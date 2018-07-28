@@ -1241,7 +1241,7 @@
 <li>调页程序</li>
 <li>缺页中断：检查进程页表，确定引用是否合法；非法引用则终止进程，引用有效但未调入内存则调入；找到空闲帧；调度磁盘，将页调入空闲帧；修改进程内部表和页表，表示已经调入；重新开始因陷阱而中断的指令</li>
 </ul>
-<p>有效访问时间=（1-页错误率）<em> 内存访问时间 + 页错误率 </em>页错误处理时间</p>
+<p>有效访问时间=（1-页错误率）<em> 内存访问时间 + 页错误率 </em> 页错误处理时间</p>
 <ul>
 <li>三个主要的页错误处理时间，中断处理，读入页和重启进程。</li>
 <li>纯粹按需调页：只有在需要时才将页调入内存</li>
@@ -1838,8 +1838,7 @@
 <li>目标是即时装配、松散耦合以及自动集成</li>
 </ul>
 <h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a><strong>微服务架构</strong></h4><p>（一种软件架构风格）通过将传统的单块架构的应用拆分成一组细粒度的微服务，每个微服务运行在独立的进程中，可以单独部署，采用不同 的编程语言，通过语言无关的轻量级的通信机制进行相互调用，实现软件系统的松耦合。</p>
-<h1 id="五a-云计算与大数据处理"><a href="#五a-云计算与大数据处理" class="headerlink" title="五a. 云计算与大数据处理"></a>五a. 云计算与大数据处理</h1><h2 id="云计算数据处理架构"><a href="#云计算数据处理架构" class="headerlink" title="云计算数据处理架构"></a>云计算数据处理架构</h2><p><img src="C:\Users\admin\AppData\Local\Temp\1531113900873.png" alt="1531113900873"></p>
-<h2 id="云数据处理关键技术"><a href="#云数据处理关键技术" class="headerlink" title="云数据处理关键技术"></a>云数据处理关键技术</h2><ul>
+<h1 id="五a-云计算与大数据处理"><a href="#五a-云计算与大数据处理" class="headerlink" title="五a. 云计算与大数据处理"></a>五a. 云计算与大数据处理</h1><h2 id="云数据处理关键技术"><a href="#云数据处理关键技术" class="headerlink" title="云数据处理关键技术"></a>云数据处理关键技术</h2><ul>
 <li>分布式数据管理<ul>
 <li>分布式文件系统</li>
 <li>分布式数据库</li>
@@ -1949,8 +1948,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="HDFS数据库分布设计"><a href="#HDFS数据库分布设计" class="headerlink" title="HDFS数据库分布设计"></a>HDFS数据库分布设计</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531116336356.png" alt="1531116336356"></p>
-<h4 id="HDFS体系结构"><a href="#HDFS体系结构" class="headerlink" title="HDFS体系结构"></a>HDFS体系结构</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531116377605.png" alt="1531116377605"></p>
 <h4 id="HDFS设计要点"><a href="#HDFS设计要点" class="headerlink" title="HDFS设计要点"></a>HDFS设计要点</h4><ul>
 <li>名字空间</li>
 <li>副本选择</li>
@@ -2081,14 +2078,11 @@
 <li>适于大数据分析处理</li>
 <li>高度并行化、可扩展、透明、容错</li>
 </ul>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531126571423.png" alt="1531126571423"></p>
 <h4 id="动力：大规模数据处理"><a href="#动力：大规模数据处理" class="headerlink" title="动力：大规模数据处理"></a>动力：大规模数据处理</h4><ul>
 <li>处理大量数据（&gt;1 TB）</li>
 <li>在千百级CPU之间并行执行</li>
 </ul>
-<h4 id="Word-Count"><a href="#Word-Count" class="headerlink" title="Word Count"></a>Word Count</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531126613643.png" alt="1531126613643"></p>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531126721718.png" alt="1531126721718"></p>
-<h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h5><ul>
+<h4 id="Word-Count"><a href="#Word-Count" class="headerlink" title="Word Count"></a>Word Count</h4><h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h5><ul>
 <li>接受输入键值/对</li>
 <li>发出中间键值/对</li>
 </ul>
@@ -2328,7 +2322,6 @@
 <li><strong>远程管理系统</strong>机制向<strong>外部云资源管理者</strong>提供工具和用户界面来配置并管理基于云的IT资源</li>
 <li>远程管理系统能够建立一个入口以便访问各种底层系统的控制与管理功能，包括资源管理、SLA管理和计费管理</li>
 </ul>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531129045247.png" alt="1531129045247"></p>
 <ul>
 <li>远程管理系统提供的工具和API一般被云提供者用来开发和定制在线入口，这些入口向云用户提供各种管理控制</li>
 <li>主要创建如下两种类型的入口：<ul>
