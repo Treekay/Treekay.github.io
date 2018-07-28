@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="操作系统," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tree Blog">
-<meta property="og:url" content="http://treekay.github.io/index.html">
+<meta name="description" content="第1章 导论操作系统概念 作为硬件和用户之间的中介程序，是管理计算机硬件的软件 从用户视角：使用方便、性能、资源使用率等考量点决定了操作系统的目标 从系统视角：作为资源分配器，管理资源，解决请求冲突，解决CPU时间、内存空间、文件存储空间、I/O设备等问题 定义操作系统：一直运行在计算机上的程序（内核），其他程序为系统程序和应用程序  计算机系统组织 I/O和CPU可以并发执行 CPU、设备控制器">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统要点">
+<meta property="og:url" content="http://treekay.github.io/2018/07/28/操作系统要点/index.html">
 <meta property="og:site_name" content="Tree Blog">
+<meta property="og:description" content="第1章 导论操作系统概念 作为硬件和用户之间的中介程序，是管理计算机硬件的软件 从用户视角：使用方便、性能、资源使用率等考量点决定了操作系统的目标 从系统视角：作为资源分配器，管理资源，解决请求冲突，解决CPU时间、内存空间、文件存储空间、I/O设备等问题 定义操作系统：一直运行在计算机上的程序（内核），其他程序为系统程序和应用程序  计算机系统组织 I/O和CPU可以并发执行 CPU、设备控制器">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-28T07:45:30.365Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tree Blog">
+<meta name="twitter:title" content="操作系统要点">
+<meta name="twitter:description" content="第1章 导论操作系统概念 作为硬件和用户之间的中介程序，是管理计算机硬件的软件 从用户视角：使用方便、性能、资源使用率等考量点决定了操作系统的目标 从系统视角：作为资源分配器，管理资源，解决请求冲突，解决CPU时间、内存空间、文件存储空间、I/O设备等问题 定义操作系统：一直运行在计算机上的程序（内核），其他程序为系统程序和应用程序  计算机系统组织 I/O和CPU可以并发执行 CPU、设备控制器">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://treekay.github.io/"/>
+  <link rel="canonical" href="http://treekay.github.io/2018/07/28/操作系统要点/"/>
 
 
 
 
 
-  <title>Tree Blog</title>
+  <title>操作系统要点 | Tree Blog</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/Treekay"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
@@ -235,9 +239,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -267,9 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/操作系统要点/" itemprop="url">操作系统要点</a></h1>
+          <h1 class="post-title" itemprop="name headline">操作系统要点</h1>
         
 
         <div class="post-meta">
@@ -341,9 +343,7 @@
       
 
       
-        
-          
-            <h1 id="第1章-导论"><a href="#第1章-导论" class="headerlink" title="第1章 导论"></a>第1章 导论</h1><h2 id="操作系统概念"><a href="#操作系统概念" class="headerlink" title="操作系统概念"></a>操作系统概念</h2><ul>
+        <h1 id="第1章-导论"><a href="#第1章-导论" class="headerlink" title="第1章 导论"></a>第1章 导论</h1><h2 id="操作系统概念"><a href="#操作系统概念" class="headerlink" title="操作系统概念"></a>操作系统概念</h2><ul>
 <li>作为<strong>硬件</strong>和<strong>用户</strong>之间的中介程序，是管理计算机硬件的软件</li>
 <li>从用户视角：使用方便、性能、资源使用率等考量点决定了操作系统的目标</li>
 <li>从系统视角：作为资源分配器，管理资源，解决请求冲突，解决CPU时间、内存空间、文件存储空间、I/O设备等问题</li>
@@ -1498,8 +1498,6 @@
 <li>为了防止用户执行非法I/O，定义所有I/O指令为特权指令，不能由用户程序发出，必须通过操作系统来进行，用户执行系统调用请求执行</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -1514,1651 +1512,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/07/28/云计算要点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Treek">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tree Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/28/云计算要点/" itemprop="url">云计算要点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-28T15:23:50+08:00">
-                2018-07-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/云计算/" itemprop="url" rel="index">
-                    <span itemprop="name">云计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="三-云计算概念"><a href="#三-云计算概念" class="headerlink" title="三. 云计算概念"></a>三. 云计算概念</h1><p>​       云计算是作为一种服务提供的一种特殊形式的分布式计算，引入效用模型远程地通过网络将可拓展、可测量的资源或软件和信息共享提供给计算机和其他设备。</p>
-<p>​       云计算=数据 <em> (软件 + 平台 + 基础设施) </em> 服务</p>
-<h2 id="提供"><a href="#提供" class="headerlink" title="提供"></a><strong>提供</strong></h2><p>数据（Data）   传感器、物联网 、原始数据、半结构化数据和经过处理的结构化数据</p>
-<ul>
-<li>软件（Software）  检索、发现、关联、处理和创造数据</li>
-<li>平台（Platform）： 软件开发API、环境和工具</li>
-<li>基础设施（Infrastructure）  存储资源、计算资源、网络资源等</li>
-<li>服务（Service）  IT服务化：产品、服务 XaaS</li>
-</ul>
-<h2 id="商业驱动力"><a href="#商业驱动力" class="headerlink" title="商业驱动力"></a><strong>商业驱动力</strong></h2><ul>
-<li>容量规划 </li>
-<li>领先策略(Lead Strategy)：根据预期增加IT资源的容量</li>
-<li>滞后策略(Lag Strategy)：当IT资源达到其最大容量时增加资源容量 </li>
-<li>匹配策略(Match Strategy)：当需求增加时，小幅增加IT资源容量</li>
-<li>购置和维护成本</li>
-<li>组织灵活性</li>
-</ul>
-<h2 id="技术创新"><a href="#技术创新" class="headerlink" title="技术创新"></a><strong>技术创新</strong></h2><ul>
-<li>集群化</li>
-<li>网格计算</li>
-<li>虚拟化</li>
-</ul>
-<h2 id="云"><a href="#云" class="headerlink" title="云"></a><strong>云</strong></h2><p>云（cloud）是指一个独特的IT环境，其设计目的是为了远程供给可扩展和可测量的IT资源。</p>
-<p>IT资源（IT resource）是指一个<strong>与IT相关的物理的或虚拟的事物</strong>，它既可以是<strong>基于软件的</strong>，比如<strong>虚拟服务器</strong>或定制<strong>软件程序</strong>，也可以是<strong>基于硬件</strong>的，比如<strong>物理服务器</strong>或<strong>网络设备</strong>。</p>
-<p>​       e.g. 物理服务器，虚拟服务器，软件程序，云服务，存储设备，网络</p>
-<ul>
-<li>可拓展性:  IT资源可以处理增加或减少的使用需求的能力</li>
-<li>水平拓展:  向外（内），增加IT资源的数量</li>
-<li>垂直拓展: 向上（下），增加IT资源的容量</li>
-</ul>
-<h2 id="云服务"><a href="#云服务" class="headerlink" title="云服务"></a>云服务</h2><p>云服务（cloud service）是指任何<strong>可以通过云远程访问的IT资源</strong>。</p>
-<h1 id="四-基本概念与模型"><a href="#四-基本概念与模型" class="headerlink" title="四. 基本概念与模型"></a>四. 基本概念与模型</h1><h2 id="云提供者"><a href="#云提供者" class="headerlink" title="云提供者"></a><strong>云提供者</strong></h2><p>提供<strong>基于云的IT资源</strong>的一方称为云提供者</p>
-<h2 id="云用户"><a href="#云用户" class="headerlink" title="云用户"></a><strong>云用户</strong></h2><p>使用基于云的IT资源的一方称为云用户，云用户使用云服务用户来访问云服务</p>
-<h2 id="云服务用户"><a href="#云服务用户" class="headerlink" title="云服务用户"></a><strong>云服务用户</strong></h2><p>云服务用户（cloud service consumer）一个临时的运行时角色，访问云服务的软件程序</p>
-<h2 id="云服务拥有者"><a href="#云服务拥有者" class="headerlink" title="云服务拥有者"></a><strong>云服务拥有者</strong></h2><p>在法律上拥有云服务的个人或者组织称为云服务拥有者，可以是云用户也可以是该云服务所在的云的云提供者（在云中部署了自己的服务的对象就是云服务拥有者，关键看云中的服务是谁部署的）</p>
-<h2 id="云资源管理者"><a href="#云资源管理者" class="headerlink" title="云资源管理者"></a><strong>云资源管理者</strong></h2><p>可以是来自云用户或者云提供者，也可以第三方组织，就是签订了合约来管理基于云的IT资源的组织（不称为云服务管理者的原因是这个角色可能要管理不以云服务形式存在但又基于云的IT资源）</p>
-<p>了解：云审计者、云代理、云运营商</p>
-<h2 id="组织边界"><a href="#组织边界" class="headerlink" title="组织边界"></a>组织边界</h2><p>​       组织边界是一个物理范围，包括由一家组织拥有和管理的IT资源的集合。</p>
-<h2 id="信任边界"><a href="#信任边界" class="headerlink" title="信任边界"></a>信任边界</h2><p>​       信任边界是一个逻辑范围，通常会跨越物理边界，表明IT资源受信任的程度</p>
-<h2 id="云的特性"><a href="#云的特性" class="headerlink" title="云的特性"></a><strong>云的特性</strong></h2><ul>
-<li><p>按需使用</p>
-</li>
-<li><p>随处访问</p>
-</li>
-<li><p>多租户</p>
-</li>
-<li><p>弹性</p>
-</li>
-<li><p>可测量的使用</p>
-</li>
-<li><p>可恢复性</p>
-</li>
-</ul>
-<h2 id="云交付模型"><a href="#云交付模型" class="headerlink" title="云交付模型"></a><strong>云交付模型</strong></h2><h3 id="基础设施作为服务（IaaS）"><a href="#基础设施作为服务（IaaS）" class="headerlink" title="基础设施作为服务（IaaS）"></a>基础设施作为服务（IaaS）</h3><ul>
-<li>硬件资源作为服务提供给用户；</li>
-<li>资源通常是未配置好的，管理的责任直接落在云用户身上；</li>
-<li>典型例子：虚拟服务器；</li>
-<li>主要技术：虚拟化技术，资源动态管理和调度技术；</li>
-</ul>
-<h3 id="平台作为服务（PaaS）"><a href="#平台作为服务（PaaS）" class="headerlink" title="平台作为服务（PaaS）"></a>平台作为服务（PaaS）</h3><ul>
-<li>预先定义好的“就绪可用”的环境，已经部署好和配置好的IT资源；</li>
-<li>典型例子：运行平台如应用服务器，辅助系统软件如数据库；</li>
-<li>关键技术：分布式文件系统、分布式数据库，并行计算技术；</li>
-<li>好处：云用户省去了建立和维护裸的基础设施IT资源的管理负担，相对地给予云用户的控制权等级较低，不能访问平台的实现细节；</li>
-</ul>
-<h3 id="软件作为服务（SaaS）"><a href="#软件作为服务（SaaS）" class="headerlink" title="软件作为服务（SaaS）"></a>软件作为服务（SaaS）</h3><ul>
-<li>把软件程序定位成共享的云服务，将运行于云中的应用程序的功能交付给用户；</li>
-</ul>
-<p>用户的管理权限十分有限，云服务用户可以访问玉衡服务，但是不能访问任何底层的IT资源或实现细节；</p>
-<ul>
-<li>关键技术：呈现技术，多租户技术；</li>
-<li>应用场景：通常是商用，如saleforce的CRM</li>
-</ul>
-<h3 id="三种云交付模型的比较"><a href="#三种云交付模型的比较" class="headerlink" title="三种云交付模型的比较"></a>三种云交付模型的比较</h3><ul>
-<li>云用户的控制等级：SaaS &lt; PaaS &lt; IaaS</li>
-<li>云用户的可用功能：前端用户接口访问 &lt; 对使用平台相关的IT资源的管理控制 &lt; 对基础设施相关的IT资源和可能的底层物理IT资源的完全访问</li>
-<li>云用户的行为：使用和配置云服务 &lt; 开发、测试、部署、管理云服务 &lt; 建立和配置裸的基础设施，安装、管理和监控所需的软件</li>
-<li>云提供者的行为：实现、管理和维护云服务，监控云用户的使用 &lt; 实现配置好的平台和在需要时提供底层的基础设施中间件和其他所需的IT资源，监控云用户的使用 &lt; 提供和管理需要的物理处理器、存储、网络和托管监控云用户的使用</li>
-</ul>
-<h3 id="云交付模型的组合使用"><a href="#云交付模型的组合使用" class="headerlink" title="云交付模型的组合使用"></a>云交付模型的组合使用</h3><ul>
-<li>IaaS + PaaS</li>
-</ul>
-<p>例子：一个提供PaaS环境的云提供者选择租用另一个不同的云提供者提供的IaaS环境; 原因可能是经济因素，也可能是原有的云提供者还服务者其他的云用户而它现有的容量快不够用了，或者其他原因是它的数据被要求物理地存放在某个特定的区域内。</p>
-<ul>
-<li>IaaS + PaaS + SaaS</li>
-</ul>
-<p>云用户组织可以利用这样的模型组合来开发部署自己的SaaS云服务</p>
-<h2 id="云部署模型"><a href="#云部署模型" class="headerlink" title="云部署模型"></a><strong>云部署模型</strong></h2><h3 id="公有云"><a href="#公有云" class="headerlink" title="公有云"></a>公有云</h3><p>​    由第三方云提供者拥有的<strong>可公共访问的云环境</strong></p>
-<h3 id="社区云"><a href="#社区云" class="headerlink" title="社区云"></a>社区云</h3><p>​       限制为<strong>特定的云用户社区</strong>可以访问的云环境</p>
-<h3 id="私有云"><a href="#私有云" class="headerlink" title="私有云"></a>私有云</h3><p>​       一家组织单独拥有的，可以集中访问不同部分、位置或部门的IT资源</p>
-<p>企业内部分工由单独的部门来承担云提供者的角色，区分“企业内部的”和“基于云的”概念很重要，因为组织和信任边界的定义和应用被改变</p>
-<h3 id="混合云"><a href="#混合云" class="headerlink" title="混合云"></a>混合云</h3><p>由两个或多个不同的云部署模型组成的云环境，可以将数据按敏感程度分别部署到公有云或私有云上。</p>
-<p>缺点：架构的构建和维护复杂和具有挑战性</p>
-<h1 id="五-云使能技术"><a href="#五-云使能技术" class="headerlink" title="五. 云使能技术"></a><strong>五. 云使能技术</strong></h1><h2 id="宽带网络和Internet架构"><a href="#宽带网络和Internet架构" class="headerlink" title="宽带网络和Internet架构"></a>宽带网络和Internet架构</h2><ul>
-<li>Internet服务提供者ISP</li>
-<li>云用户和云提供者通常利用Internet进行通信。Internet以无中心的供给和管理模型为基础，不受任何集中式实体的控制</li>
-<li>网络互联架构的主要组件是使用网络路由器和交换机的<strong>无连接分组交换</strong>与<strong>基于路由器的互联</strong></li>
-<li>网络带宽和延迟是影响QoS的因素，而网络拥塞对其有巨大影响   </li>
-</ul>
-<h2 id="数据中心技术"><a href="#数据中心技术" class="headerlink" title="数据中心技术"></a>数据中心技术</h2><ul>
-<li>数据中心基本资源：云化的计算集群</li>
-<li>硬件：计算设备、存储设备、网络设备、配套设备</li>
-<li>软件：操作系统、系统软件、应用软件……</li>
-<li>数据中心基本技术：虚拟化，抽象物理计算和网络IT资源以便于资源分配、操作、</li>
-<li>释放、监视和控制；</li>
-<li><p>标准化与模块化</p>
-</li>
-<li><p>自动化（自配置与自恢复）</p>
-</li>
-<li>远程操作与管理</li>
-<li><p>高可用性（采用高冗余度）</p>
-</li>
-<li><p>数据中心管理软件层次：业务服务管理平台、资源管理平台、基础设施资源池</p>
-</li>
-<li><p>自动化部署：初次部署、迁移</p>
-</li>
-<li><p>弹性能力提供：向上/下扩展，向内/外扩展</p>
-</li>
-<li><p>资源监控，资源调度</p>
-</li>
-</ul>
-<h2 id="虚拟化技术"><a href="#虚拟化技术" class="headerlink" title="虚拟化技术"></a><strong>虚拟化技术</strong></h2><ul>
-<li><p>将物理IT资源转换为虚拟IT资源的过程；</p>
-</li>
-<li><p>大多数IT资源都可被虚拟化：服务器，存储设备，网络，电源</p>
-</li>
-<li><p>特性：硬件无关性，服务器整合，资源复制</p>
-</li>
-</ul>
-<h3 id="基于操作系统的虚拟化—寄生架构（Hosted）"><a href="#基于操作系统的虚拟化—寄生架构（Hosted）" class="headerlink" title="基于操作系统的虚拟化—寄生架构（Hosted）"></a><strong>基于操作系统的虚拟化—寄生架构（Hosted）</strong></h3><ul>
-<li><p>VM首先被安装在完整的宿主操作系统上，然后被用于产生虚拟机；</p>
-</li>
-<li><p>在一个已存在的操作系统上安装虚拟化软件</p>
-<ul>
-<li><p>例子：备份和恢复，集成目录服务，安全管理</p>
-</li>
-<li><p>缺点：</p>
-<ul>
-<li>宿主操作系统消耗CPU、内存等硬件IT资源；</li>
-<li>来自客户操作系统的硬件相关操作穿过层次多，整体性能降低</li>
-<li>每个操作系统需要独立的许可证</li>
-</ul>
-</li>
-<li><p>优点：使用方便，功能丰富，适用于桌面系统</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="基于硬件的虚拟化—裸金属架构（Bare-metal）"><a href="#基于硬件的虚拟化—裸金属架构（Bare-metal）" class="headerlink" title="基于硬件的虚拟化—裸金属架构（Bare-metal）"></a><strong>基于硬件的虚拟化—裸金属架构（Bare-metal）</strong></h3><ul>
-<li>不再需要另一个宿主操作系统，将虚拟化软件直接安装在物理主机硬件上，</li>
-<li><p>从而绕过宿主操作系统</p>
-</li>
-<li><p>优点：效率高，安全性高，适用于服务器系统</p>
-</li>
-<li>缺点：高级功能少，使用不够方便</li>
-</ul>
-<h3 id="系统虚拟化技术"><a href="#系统虚拟化技术" class="headerlink" title="系统虚拟化技术"></a><strong>系统虚拟化技术</strong></h3><ul>
-<li>硬件仿真，属于hosted架构</li>
-<li>全虚拟化，hosted和bare-metal都有；</li>
-</ul>
-<p>在客户操作系统和硬件之间捕获和处理那些对虚拟化敏感的特权指令，使客户操作系统无需修改就能运行</p>
-<ul>
-<li>半虚拟化，bare-metal模式；</li>
-</ul>
-<p>利用VMM实现对底层硬件的访问，Guest OS集成与半虚拟化有关的代码以配合VMM，无需重新编译或捕获特权指令</p>
-<ul>
-<li>硬件辅助虚拟化：结合到全/半虚拟化中使用，对软件技术进行硬件化来提高性能</li>
-<li>操作系统级虚拟化：对服务器操作系统进行隔离实现虚拟化（只有一份操作系统）</li>
-</ul>
-<h3 id="CPU-虚拟化"><a href="#CPU-虚拟化" class="headerlink" title="CPU 虚拟化"></a>CPU 虚拟化</h3><ul>
-<li>CPU 全虚拟化（模拟执行）</li>
-</ul>
-<p>​       优先级压缩技术，二进制代码翻译技术</p>
-<ul>
-<li>CPU半虚拟化（操作系统辅助）</li>
-<li>CPU硬件辅助虚拟化</li>
-</ul>
-<h3 id="内存虚拟化"><a href="#内存虚拟化" class="headerlink" title="内存虚拟化"></a><strong>内存虚拟化</strong></h3><p>做好虚拟机内存之间的隔离，使每个虚拟机都认为自己拥有了整个内存地址，并且效率也能接近物理机；影子页表，页表写入，EPT</p>
-<h3 id="I-O虚拟化"><a href="#I-O虚拟化" class="headerlink" title="I/O虚拟化"></a><strong>I/O虚拟化</strong></h3><p>使虚拟机能访问到I/O资源并相互隔离，减轻虚拟化带来的开销</p>
-<h3 id="存储虚拟化"><a href="#存储虚拟化" class="headerlink" title="存储虚拟化"></a><strong>存储虚拟化</strong></h3><p>实现与应用/网络无关的数据存储和管理</p>
-<p>设备层虚拟化：实现统一寻址；</p>
-<p>块聚合层虚拟化：整合不同的物理存储设备</p>
-<h3 id="网络虚拟化"><a href="#网络虚拟化" class="headerlink" title="网络虚拟化"></a><strong>网络虚拟化</strong></h3><p>将网络资源和功能集成到一个软件中统一管控，增加容量、应对横向流量、大缓存低延迟等；<strong>两种形式</strong>：<strong>横向整合：多个变一个</strong>；<strong>纵向分割：VLAN等</strong></p>
-<ul>
-<li><h5 id="Web技术"><a href="#Web技术" class="headerlink" title="Web技术"></a>Web技术</h5></li>
-<li><h5 id="多租户技术"><a href="#多租户技术" class="headerlink" title="多租户技术"></a>多租户技术</h5></li>
-</ul>
-<p>设计多租户应用的目的是使得多个用户（租户）在逻辑上同时访问同一个应用，同时每个租户都不会意识到还有其他租户正在使用该应用，确保每个租户都不会访问到不属于自己的数据和配置信息</p>
-<ul>
-<li>服务技术</li>
-</ul>
-<h4 id="SOA模型"><a href="#SOA模型" class="headerlink" title="SOA模型"></a><strong>SOA模型</strong></h4><p>面向服务架构，将应用程序的不同功能单元（称为服务）通过接口和契约联系起来；接口是采用中立的方式进行定义的，独立于实现服务的硬件平台、操作系统和编程语言。构建在各种这样的系统中的服务以统一和通用的方式进行交互。</p>
-<p>三种角色：服务提供者，服务请求者，服务代理；</p>
-<p>媒介：服务总线；</p>
-<p>三个操作：发布、查找、绑定</p>
-<h4 id="Web-Services"><a href="#Web-Services" class="headerlink" title="Web Services"></a><strong>Web Services</strong></h4><ul>
-<li>实现SOA的方式之一，平台无关、语言无关、通用性强；</li>
-<li>目标是即时装配、松散耦合以及自动集成</li>
-</ul>
-<h4 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a><strong>微服务架构</strong></h4><p>（一种软件架构风格）通过将传统的单块架构的应用拆分成一组细粒度的微服务，每个微服务运行在独立的进程中，可以单独部署，采用不同 的编程语言，通过语言无关的轻量级的通信机制进行相互调用，实现软件系统的松耦合。</p>
-<h1 id="五a-云计算与大数据处理"><a href="#五a-云计算与大数据处理" class="headerlink" title="五a. 云计算与大数据处理"></a>五a. 云计算与大数据处理</h1><h2 id="云计算数据处理架构"><a href="#云计算数据处理架构" class="headerlink" title="云计算数据处理架构"></a>云计算数据处理架构</h2><p><img src="C:\Users\admin\AppData\Local\Temp\1531113900873.png" alt="1531113900873"></p>
-<h2 id="云数据处理关键技术"><a href="#云数据处理关键技术" class="headerlink" title="云数据处理关键技术"></a>云数据处理关键技术</h2><ul>
-<li>分布式数据管理<ul>
-<li>分布式文件系统</li>
-<li>分布式数据库</li>
-</ul>
-</li>
-<li>云并行计算技术</li>
-<li>分布式协同管理</li>
-<li>集群管理</li>
-</ul>
-<h2 id="分布式计算技术"><a href="#分布式计算技术" class="headerlink" title="分布式计算技术"></a>分布式计算技术</h2><h3 id="云平台的分布式计算特性"><a href="#云平台的分布式计算特性" class="headerlink" title="云平台的分布式计算特性"></a>云平台的分布式计算特性</h3><ul>
-<li>CAP理论：Consistency、Availability、Partition-tolerance</li>
-<li>传统分布式计算注重“C”</li>
-<li>云计算平台注重“A”和”P”</li>
-</ul>
-<h3 id="MapReduce计算模型"><a href="#MapReduce计算模型" class="headerlink" title="MapReduce计算模型"></a>MapReduce计算模型</h3><ul>
-<li>Google发明的分布式计算模型</li>
-<li>适于海量数据处理<ul>
-<li>传统分布式计算适于“计算”密集型任务</li>
-</ul>
-</li>
-<li>基于数据分割</li>
-</ul>
-<h3 id="分布式协同管理"><a href="#分布式协同管理" class="headerlink" title="分布式协同管理"></a>分布式协同管理</h3><ul>
-<li>共享资源的并行操作-&gt;数据不一致</li>
-<li>通过<strong>同步机制</strong>控制并发操作</li>
-<li>常用的并发控制方法<ul>
-<li>基于锁的并发控制<ul>
-<li>两阶段锁协议</li>
-<li>多副本的锁机制：读-写全法、多数法、主副本法、单一管理法</li>
-</ul>
-</li>
-<li>基于时间戳的并发控制<ul>
-<li>基于全局唯一的时间戳</li>
-</ul>
-</li>
-<li>乐观并发控制</li>
-<li>基于版本的并发控制</li>
-</ul>
-</li>
-</ul>
-<h3 id="集群和平台管理"><a href="#集群和平台管理" class="headerlink" title="集群和平台管理"></a>集群和平台管理</h3><ul>
-<li>集群的自动化部署<ul>
-<li>安装配置OS、DFS、分布式计算程序、作业管理软件、系统管理软件等</li>
-</ul>
-</li>
-<li>集群作业调度<ul>
-<li>基于资源管理器调度作业的运行节点和时间</li>
-<li>调度管理MapReduce任务</li>
-</ul>
-</li>
-<li>远程控制<ul>
-<li>开关机控制</li>
-<li>远程控制台</li>
-</ul>
-</li>
-<li>应用管理与度量计费</li>
-</ul>
-<h2 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h2><h3 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h3><ul>
-<li>透明性、并发访问、高可用性</li>
-</ul>
-<h3 id="基本需求"><a href="#基本需求" class="headerlink" title="基本需求"></a>基本需求</h3><ul>
-<li>数据冗余、异构性、一致性、高效性、安全性</li>
-</ul>
-<h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
-<li>按块存储、并行读取、效率高</li>
-<li>自动复制、多层次容错、原子操作保证一致性</li>
-</ul>
-<h3 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h3><ul>
-<li>GFS的开源实现</li>
-<li>容量大：Terabytes or Petabytes<ul>
-<li>将数据保存到大量的节点当中</li>
-<li>支持很大单个文件</li>
-</ul>
-</li>
-<li>高可靠性、快速访问、高可扩展<ul>
-<li>大量的数据复制</li>
-<li>简单加入更多服务器</li>
-</ul>
-</li>
-</ul>
-<h4 id="HDFS适应的场景"><a href="#HDFS适应的场景" class="headerlink" title="HDFS适应的场景"></a>HDFS适应的场景</h4><ul>
-<li>HDFS是针对MapReduce设计<ul>
-<li>数据尽可能根据其本地局部性进行访问与计算</li>
-</ul>
-</li>
-<li>大量地从文件中顺序读<ul>
-<li>HDFS对顺序读进行了优化 </li>
-<li>随机的访问负载较高</li>
-</ul>
-</li>
-<li>数据支持一次写入，多次读取<ul>
-<li>不支持数据更新（但可以直接进行文件替换）</li>
-</ul>
-</li>
-<li>数据不进行本地缓存<ul>
-<li>文件很大，且顺序读</li>
-</ul>
-</li>
-</ul>
-<h4 id="HDFS的设计"><a href="#HDFS的设计" class="headerlink" title="HDFS的设计"></a>HDFS的设计</h4><ul>
-<li>基于块的文件存储</li>
-<li>块进行复制的形式放置，按照块的方式随机选择存储节点</li>
-<li>副本的默认数目是3</li>
-<li>默认的块的大小是64MB<ul>
-<li>减少元数据的量</li>
-<li>有利于顺序读写（在磁盘上数据顺序存放）</li>
-</ul>
-</li>
-</ul>
-<h4 id="HDFS数据库分布设计"><a href="#HDFS数据库分布设计" class="headerlink" title="HDFS数据库分布设计"></a>HDFS数据库分布设计</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531116336356.png" alt="1531116336356"></p>
-<h4 id="HDFS体系结构"><a href="#HDFS体系结构" class="headerlink" title="HDFS体系结构"></a>HDFS体系结构</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531116377605.png" alt="1531116377605"></p>
-<h4 id="HDFS设计要点"><a href="#HDFS设计要点" class="headerlink" title="HDFS设计要点"></a>HDFS设计要点</h4><ul>
-<li>名字空间</li>
-<li>副本选择</li>
-<li>安全模式<ul>
-<li>刚启动的时候，等待每一个DataNode报告情况</li>
-<li>退出安全模式的时候才进行副本复制操作</li>
-</ul>
-</li>
-<li>NameNode有自己的FsImage和EditLog，前者有自己的文件系统状态，后者是还没有更新的记录</li>
-</ul>
-<h4 id="HDFS可靠性"><a href="#HDFS可靠性" class="headerlink" title="HDFS可靠性"></a>HDFS可靠性</h4><ul>
-<li>磁盘数据错误</li>
-</ul>
-<h4 id="HDFS程序接口"><a href="#HDFS程序接口" class="headerlink" title="HDFS程序接口"></a>HDFS程序接口</h4><ul>
-<li>在MapReduce程序中使用HDFS<ul>
-<li>通过fs.default.name的配置选项关联NameNode</li>
-</ul>
-</li>
-<li>在程序中使用HDFS接口<ul>
-<li>命令行接口</li>
-<li>Hadoop MapReduce Job的隐含的输入</li>
-<li>Java程序直接操作</li>
-<li>lib/hdfs从c/c++程序中操作</li>
-</ul>
-</li>
-</ul>
-<h4 id="HDFS权限控制与安全特性"><a href="#HDFS权限控制与安全特性" class="headerlink" title="HDFS权限控制与安全特性"></a>HDFS权限控制与安全特性</h4><ul>
-<li>类似POSIX的安全特性</li>
-<li>不完全，主要预防操作失误</li>
-<li>不是一个强的安全模型，不能保证操作的完全安全性</li>
-<li>用户：当前登录的用户名，即使用Linux自身设定的用户与组的概念</li>
-</ul>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><ul>
-<li>加入一个新节点的步骤<ul>
-<li>配置新节点上的hadoop程序</li>
-<li>在Master的slaves文件中加入新的slave节点</li>
-<li>启动slave节点上的DataNode，会自动去联系NameNode，加入到集群中</li>
-</ul>
-</li>
-<li>Balancer类用来做负载均衡<ul>
-<li>默认的均衡参数是10%范围内</li>
-<li>bin/start-balancer.sh -threshold 5</li>
-</ul>
-</li>
-</ul>
-<h4 id="分布式拷贝"><a href="#分布式拷贝" class="headerlink" title="分布式拷贝"></a>分布式拷贝</h4><ul>
-<li><p>bin/hadoop distcp</p>
-<p>hdfs://SomeNameNode:9000/foo/bar/<br>hdfs://OtherNameNode:2000/baz/quux/</p>
-</li>
-<li><p>目标也可以是s3://bucket-name/key</p>
-</li>
-</ul>
-<h2 id="分布式数据库"><a href="#分布式数据库" class="headerlink" title="分布式数据库"></a>分布式数据库</h2><ul>
-<li>数据存储量和交易率的巨大需求</li>
-<li>数据库的可伸缩性<ul>
-<li>方法1：MyCask或其他缓存，可扩展性有限</li>
-<li>方法2：使用现有的并行数据库，昂贵且最并行的数据库是为决策支持而不是OLTP设计的。</li>
-<li>方法3：用数据库构建并行存储</li>
-</ul>
-</li>
-</ul>
-<h3 id="缩放关系数据库管理系统-分割法"><a href="#缩放关系数据库管理系统-分割法" class="headerlink" title="缩放关系数据库管理系统 - 分割法"></a>缩放关系数据库管理系统 - 分割法</h3><ul>
-<li>“碎片”<ul>
-<li>在一些廉价数据库(MySQL/PostgreSQL)中划分数据</li>
-<li>管理应用程序中的并行访问</li>
-<li>适合读写</li>
-<li>不透明，应用程序需要分区感知</li>
-</ul>
-</li>
-</ul>
-<h3 id="CAP-定理"><a href="#CAP-定理" class="headerlink" title="CAP 定理"></a>CAP 定理</h3><h4 id="共享数据的三个性质："><a href="#共享数据的三个性质：" class="headerlink" title="共享数据的三个性质："></a>共享数据的三个性质：</h4><ul>
-<li>一致性（Consistency）：所有的副本的值相同</li>
-<li>可用性（Availability）：总能进行读写</li>
-<li>分区容错性（Partition-tolerance）：即使网络故障妨碍了一些设备之间的通信，一致性和/或可用性仍然有效</li>
-</ul>
-<h4 id="布鲁尔的CAP定理"><a href="#布鲁尔的CAP定理" class="headerlink" title="布鲁尔的CAP定理"></a>布鲁尔的CAP定理</h4><ul>
-<li>对于任何系统共享数据，不能保证同时满足三个性质</li>
-<li>最多有两个性质</li>
-<li>传统的数据库管理系统更注重”C”</li>
-</ul>
-<p>云系统，分区是不可避免的</p>
-<ul>
-<li>“C”和”A”都可以从中选择</li>
-<li>几乎在所有情况下都会选择”A”</li>
-</ul>
-<h3 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h3><h4 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h4><ul>
-<li>非关系型，不需要模式</li>
-<li>数据被复制到多个节点并且可以分区：<ul>
-<li>下行节点容易替换</li>
-<li>没有单一的故障点</li>
-</ul>
-</li>
-<li>水平可缩放</li>
-<li>廉价，容易实现</li>
-<li>大规模写入性能</li>
-<li>快速键值存取</li>
-</ul>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
-<li>不完全支持关系特性<ul>
-<li>没有join，group by，order by 操作；</li>
-<li>没有声明性查询语言（如：SQL）</li>
-<li>Relaxed ACID</li>
-<li>不容易与其他支持SQL的应用结合</li>
-</ul>
-</li>
-</ul>
-<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><ul>
-<li>键值存储数据库<ul>
-<li>如：DynamoDB, Voldermort, Scalaris</li>
-</ul>
-</li>
-<li>列存储数据库<ul>
-<li>如：MongoDB, CouchDB</li>
-</ul>
-</li>
-<li>文档型数据库<ul>
-<li>如：BigTable, Cassandra, Hbased</li>
-</ul>
-</li>
-<li>图形数据库<ul>
-<li>Neo4J, InfoGrid</li>
-</ul>
-</li>
-</ul>
-<p>“No-schema”是大多数NoSQL存储系统的共同特点，提供”灵活“数据类型</p>
-<h3 id="MapReduce技术"><a href="#MapReduce技术" class="headerlink" title="MapReduce技术"></a>MapReduce技术</h3><ul>
-<li>一种新的编程框架/模型与运行环境</li>
-<li>适于大数据分析处理</li>
-<li>高度并行化、可扩展、透明、容错</li>
-</ul>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531126571423.png" alt="1531126571423"></p>
-<h4 id="动力：大规模数据处理"><a href="#动力：大规模数据处理" class="headerlink" title="动力：大规模数据处理"></a>动力：大规模数据处理</h4><ul>
-<li>处理大量数据（&gt;1 TB）</li>
-<li>在千百级CPU之间并行执行</li>
-</ul>
-<h4 id="Word-Count"><a href="#Word-Count" class="headerlink" title="Word Count"></a>Word Count</h4><p><img src="C:\Users\admin\AppData\Local\Temp\1531126613643.png" alt="1531126613643"></p>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531126721718.png" alt="1531126721718"></p>
-<h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h5><ul>
-<li>接受输入键值/对</li>
-<li>发出中间键值/对</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MapClass</span> <span class="keyword">extends</span> <span class="title">MapReduceBase</span> <span class="keyword">implements</span> <span class="title">Mapper</span> </span>&#123; </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> IntWritable one = <span class="keyword">new</span> IntWritable(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">private</span> Text word = <span class="keyword">new</span> Text();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(WritableComparable key, Writable value, OutputCollector output, Reporter reporter)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        String line = ((Text)value).toString();</span><br><span class="line">        StringTokenizer itr = <span class="keyword">new</span> StringTokenizer(line);</span><br><span class="line">        <span class="keyword">while</span> (itr.hasMoreTokens()) &#123;</span><br><span class="line">            word.set(itr.nextToken());</span><br><span class="line">            output.collect(word, one);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h5><ul>
-<li>接受中间键值/对</li>
-<li>发出输出键值/对</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Reduce</span> <span class="keyword">extends</span> <span class="title">MapReduceBase</span> <span class="keyword">implements</span> <span class="title">Reducer</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(WritableComparable key, Iterator values, OutputCollector output, Reporter reporter)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (values.hasNext()) &#123;</span><br><span class="line">        	sum += ((IntWritable) values.next()).get();</span><br><span class="line">        &#125;</span><br><span class="line">    	output.collect(key, <span class="keyword">new</span> IntWritable(sum));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="InputSplits"><a href="#InputSplits" class="headerlink" title="InputSplits"></a>InputSplits</h5><ul>
-<li>定义了输入到单个Map任务的输入数据</li>
-<li>一个MapReduce程序被统称为一个Job，可能有上百个任务构成</li>
-<li>InputSplit将文件分为64MB的大小<ul>
-<li>hadoop-site.xml中的mapred.min.split.size参数控制这个大小</li>
-</ul>
-</li>
-<li>mapred.tasktracker.map.taks.maximum用来控制某一个节点上所有map任务的最大数目</li>
-</ul>
-<h5 id="RecordReader"><a href="#RecordReader" class="headerlink" title="RecordReader"></a>RecordReader</h5><ul>
-<li>InputSplit定义了一项工作的大小，但是没有定义如何读取数据</li>
-<li>RecordReader实际上定义了如何从数据上转化为一个（key，value）对，从而输出到Mapper类中</li>
-<li>TextInputFormat提供了LineRecordReader</li>
-</ul>
-<h5 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h5><ul>
-<li>来自数据源的记录<ul>
-<li>从文件中逐行读出、或从数据库的行获得，等</li>
-<li>键值对：如（filename，line）</li>
-</ul>
-</li>
-<li>map（）函数从输入的数据中产生一个或多个中间值以及输出键</li>
-<li>每一个Mapper类的示例生成了一个Java进程<ul>
-<li>在某一个InputSplit上执行</li>
-</ul>
-</li>
-<li>有两个额外的参数OutputCollector以及Reporter<ul>
-<li>前者用来收集中间结果</li>
-<li>后者用来获得环境参数以及设置当前执行的状态</li>
-</ul>
-</li>
-</ul>
-<h5 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h5><ul>
-<li>在map阶段结束后，给定输出键的所有中间值都被组合成一个列表</li>
-<li>reduce()函数将这些中间值组合为同一输出键的一个或多个最终值</li>
-</ul>
-<h5 id="Partition-amp-Shuffle"><a href="#Partition-amp-Shuffle" class="headerlink" title="Partition&amp;Shuffle"></a>Partition&amp;Shuffle</h5><ul>
-<li>在Map工作完成之后，每一个Map函数会将结果传到对应的Reducer所在的节点</li>
-<li>用户可以提供一个Partitioner类，用来决定一个给定的（key，value）对传输的具体位置</li>
-</ul>
-<h5 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h5><ul>
-<li>传输到每一个节点上的所有的Reduce函数接收到Key，value对会被Hadoop自动排序（即Map生成的结果传送到某一个节点的时候，会被自动培排序）</li>
-<li>默认：hash（key）mod R</li>
-<li>保证：<ul>
-<li>相对平衡的分区</li>
-<li>分区内排序保证</li>
-</ul>
-</li>
-</ul>
-<h1 id="六-基本云安全"><a href="#六-基本云安全" class="headerlink" title="六. 基本云安全"></a>六. 基本云安全</h1><ul>
-<li>保密性：只有被授权方才能访问</li>
-<li><p>完整性：<strong>云服务传送过程中数据不被</strong>未授权方<strong>篡改</strong></p>
-</li>
-<li><p>真实性：唯一性，真实可靠</p>
-</li>
-<li><p>可用性：在特定的时间段内可以访问和可以使用</p>
-</li>
-<li><p>威胁：潜在的安全型违反，可能视图破坏隐私并/或导致危害，以此挑战防护</p>
-</li>
-<li>风险：执行一个行为带来损失或危害的可能性</li>
-</ul>
-<h2 id="威胁作用者"><a href="#威胁作用者" class="headerlink" title="威胁作用者"></a>威胁作用者</h2><ul>
-<li><p>匿名攻击者</p>
-</li>
-<li><p>恶意服务作用者</p>
-</li>
-<li><p>授信的攻击者（恶意的租户）</p>
-</li>
-<li>恶意的内部人员</li>
-</ul>
-<h2 id="云安全威胁"><a href="#云安全威胁" class="headerlink" title="云安全威胁"></a>云安全威胁</h2><ul>
-<li>流量窃听：数据在传输到云中或在云内部传输时被恶意的服务作用者<strong>被动地</strong>截获<ul>
-<li>目的：破坏数据的保密性，破坏云用户和云提供者之间关系的保密性</li>
-<li>特点：由于攻击被动的本质，容易长时间进行而不被发现</li>
-</ul>
-</li>
-<li><p>恶意媒介：消息被恶意服务作用者截获并且篡改，破坏消息的保密性和完整性</p>
-</li>
-<li><p>拒绝服务：使IT资源过载至无法正确运行</p>
-</li>
-<li><p>授权不足：错误地授予了攻击者访问权限或是授权太宽泛，导致攻击者能够访问到本应                      该受到保护的IT资源</p>
-</li>
-<li><p>虚拟攻击：利用虚拟化平台中的漏洞来危害虚拟化平台的保密性。完整性和可用性。</p>
-</li>
-<li>信任边界重叠</li>
-</ul>
-<h1 id="七-云基础设施机制"><a href="#七-云基础设施机制" class="headerlink" title="七. 云基础设施机制"></a>七. 云基础设施机制</h1><h2 id="逻辑网络边界"><a href="#逻辑网络边界" class="headerlink" title="逻辑网络边界"></a>逻辑网络边界</h2><p>将一个网络环境与通信网络的其他部分隔离开来，形成了一个虚拟网络边界。</p>
-<p>用于：将云中的IT资源与非授权用户或非用户、云用户隔离，控制被隔离IT资源的可用带宽；</p>
-<h2 id="虚拟防火墙"><a href="#虚拟防火墙" class="headerlink" title="虚拟防火墙"></a>虚拟防火墙</h2><p>一种IT资源，可以主动过滤杯隔离网络的网络流量，并控制其与Internet的交互。</p>
-<h2 id="虚拟网络"><a href="#虚拟网络" class="headerlink" title="虚拟网络"></a>虚拟网络</h2><p>一般通过VLAN形成，这种IT资源用来隔离数据中心基础设施内的网络环境。</p>
-<h2 id="虚拟服务器"><a href="#虚拟服务器" class="headerlink" title="虚拟服务器"></a><strong>虚拟服务器</strong></h2><p>模拟物理服务器的虚拟化软件，是最基本的云环境构建块。每个虚拟服务器都可以存储大量的IT资源、基于云的解决方案和各种其他的云计算机制。从映像文件进行虚拟服务器的实例化是一个可以快速且按需完成的资源分配过程。</p>
-<h2 id="云存储设备"><a href="#云存储设备" class="headerlink" title="云存储设备"></a><strong>云存储设备</strong></h2><ul>
-<li><p>云存储设备是指专门为基于云配置所设计的存储设备。</p>
-</li>
-<li><p>支持按使用计费，提供固定增幅的容量分配</p>
-</li>
-<li><p>主要问题是数据的完整性，保密性，安全性</p>
-</li>
-<li>常见数据存储逻辑单元：文件、块、数据集、对象</li>
-<li>三种技术接口：网络存储接口（文件或块）、对象存储接口（Web资源），数据库存储接口（分为关系数据存储和非关系数据存储NoSQL）</li>
-</ul>
-<h2 id="云使用监控"><a href="#云使用监控" class="headerlink" title="云使用监控"></a><strong>云使用监控</strong></h2><p>​       三种常见的实现形式：监控代理、资源代理、轮询代理</p>
-<p>​       监控代理是一个中间的事件驱动程序，作为<strong>服务代理</strong></p>
-<p>​       资源代理是一种处理模块，轮询代理是一种处理模块</p>
-<p>资源复制：对同一个IT资源创建多个实例，加强IT资源的<strong>可用性</strong>和<strong>性能，</strong>复制基于云的IT资源</p>
-<p>已就绪环境：已就绪环境机制是PaaS云交付模型的定义组件，代表的是预定义的基于云的平台，该平台由一组已安装的IT资源组成，可以云用户使用和定制。云用户可以使用这些环境在云内远程开发和配置自身的服务与应用程序。</p>
-<p>典型的已就绪环境包括预安装的IT资源，如数据库、中间件、开发工具等</p>
-<h1 id="八-特殊云机制"><a href="#八-特殊云机制" class="headerlink" title="八. 特殊云机制"></a><strong>八. 特殊云机制</strong></h1><h2 id="自动伸缩监听器"><a href="#自动伸缩监听器" class="headerlink" title="自动伸缩监听器"></a>自动伸缩监听器</h2><ul>
-<li><p>一个服务代理，它监控和追踪<strong>云服务用户和云服务</strong>之间的通信，用以动态自动伸缩。</p>
-</li>
-<li><p>通常部署在靠近防火墙的位置，来自动追踪负载状态信息</p>
-</li>
-<li><p>负载量可以由云用户产生的请求量或某种类型的请求印发的后端处理需求量来决定</p>
-</li>
-<li><p>对于不同负载波动的条件，自动伸缩监听器可以提供不同类型的响应：</p>
-<ul>
-<li><p>自动伸缩IT资源：根据事先定义的参数</p>
-</li>
-<li><p>自动通知云用户：负载过高或过低时</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="负载均衡器"><a href="#负载均衡器" class="headerlink" title="负载均衡器"></a>负载均衡器</h2><ul>
-<li><p>一个运行时代理，主要用于把负载在两个或更多的IT资源上做负载</p>
-</li>
-<li><p>负载分配功能：</p>
-<ul>
-<li>非对称分配</li>
-<li>负载优先级</li>
-<li>上下文感知的分配</li>
-</ul>
-</li>
-<li><p>目标：优化IT资源的使用，避免过载并最大化吞吐量</p>
-</li>
-<li><p>机制：</p>
-<ul>
-<li>多层网络交换机</li>
-<li>专门的硬件设备</li>
-<li>专门的基于软件的系统（在服务器操作系统中比较常见）</li>
-<li>服务代理（通常由云管理软件控制）</li>
-</ul>
-</li>
-<li><p>负载均衡器通常位于<strong>产生负载的IT资源</strong>和<strong>执行负载处理的IT资源</strong>之间的通信路径上</p>
-</li>
-<li><p>负载均衡器可以被设计成一个透明的代理或是一个代理的组件</p>
-</li>
-</ul>
-<h2 id="SLA监控器"><a href="#SLA监控器" class="headerlink" title="SLA监控器"></a>SLA监控器</h2><ul>
-<li>被用来专门观察云服务的<strong>运行时性能</strong>，确保它们履行了SLA中报告的约定的QoS需求</li>
-<li>SLA监控器收集的数据由<strong>SLA管理系统</strong>处理并集成到SLA报告的标准中</li>
-</ul>
-<p>（PS.详见第九章)</p>
-<h2 id="按使用付费监控器"><a href="#按使用付费监控器" class="headerlink" title="按使用付费监控器"></a>按使用付费监控器</h2><ul>
-<li>机制，按照预先定义好的定价参数测量基于云的IT资源使用，并<strong>生成使用日志用于计算费用</strong></li>
-<li>使用数据由<strong>计费管理系统</strong>进行处理</li>
-<li>一些典型的监控变量包括：<ul>
-<li>请求/响应消息数量</li>
-<li>传送的数据量</li>
-<li>带宽消耗</li>
-</ul>
-</li>
-<li>实现方式<ul>
-<li>资源代理</li>
-<li>监控代理</li>
-</ul>
-</li>
-</ul>
-<h2 id="审计监控器"><a href="#审计监控器" class="headerlink" title="审计监控器"></a>审计监控器</h2><ul>
-<li>用来<strong>收集网络和IT资源的审计记录</strong>数据，用以满足管理需要或者合同义务</li>
-</ul>
-<h2 id="故障转移系统"><a href="#故障转移系统" class="headerlink" title="故障转移系统"></a>故障转移系统</h2><ul>
-<li>通过使用现有的集群技术提供<strong>冗余</strong>的实现来增加IT资源的<strong>可靠性和可用性</strong></li>
-<li>只要当前活跃的IT资源变得不可用时，便会<strong>自动切换</strong>到冗余的或待机IT资源实例上</li>
-<li>类型：<ul>
-<li>主动-主动<ul>
-<li>多个实例都处于活动状态，同时提供服务</li>
-<li>IT资源的冗余实现和负载均衡器是必须要的</li>
-</ul>
-</li>
-<li>主动-被动<ul>
-<li>一个处于活动状态，一个待机或闲置</li>
-<li>当IT资源变得不可用的时候，就会激活待机实例来接管工作</li>
-<li>相应的工作负载就会被重定向到接管操作的这个实例上</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="虚拟机监控器"><a href="#虚拟机监控器" class="headerlink" title="虚拟机监控器"></a>虚拟机监控器</h2><ul>
-<li>虚拟化基础设施的最基本部分，主要用来<strong>在物理服务器上生成虚拟服务器实例</strong>。</li>
-<li>通常受限于一台物理服务器（即一个虚拟机监控器由一台物理服务器来管理）</li>
-<li>VIM提供了一组特性来管理跨物理服务器的多虚拟机监控器</li>
-</ul>
-<h2 id="资源集群"><a href="#资源集群" class="headerlink" title="资源集群"></a>资源集群</h2><ul>
-<li>把多个IT资源实例分为一组，使得他们能像一个IT资源那样进行操作</li>
-<li>通过<strong>高速专用网络链接</strong>或者<strong>集群结点</strong>是实现工作负载、任务调度、数据共享和系统同步等通讯要求</li>
-<li>作用：增强了集群化IT资源的组合计算能力、负载均衡能力和可用性</li>
-<li>常见的资源集群类型包括：<ul>
-<li>服务器集群：提高性能和可用性</li>
-<li>数据库集群：提高数据可用性，维持数据的一致性</li>
-<li>大数据集集群：数据的分区和分布</li>
-</ul>
-</li>
-<li>两种基本类型:<ul>
-<li>负载均衡的集群：保持集中管理的特性下实现了在集群结点中的分布式工作负载</li>
-<li>高可用集群：在多节点失效的情况下保持系统的可用性，需要冗余实现和故障转移机制</li>
-</ul>
-</li>
-</ul>
-<h2 id="多设备代理"><a href="#多设备代理" class="headerlink" title="多设备代理"></a>多设备代理</h2><ul>
-<li>用来帮助运行时的数据转换</li>
-<li>克服云服务和多样性的云服务用户之间的<strong>不兼容性</strong></li>
-<li>使得云服务能够被更广泛的云服务用户程序和设备所使用</li>
-<li>需要创建映射逻辑来改变运行时交换的信息</li>
-<li>通常是作为网关存在的：<ul>
-<li>XML网关</li>
-<li>云存储网关</li>
-<li>移动设备网关</li>
-</ul>
-</li>
-</ul>
-<h2 id="状态管理数据库"><a href="#状态管理数据库" class="headerlink" title="状态管理数据库"></a>状态管理数据库</h2><ul>
-<li>是一种存储设备，用来暂时地持久化软件程序的状态数据，软件程序可以把状态数据卸载到数据库汇总</li>
-<li>替代状态数据<strong>缓存在内存中</strong>的一种办法，用以<strong>降低程序占用的运行时的内存量</strong></li>
-<li>状态管理数据库使得软降程序和周边的基础设施都具有更大的可拓展性</li>
-</ul>
-<h1 id="九-云管理机制"><a href="#九-云管理机制" class="headerlink" title="九. 云管理机制"></a>九. 云管理机制</h1><h2 id="远程管理系统"><a href="#远程管理系统" class="headerlink" title="远程管理系统"></a>远程管理系统</h2><ul>
-<li><strong>远程管理系统</strong>机制向<strong>外部云资源管理者</strong>提供工具和用户界面来配置并管理基于云的IT资源</li>
-<li>远程管理系统能够建立一个入口以便访问各种底层系统的控制与管理功能，包括资源管理、SLA管理和计费管理</li>
-</ul>
-<p><img src="C:\Users\admin\AppData\Local\Temp\1531129045247.png" alt="1531129045247"></p>
-<ul>
-<li>远程管理系统提供的工具和API一般被云提供者用来开发和定制在线入口，这些入口向云用户提供各种管理控制</li>
-<li>主要创建如下两种类型的入口：<ul>
-<li>使用与管理入口：一种通用入口，集中管理不同的基于云的IT资源，并提供IT资源使用报告</li>
-<li>自主服务入口：本质上是一个购买门户，允许云用户搜索云提供者提供的最新云服务和IT资源列表</li>
-</ul>
-</li>
-<li>通过远程管理控制奥体，云用户通常能够执行的任务包括：<ul>
-<li>配置与建立云服务</li>
-<li>为按需云服务提供和释放IT资源</li>
-<li>监控云服务的状态、使用和性能</li>
-<li>监控QoS和SLA的实行</li>
-<li>管理租赁成本与使用费用</li>
-<li>管理用户账户、安全凭证、授权和访问控制</li>
-<li>跟踪对租赁服务内部与外部的访问</li>
-<li>规划与评估IT资源供给</li>
-<li>容量规划</li>
-</ul>
-</li>
-</ul>
-<h2 id="资源管理系统"><a href="#资源管理系统" class="headerlink" title="资源管理系统"></a>资源管理系统</h2><ul>
-<li>资源管理系统机制帮助协调IT资源，以便相应云用户和云提供者执行的管理操作</li>
-<li>此系统的核心是虚拟基础设施管理器（VIM），用于协调服务器硬件，这样就可以从最合适的底层物理服务器创建虚拟服务器实例</li>
-<li>VIM是一个商业化产品，用于管理一系列跨多个物理服务器的IT资源</li>
-<li>通常通过资源管理系统自动化并是吸纳的任务包括：<ul>
-<li>管理虚拟IT资源模板，如虚拟服务器映像</li>
-<li>分配和释放虚拟IT资源，比如开始、暂停、继续和终止</li>
-<li>在有其他机制参与的条件下，协调IT资源，比如资源复制、负载均衡和故障转移系统</li>
-<li>在云服务实例的生命周期内，强制执行使用策略和安全规定</li>
-<li>监控IT资源的操作条件</li>
-</ul>
-</li>
-</ul>
-<h2 id="SLA管理系统"><a href="#SLA管理系统" class="headerlink" title="SLA管理系统"></a>SLA管理系统</h2><ul>
-<li>SLA管理系统机制代表的是一系列商品化的可用云管理产品，这些产品提供的功能包括：SLA数据的管理、收集、存储、报告以及运行时通知</li>
-<li>部署SLA管理系统时，常常会包含一个库，用于存储和检索被收集的基于预定义指标和报告参数的SLA数据</li>
-</ul>
-<h2 id="计费管理系统"><a href="#计费管理系统" class="headerlink" title="计费管理系统"></a>计费管理系统</h2><ul>
-<li><strong>计费管理系统</strong>机制专门用于手机和处理使用数据，它涉及<strong>云提供者的结算</strong>和<strong>云用户的计费</strong></li>
-<li>计费管理系统依靠<strong>按使用付费监控器</strong>来收集运行时使用数据，用于计费、报告和开发票等目的</li>
-<li>计费管理系统允许指制定不同的定价规则，还可以针对每个云用户或每个IT资源自定义定价模型</li>
-<li>定价模型可以是传统的按使用付费模型，也可以是固定费率或按分配付费模型，还可以是它们的组合</li>
-<li>计费是根据使用前支付和使用后支付来安排的</li>
-</ul>
-<h1 id="十-云安全机制"><a href="#十-云安全机制" class="headerlink" title="十. 云安全机制"></a>十. 云安全机制</h1><ul>
-<li>安全属性：<ul>
-<li>保密性：是指只有被授权方才能访问的特性</li>
-<li>完整性：是指未被未授权方篡改的特性</li>
-<li>真实性：是指事务是由经过授权的源提供的这一特性</li>
-<li>可用性：是在特定的时间段内可以访问和可以使用的特性</li>
-</ul>
-</li>
-</ul>
-<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><ul>
-<li>加密<ul>
-<li>是一种数据编码系统，专门用来保护数据的<strong>保密性</strong>和<strong>完整性</strong></li>
-<li>用于对抗流量窃听、恶意媒介、授权不足和信任边界重叠这样一些安全威胁</li>
-</ul>
-</li>
-<li>加密部件<ul>
-<li>加密用的标准化算法，把原始的明文数据转换成加密的密文数据</li>
-</ul>
-</li>
-<li>Key - 密钥</li>
-</ul>
-<h3 id="加密的类型"><a href="#加密的类型" class="headerlink" title="加密的类型"></a>加密的类型</h3><ul>
-<li>基于流的密码<ul>
-<li>一次一个</li>
-<li>将明文与密钥流混合</li>
-<li>有利于实时服务</li>
-</ul>
-</li>
-<li>基于块的密码<ul>
-<li>取代和换位</li>
-</ul>
-</li>
-</ul>
-<h3 id="加密的方法"><a href="#加密的方法" class="headerlink" title="加密的方法"></a>加密的方法</h3><h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><ul>
-<li>加密和解密的相同密钥</li>
-<li>密钥分配问题</li>
-</ul>
-<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><ul>
-<li>基于无法逆向求解的数学问题<ul>
-<li>整数分解、离散对数、椭圆曲线</li>
-</ul>
-</li>
-<li>通过一个大的随机数产生一对密钥<ul>
-<li>私钥、公钥</li>
-</ul>
-</li>
-</ul>
-<h4 id="混合加密"><a href="#混合加密" class="headerlink" title="混合加密"></a>混合加密</h4><ul>
-<li>结合了两种的优点</li>
-<li>非对称分配对称密钥<ul>
-<li>也称为会话密钥</li>
-</ul>
-</li>
-<li>对称提供批量加密</li>
-</ul>
-<h4 id="对称-VS-非对称"><a href="#对称-VS-非对称" class="headerlink" title="对称 VS. 非对称"></a>对称 VS. 非对称</h4><ul>
-<li>对称加密保证了数据的保密性，但是并不保证数据的不可否认性</li>
-<li>非对称加密依赖于使用两个不同的密钥，称为私钥和公钥<ul>
-<li>用自己的私钥加密给对方，对方用公钥解开<ul>
-<li>真实性、不可否认性和完整性保护（不提供保密性）</li>
-</ul>
-</li>
-<li>用公钥加密送给私钥拥有者<ul>
-<li>保证了保密性（不保证完整性、真实性的保护）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><ul>
-<li>哈希<ul>
-<li>用来获得消息的哈希代码或者消息摘要，通常是固定的长度，小于原始的消息大小</li>
-<li>单向的、不可逆转的数据保护</li>
-<li>主要属性：计算简单、不可逆、不重复</li>
-</ul>
-</li>
-<li>典型应用<ul>
-<li>数据保密：如密码哈希</li>
-<li>恶意媒介和授权不足</li>
-<li>服务滥用：（如DoS）Proof-of-work</li>
-<li>文件标识：P2P文件系统、软件版本管理工具</li>
-</ul>
-</li>
-</ul>
-<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><ul>
-<li>数字签名<ul>
-<li>将消息进行哈希，然后用私钥进行加密</li>
-</ul>
-</li>
-<li>作用<ul>
-<li>通过身份验证和不可否认性来提供数据真实性和数据完整性</li>
-<li>类似于日常生活中的“签名”</li>
-</ul>
-</li>
-<li>算法<ul>
-<li>RSA是最常用的签名算法</li>
-</ul>
-</li>
-<li>扩展应用<ul>
-<li>数字证书：个人安全邮件证书</li>
-<li>智能卡：将数字签名放入便携物理存储介质</li>
-</ul>
-</li>
-</ul>
-<h2 id="公钥基础设施"><a href="#公钥基础设施" class="headerlink" title="公钥基础设施"></a>公钥基础设施</h2><ul>
-<li>公钥基础设施<ul>
-<li>是一个由协议、数据格式、规则和实施组成的系统</li>
-<li>是用于大规模、公共系统的公钥加密技术</li>
-</ul>
-</li>
-<li>数字证书<ul>
-<li>带数字签名的数据结构，验证证书拥有者身份以及相关信息</li>
-<li>通常是由第三方证书颁发机构签发的</li>
-</ul>
-</li>
-<li>PKI与云计算<ul>
-<li>实现非对称加密</li>
-<li>管理云用户和云提供者身份信息</li>
-<li>防御恶意中介和不充分的授权威胁</li>
-</ul>
-</li>
-</ul>
-<h2 id="身份与访问管理IAM"><a href="#身份与访问管理IAM" class="headerlink" title="身份与访问管理IAM"></a>身份与访问管理IAM</h2><ul>
-<li>身份与访问管理<ul>
-<li>控制和追踪用户身份以及IT资源、环境、系统访问特权</li>
-</ul>
-</li>
-<li>四个主要部分组成：<ul>
-<li>认证</li>
-<li>授权</li>
-<li>用户管理</li>
-<li>证书管理</li>
-</ul>
-</li>
-<li>IAM机制功能：<ul>
-<li>分配用户特权等级</li>
-<li>访问控制和策略</li>
-</ul>
-</li>
-<li>IAM机制的用途<ul>
-<li>对抗授权不足、拒绝服务供给和信任边界重叠等威胁</li>
-<li>比PKI机制要更全面</li>
-</ul>
-</li>
-</ul>
-<h2 id="单一登录"><a href="#单一登录" class="headerlink" title="单一登录"></a>单一登录</h2><ul>
-<li>单一登录机制<ul>
-<li>使得一个云服务用户能够被一个安全代理认证并建立起一个安全上下文</li>
-<li>当云用户要访问其他云服务或资源的时候，这个上下文会被持久化</li>
-</ul>
-</li>
-<li>实现跨云服务的用户认证和授权</li>
-<li>允许互相独立的云服务和IT资源产生并流通运行时认证和授权证书</li>
-<li>不直接对抗任何一个云安全威胁</li>
-<li>增强了基于云的环境的访问并管理分布式IT资源和解决方案的可用性</li>
-</ul>
-<h2 id="基于云的安全组"><a href="#基于云的安全组" class="headerlink" title="基于云的安全组"></a>基于云的安全组</h2><ul>
-<li>云资源分割<ul>
-<li>为不同用户和组创建各自的物理和虚拟IT环境的过程</li>
-<li>云资源分割是虚拟化的基础</li>
-</ul>
-</li>
-<li>基于云的安全组<ul>
-<li>基于云的资源分割，网络被分成逻辑的基于云的安全组，形成逻辑网络边界</li>
-<li>运行在同一个物理服务器上的多个虚拟服务器逻辑上可以是不同基于云的安全组的成员</li>
-<li>基于云的安全组能限制对资源的未被授权的访问</li>
-<li>用来对抗拒绝服务、授权不足和信任边界重叠等威胁</li>
-</ul>
-</li>
-</ul>
-<h2 id="强化的虚拟服务器映像"><a href="#强化的虚拟服务器映像" class="headerlink" title="强化的虚拟服务器映像"></a>强化的虚拟服务器映像</h2><ul>
-<li>虚拟服务器镜像<ul>
-<li>一个从模板配置创建的虚拟服务器镜像</li>
-<li>比原始标准映像更加安全的虚拟服务器模板</li>
-</ul>
-</li>
-<li>强化<ul>
-<li>把不必要的软件从系统中剥离出来。限制可能被攻击者利用的潜在漏洞的过程</li>
-<li>去除冗余的程序，关闭不必要的服务器端口，关闭不使用的服务，内部root用户和guest访问等</li>
-</ul>
-</li>
-<li>对抗拒绝服务、授权不足和信任边界重叠等威胁</li>
-</ul>
-<h1 id="十一-基本云架构"><a href="#十一-基本云架构" class="headerlink" title="十一. 基本云架构"></a>十一. 基本云架构</h1><h2 id="负载分布架构"><a href="#负载分布架构" class="headerlink" title="负载分布架构"></a>负载分布架构</h2><ul>
-<li>负载分布架构<ul>
-<li>通过增加一个或多个<strong>相同的IT资源</strong>可以进行IT资源<strong>水平扩展</strong>，而提供运行时逻辑的负载均衡器能够在可用IT资源上均衡分配工作负载</li>
-<li>以来负载均衡算法和运行时逻辑</li>
-</ul>
-</li>
-<li>分布式IT资源<ul>
-<li>多个同类型IT资源同时提供服务</li>
-<li>水平扩展：增加/减少相同的IT资源</li>
-</ul>
-</li>
-<li>负载均衡<ul>
-<li>在可用IT资源上均匀分配工作负载</li>
-</ul>
-</li>
-<li>负载均衡器<ul>
-<li>资源入口处执行负载均衡的实体</li>
-<li>调度方法<ul>
-<li>基于DNS</li>
-<li>基于虚拟IP</li>
-<li>基于链路聚合：用于整合链路提高网络传输能力</li>
-<li>基于应用：用于分配到分布式调度器</li>
-</ul>
-</li>
-<li>调度策略<ul>
-<li>轮转、负载水平,……</li>
-<li>同一用户的多个请求调度到同一服务器</li>
-<li>同一租户的请求调度到尽量少的一组服务器</li>
-<li>尽量实现不同类型负载的互补</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>负载分布架构的多个构成部分<ul>
-<li>IT资源<ul>
-<li>资源副本</li>
-<li>资源集群</li>
-</ul>
-</li>
-<li>服务入口<ul>
-<li>负载均衡器</li>
-<li>逻辑网络边界</li>
-</ul>
-</li>
-<li>监控与审计<ul>
-<li>使用监控器</li>
-<li>VM监控器</li>
-<li>审计监控器</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="服务负载均衡架构"><a href="#服务负载均衡架构" class="headerlink" title="服务负载均衡架构"></a>服务负载均衡架构</h2><ul>
-<li>服务负载架构<ul>
-<li>可以被认为是工作负载分布架构的一个特殊变种</li>
-<li>专门针对扩展云服务实现</li>
-</ul>
-</li>
-<li>基于云服务的冗余部署<ul>
-<li>部署在虚拟机上或容器中的应用程序或软件</li>
-<li>多实例构成资源池</li>
-</ul>
-</li>
-<li>两种形式<ul>
-<li>独立于云设备及主机服务器</li>
-<li>作为应用程序/服务器环境的内置组件</li>
-</ul>
-</li>
-<li>其他机制<ul>
-<li>云使用监控器</li>
-<li>资源集群</li>
-<li>资源复制</li>
-</ul>
-</li>
-</ul>
-<h2 id="资源池架构"><a href="#资源池架构" class="headerlink" title="资源池架构"></a>资源池架构</h2><ul>
-<li>资源池架构<ul>
-<li>使用一个或多个资源池为基础，其中相同的IT资源由一个系统进行分组和维护，以确保它们保持同步</li>
-</ul>
-</li>
-<li>常见的资源池有：<ul>
-<li>物理服务器池</li>
-<li>虚拟服务器池</li>
-<li>存储池</li>
-<li>网络池</li>
-<li>CPU池</li>
-<li>内存池</li>
-</ul>
-</li>
-<li>可以每种类型的IT资源创建专用池，也可以单个或多个池集合成一个更大的池</li>
-</ul>
-<h3 id="层次资源池架构"><a href="#层次资源池架构" class="headerlink" title="层次资源池架构"></a>层次资源池架构</h3><ul>
-<li>资源池可以建立层次结构，形成父子、兄弟和嵌套关系，利于构成不同的资源池需求</li>
-</ul>
-<h3 id="同级资源池"><a href="#同级资源池" class="headerlink" title="同级资源池"></a>同级资源池</h3><ul>
-<li><p>通常来自物理上的同一组IT资源</p>
-</li>
-<li><p>同级资源池之间是相互隔离的，云用户只能访问各自的资源池</p>
-</li>
-</ul>
-<h3 id="嵌套资源池"><a href="#嵌套资源池" class="headerlink" title="嵌套资源池"></a>嵌套资源池</h3><ul>
-<li><p>较大的资源池被分解成较小的资源池，每个小资源池分别包含了与大资源池相同类型的IT资源</p>
-</li>
-<li><p>嵌套资源池可以用于向同一个云用户组织的不同部门或者不同组分配资源池</p>
-</li>
-</ul>
-<h3 id="资源池使能技术"><a href="#资源池使能技术" class="headerlink" title="资源池使能技术"></a>资源池使能技术</h3><ul>
-<li>云存储设备和虚拟服务器</li>
-<li>辅助技术：<ul>
-<li>审计监控器</li>
-<li>云使用监控器</li>
-<li>虚拟机监控器</li>
-<li>逻辑网络边界</li>
-<li>按使用付费监控器</li>
-<li>远程管理系统</li>
-<li>资源管理系统</li>
-<li>资源复制</li>
-</ul>
-</li>
-</ul>
-<h2 id="动态可扩展架构"><a href="#动态可扩展架构" class="headerlink" title="动态可扩展架构"></a>动态可扩展架构</h2><ul>
-<li>动态可扩展架构<ul>
-<li>基于预先定义的扩展条件从资源池中动态分配IT资源</li>
-<li>云资源弹性管理的核心机制</li>
-</ul>
-</li>
-<li>自动扩展监听器<ul>
-<li>是实现动态扩展的核心部件</li>
-<li>监听负载状态以决定何时扩展</li>
-</ul>
-</li>
-<li>动态扩展类型<ul>
-<li>动态水平扩展<ul>
-<li>向内或向外扩展IT资源实例</li>
-<li>自动扩展监听器<strong>请求资源复制</strong>，并发信号启动IT资源复制</li>
-</ul>
-</li>
-<li>动态垂直扩展<ul>
-<li>调整单个IT资源的<strong>处理容量</strong></li>
-<li>向上或向下扩展IT资源实例</li>
-</ul>
-</li>
-<li>动态重定位<ul>
-<li>将IT资源重放置到更大/更小容量的主机上</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>使用的机制<ul>
-<li>云使用监控器</li>
-<li>虚拟机监控器</li>
-<li>按使用付费监控器</li>
-</ul>
-</li>
-</ul>
-<h2 id="弹性资源容量架构"><a href="#弹性资源容量架构" class="headerlink" title="弹性资源容量架构"></a>弹性资源容量架构</h2><ul>
-<li>弹性资源容量架构<ul>
-<li>主要与虚拟服务器的动态供给相关</li>
-<li>根据负载变化分配和回收CPU与RAM资源</li>
-</ul>
-</li>
-<li>扩展逻辑在智能自动化引擎<ul>
-<li>自动扩展监听器发信号给智能引擎(一种脚本)</li>
-<li>智能引擎运行工作流逻辑，触发扩展</li>
-</ul>
-</li>
-<li>扩展属于垂直扩展</li>
-<li>依赖一些额外机制<ul>
-<li>云使用监控器</li>
-<li>按使用付费监控器</li>
-<li>资源复制</li>
-</ul>
-</li>
-<li>变种<ul>
-<li>包含工作流逻辑的脚本通过VIM发送其扩展请求</li>
-<li>而不是直接发送给虚拟机监控器</li>
-</ul>
-</li>
-</ul>
-<h2 id="云爆发架构"><a href="#云爆发架构" class="headerlink" title="云爆发架构"></a>云爆发架构</h2><ul>
-<li>动态扩展架构的特殊形式</li>
-<li>云数据中心和企业IT资源协同<ul>
-<li>企业内部IT资源<- -="">云IT资源</-></li>
-</ul>
-</li>
-<li>基于云的IT资源是冗余性预部署<ul>
-<li>保持非活跃状态，直到发生云爆发</li>
-</ul>
-</li>
-<li>架构模型基础<ul>
-<li>自动扩展监听器</li>
-<li>资源复制机制</li>
-</ul>
-</li>
-</ul>
-<h2 id="弹性磁盘供给架构"><a href="#弹性磁盘供给架构" class="headerlink" title="弹性磁盘供给架构"></a>弹性磁盘供给架构</h2><ul>
-<li>建立了一个动态存储供给系统，确保按照云用户实际使用的存储量进行精确计费</li>
-<li>基于自动精简供给技术</li>
-<li>辅助机制<ul>
-<li>云使用监控器</li>
-<li>资源复制</li>
-</ul>
-</li>
-<li>通常的收费方式：按照预定义的磁盘容量收费</li>
-</ul>
-<h2 id="冗余存储架构"><a href="#冗余存储架构" class="headerlink" title="冗余存储架构"></a>冗余存储架构</h2><ul>
-<li>引入了复制的辅云存储设备作为故障系统的一部分，与主云存储设备中的数据保持同步</li>
-<li>主设备失效时，存储设备网关把用户请求转向辅设备</li>
-<li>主要依靠的的存储复制系统<ul>
-<li>使得主云存储设备与其复制的辅云存储谁被保持同步</li>
-</ul>
-</li>
-<li>通常部署在不同的地理区域<ul>
-<li>抗灾容错</li>
-<li>经济成本</li>
-<li>法律问题</li>
-</ul>
-</li>
-</ul>
-<h1 id="十二-高级云架构"><a href="#十二-高级云架构" class="headerlink" title="十二. 高级云架构"></a>十二. 高级云架构</h1><h2 id="虚拟机监控器集群架构"><a href="#虚拟机监控器集群架构" class="headerlink" title="虚拟机监控器集群架构"></a>虚拟机监控器集群架构</h2><ul>
-<li>虚拟机监控器集群<ul>
-<li>建立了一个<strong>跨多个物理服务器</strong>的高可用<strong>虚拟机监控器集群</strong></li>
-<li>如果一个给定的虚拟机监控器或其底层物理服务器变得不可用，则被其托管的虚拟机服务器可<strong>迁移到另一物理服务器</strong>或<strong>虚拟机监控器</strong>上来保持运行时操作</li>
-</ul>
-</li>
-<li>虚拟机监控器集群由中心VIM控制<ul>
-<li>通过常规心跳消息来检测虚拟机监控器的状态</li>
-<li>当物理机或虚拟机监控器失效时进行在线迁移</li>
-<li>使用共享云存储设备实现在线迁移</li>
-</ul>
-</li>
-</ul>
-<h2 id="粗粒度负载均衡与资源预留"><a href="#粗粒度负载均衡与资源预留" class="headerlink" title="粗粒度负载均衡与资源预留"></a>粗粒度负载均衡与资源预留</h2><ul>
-<li>负载均衡的粒度有很多</li>
-<li>用户请求<ul>
-<li>前端LB把用户请求分发给不同的云服务实例</li>
-</ul>
-</li>
-<li>虚拟机服务器实例<ul>
-<li>把虚拟服务器放置到不同的物理机</li>
-</ul>
-</li>
-<li>云负载均衡<ul>
-<li>数据中心间的负载均衡</li>
-</ul>
-</li>
-</ul>
-<h3 id="负载均衡的虚拟服务器实例架构"><a href="#负载均衡的虚拟服务器实例架构" class="headerlink" title="负载均衡的虚拟服务器实例架构"></a>负载均衡的虚拟服务器实例架构</h3><ul>
-<li>由于物理服务器之间保持跨服务器的工作负载均衡是很难实现的，运行和管理是相互隔离的，需要建立一个容量看门狗系统</li>
-<li>包含的机制<ul>
-<li>虚拟机监控器</li>
-<li>资源集群</li>
-<li>虚拟服务器</li>
-<li>(容量看门狗)云使用监控器</li>
-<li>自动伸缩监控器</li>
-<li>负载均衡器</li>
-<li>逻辑网络边界</li>
-<li>资源复制</li>
-</ul>
-</li>
-</ul>
-<h4 id="容量看门狗系统"><a href="#容量看门狗系统" class="headerlink" title="容量看门狗系统"></a>容量看门狗系统</h4><ul>
-<li>动态地计算虚拟服务器实例及其相关的工作负载，再把处理任务分配到可用的物理服务器主机</li>
-<li>组成<ul>
-<li>一个云使用监控器</li>
-<li>VM在线迁移程序</li>
-<li>容量计划器</li>
-</ul>
-</li>
-</ul>
-<h3 id="云负载均衡架构"><a href="#云负载均衡架构" class="headerlink" title="云负载均衡架构"></a>云负载均衡架构</h3><ul>
-<li>云负载均衡架构<ul>
-<li>一个特殊的架构模型</li>
-<li>IT资源可以在多个云之间进行负载均衡</li>
-</ul>
-</li>
-<li>目的<ul>
-<li>提高IT资源的性能和可扩展性</li>
-<li>增加IT资源的可用性和可靠性</li>
-<li>改进负载均衡和IT资源优化</li>
-</ul>
-</li>
-<li>基础<ul>
-<li>自动伸缩监听器</li>
-<li>故障转移系统</li>
-</ul>
-</li>
-</ul>
-<h3 id="资源预留架构"><a href="#资源预留架构" class="headerlink" title="资源预留架构"></a>资源预留架构</h3><ul>
-<li>资源受限<ul>
-<li>太多并发访问可能会导致运行时异常</li>
-<li>IT资源没有足够的容量</li>
-</ul>
-</li>
-<li>资源预留<ul>
-<li>专门为给定的云用户保留<ul>
-<li>单个IT资源</li>
-<li>一个IT资源的一部分</li>
-<li>多个IT资源</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>依赖多个部件和机制<ul>
-<li>审计监控器</li>
-<li>云使用监控器</li>
-<li>虚拟机监控器</li>
-<li>逻辑网路边界</li>
-<li>资源复制</li>
-</ul>
-</li>
-</ul>
-<h2 id="云服务容错架构"><a href="#云服务容错架构" class="headerlink" title="云服务容错架构"></a>云服务容错架构</h2><ul>
-<li>云服务不可用的原因<ul>
-<li>运行时需求超出处理能力</li>
-<li>维护更新导致的暂时中断</li>
-<li>云服务迁移</li>
-<li>物理机失效、宕机</li>
-</ul>
-</li>
-<li>应对机制<ul>
-<li>服务迁移：不中断服务重定位架构</li>
-<li>服务故障检测与恢复：动态故障检测与恢复架构</li>
-<li>物理机容错</li>
-</ul>
-</li>
-</ul>
-<h3 id="动态故障检测与恢复架构"><a href="#动态故障检测与恢复架构" class="headerlink" title="动态故障检测与恢复架构"></a>动态故障检测与恢复架构</h3><ul>
-<li>建立一个弹性的看门狗系统，以监控范围广泛的预先定义的故障场景，并对之做出相应</li>
-<li>弹性看门狗系统<ul>
-<li>五个核心功能<ul>
-<li>监视</li>
-<li>选定事件</li>
-<li>对事件做出反应</li>
-<li>报告</li>
-<li>升级处理</li>
-</ul>
-</li>
-<li>智能看门狗监控器升级一个问题的处理最常采用的措施包括<ul>
-<li>运行一个批处理文件</li>
-<li>发送一个控制台消息</li>
-<li>发送一条短信消息</li>
-<li>发送一份电子邮件消息</li>
-<li>发送一个SNMP陷阱</li>
-<li>记录一个通知单</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>零宕机架构<ul>
-<li>物理机不中断机制</li>
-<li>服务器会聚成一组，由容错系统控制</li>
-<li>虚拟服务器都存储在共享介质</li>
-</ul>
-</li>
-</ul>
-<h2 id="裸机供给与快速供给架构"><a href="#裸机供给与快速供给架构" class="headerlink" title="裸机供给与快速供给架构"></a>裸机供给与快速供给架构</h2><ul>
-<li>裸机<ul>
-<li>指没有预装操作系统或其他任何软件的物理服务器</li>
-</ul>
-</li>
-</ul>
-<h3 id="裸机供给架构"><a href="#裸机供给架构" class="headerlink" title="裸机供给架构"></a>裸机供给架构</h3><ul>
-<li>弹性增加裸机</li>
-<li>基于ROM提供的远程安装支持自动安装系统<ul>
-<li>连接默认或DHCP配置IP</li>
-<li>通过Web或专有接口连接到物理机</li>
-<li>自动安装操作系统或软件</li>
-</ul>
-</li>
-<li>主要构成<ul>
-<li>发现代理<ul>
-<li>一种监控代理</li>
-<li>搜索并找到可用的物理机</li>
-</ul>
-</li>
-<li>部署代理<ul>
-<li>裸机供给的客户端</li>
-<li>加载到物理服务器RAM中</li>
-</ul>
-</li>
-<li>部署组件<ul>
-<li>用于安装操作系统</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="快速供给架构"><a href="#快速供给架构" class="headerlink" title="快速供给架构"></a>快速供给架构</h3><ul>
-<li>快速供给架构<ul>
-<li>实现大范围的IT资源供给的<strong>自动化</strong></li>
-<li>单个IT资源或者复合IT资源</li>
-<li>大用户量或者大资源量</li>
-</ul>
-</li>
-<li>主要构成部分<ul>
-<li>顺序管理器<ul>
-<li>组织自动化供给任务的顺序<pre><code>顺序日志记录器    
-</code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="存储负载管理架构"><a href="#存储负载管理架构" class="headerlink" title="存储负载管理架构"></a>存储负载管理架构</h2><ul>
-<li>存储负载管理架构<ul>
-<li>使得LUN可以均匀地分布在可用的云存储设备上</li>
-</ul>
-</li>
-<li>LUN迁移<ul>
-<li>把LUN从一个存储设备都能到另一个上而无需中断</li>
-<li>同时还对云用于保持透明</li>
-</ul>
-</li>
-<li>存储容量系统<ul>
-<li>则用来确保运行时工作负载均匀地分布在LUN上</li>
-</ul>
-</li>
-<li>云存储设备合并成一个组<ul>
-<li>LUN数据在可用的存储主机上均匀地分布</li>
-</ul>
-</li>
-<li>放置一个自动伸缩监听器<ul>
-<li>监控并且动态分配云存储设备之间的运行时工作负载</li>
-</ul>
-</li>
-<li>其他支持机制<ul>
-<li>审计监控器</li>
-<li>负载均衡器</li>
-<li>云使用监控器</li>
-<li>自动伸缩监听器</li>
-<li>逻辑网络边界</li>
-</ul>
-</li>
-</ul>
-<h1 id="十三-特殊云架构"><a href="#十三-特殊云架构" class="headerlink" title="十三. 特殊云架构"></a>十三. 特殊云架构</h1><h1 id="十四-云交付模型考量"><a href="#十四-云交付模型考量" class="headerlink" title="十四. 云交付模型考量"></a>十四. 云交付模型考量</h1><h1 id="十五-成本指标与定价模型"><a href="#十五-成本指标与定价模型" class="headerlink" title="十五. 成本指标与定价模型"></a>十五. 成本指标与定价模型</h1><h1 id="十六-服务质量指标与SLA"><a href="#十六-服务质量指标与SLA" class="headerlink" title="十六. 服务质量指标与SLA"></a>十六. 服务质量指标与SLA</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/07/24/Hello-Hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Treek">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tree Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/24/Hello-Hexo/" itemprop="url">Hello, Hexo!</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T10:35:10+08:00">
-                2018-07-24
-              </time>
+              <a href="/2018/07/28/云计算要点/" rel="next" title="云计算要点">
+                <i class="fa fa-chevron-left"></i> 云计算要点
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/搭建博客/" itemprop="url" rel="index">
-                    <span itemprop="name">搭建博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>The first time using hexo to create a blog page, just for testing </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -3168,10 +1551,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -3179,6 +1563,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -3199,8 +1587,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -3260,6 +1657,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-导论"><span class="nav-number">1.</span> <span class="nav-text">第1章 导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概念"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统组织"><span class="nav-number">1.2.</span> <span class="nav-text">计算机系统组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统体系结构"><span class="nav-number">1.3.</span> <span class="nav-text">计算机系统体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统结构"><span class="nav-number">1.4.</span> <span class="nav-text">操作系统结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统操作"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双重模式操作"><span class="nav-number">1.5.1.</span> <span class="nav-text">双重模式操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章-操作系统结构"><span class="nav-number">2.</span> <span class="nav-text">第2章  操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统服务"><span class="nav-number">2.1.</span> <span class="nav-text">操作系统服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的用户界面"><span class="nav-number">2.2.</span> <span class="nav-text">操作系统的用户界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用"><span class="nav-number">2.3.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用类型"><span class="nav-number">2.4.</span> <span class="nav-text">系统调用类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统程序"><span class="nav-number">2.5.</span> <span class="nav-text">系统程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分层方法"><span class="nav-number">2.5.1.</span> <span class="nav-text">分层方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微内核"><span class="nav-number">2.5.2.</span> <span class="nav-text">微内核</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-进程"><span class="nav-number">3.</span> <span class="nav-text">第3章 进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程概念"><span class="nav-number">3.1.</span> <span class="nav-text">进程概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">3.1.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程状态"><span class="nav-number">3.1.2.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程控制块"><span class="nav-number">3.1.3.</span> <span class="nav-text">进程控制块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程"><span class="nav-number">3.1.4.</span> <span class="nav-text">线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度"><span class="nav-number">3.2.</span> <span class="nav-text">进程调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调度队列"><span class="nav-number">3.2.1.</span> <span class="nav-text">调度队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度程序"><span class="nav-number">3.2.2.</span> <span class="nav-text">调度程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.2.3.</span> <span class="nav-text">上下文切换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程操作"><span class="nav-number">3.3.</span> <span class="nav-text">进程操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">3.4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享内存系统"><span class="nav-number">3.4.1.</span> <span class="nav-text">共享内存系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者-消费者问题"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">生产者-消费者问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息传递系统"><span class="nav-number">3.4.2.</span> <span class="nav-text">消息传递系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接或间接通信"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">直接或间接通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步或异步通信"><span class="nav-number">3.4.2.2.</span> <span class="nav-text">同步或异步通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动或显式缓冲"><span class="nav-number">3.4.2.3.</span> <span class="nav-text">自动或显式缓冲</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户机-服务器系统通信"><span class="nav-number">3.5.</span> <span class="nav-text">客户机-服务器系统通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-套接字"><span class="nav-number">3.5.1.</span> <span class="nav-text">Socket(套接字)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程过程调用-Remote-Procedure-Calls"><span class="nav-number">3.5.2.</span> <span class="nav-text">远程过程调用(Remote Procedure Calls)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程方法调用-Remote-Method-Invocation"><span class="nav-number">3.5.3.</span> <span class="nav-text">远程方法调用(Remote Method Invocation)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-线程"><span class="nav-number">4.</span> <span class="nav-text">第4章 线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程模型"><span class="nav-number">4.1.</span> <span class="nav-text">多线程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程库"><span class="nav-number">4.2.</span> <span class="nav-text">线程库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程问题"><span class="nav-number">4.3.</span> <span class="nav-text">多线程问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第5章-CPU调度"><span class="nav-number">5.</span> <span class="nav-text">第5章 CPU调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调度准则"><span class="nav-number">5.1.</span> <span class="nav-text">调度准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调度算法"><span class="nav-number">5.2.</span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FCFS-先到先服务调度"><span class="nav-number">5.2.1.</span> <span class="nav-text">FCFS-先到先服务调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SJF-最短作业优先调度"><span class="nav-number">5.2.2.</span> <span class="nav-text">SJF-最短作业优先调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级调度"><span class="nav-number">5.2.3.</span> <span class="nav-text">优先级调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RR-轮转法调度"><span class="nav-number">5.2.4.</span> <span class="nav-text">RR - 轮转法调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多级队列调度"><span class="nav-number">5.2.5.</span> <span class="nav-text">多级队列调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多级反馈队列调度"><span class="nav-number">5.2.6.</span> <span class="nav-text">多级反馈队列调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多处理器调度"><span class="nav-number">5.3.</span> <span class="nav-text">多处理器调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程调度"><span class="nav-number">5.4.</span> <span class="nav-text">线程调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第6章-进程同步"><span class="nav-number">6.</span> <span class="nav-text">第6章 进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#临界区问题"><span class="nav-number">6.1.</span> <span class="nav-text">临界区问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三项要求"><span class="nav-number">6.1.1.</span> <span class="nav-text">三项要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peterson算法"><span class="nav-number">6.2.</span> <span class="nav-text">Peterson算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件同步"><span class="nav-number">6.3.</span> <span class="nav-text">硬件同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">6.4.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典同步问题"><span class="nav-number">6.5.</span> <span class="nav-text">经典同步问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有限缓冲问题"><span class="nav-number">6.5.1.</span> <span class="nav-text">有限缓冲问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读者-写者问题"><span class="nav-number">6.5.2.</span> <span class="nav-text">读者-写者问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哲学家问题"><span class="nav-number">6.5.3.</span> <span class="nav-text">哲学家问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管程monitor"><span class="nav-number">6.6.</span> <span class="nav-text">管程monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子事务"><span class="nav-number">6.7.</span> <span class="nav-text">原子事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">6.7.1.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">6.7.2.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回退"><span class="nav-number">6.7.3.</span> <span class="nav-text">回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#易失性存储"><span class="nav-number">6.7.4.</span> <span class="nav-text">易失性存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非易失性存储"><span class="nav-number">6.7.5.</span> <span class="nav-text">非易失性存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稳定存储"><span class="nav-number">6.7.6.</span> <span class="nav-text">稳定存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第7章-死锁"><span class="nav-number">7.</span> <span class="nav-text">第7章 死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁特征"><span class="nav-number">7.1.</span> <span class="nav-text">死锁特征</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源分配图"><span class="nav-number">7.1.1.</span> <span class="nav-text">资源分配图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁处理方法"><span class="nav-number">7.2.</span> <span class="nav-text">死锁处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁预防"><span class="nav-number">7.3.</span> <span class="nav-text">死锁预防</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁避免"><span class="nav-number">7.4.</span> <span class="nav-text">死锁避免</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源分配图算法"><span class="nav-number">7.4.1.</span> <span class="nav-text">资源分配图算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#银行家算法"><span class="nav-number">7.4.2.</span> <span class="nav-text">银行家算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安全性算法"><span class="nav-number">7.4.2.1.</span> <span class="nav-text">安全性算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#资源请求算法"><span class="nav-number">7.4.2.2.</span> <span class="nav-text">资源请求算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁检测"><span class="nav-number">7.5.</span> <span class="nav-text">死锁检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#每种资源类型只有单个实例"><span class="nav-number">7.5.1.</span> <span class="nav-text">每种资源类型只有单个实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#每种资源类型可有多个实例"><span class="nav-number">7.5.2.</span> <span class="nav-text">每种资源类型可有多个实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁恢复"><span class="nav-number">7.6.</span> <span class="nav-text">死锁恢复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第8章-内存管理"><span class="nav-number">8.</span> <span class="nav-text">第8章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#交换"><span class="nav-number">8.1.</span> <span class="nav-text">交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续内存分配"><span class="nav-number">8.2.</span> <span class="nav-text">连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配"><span class="nav-number">8.2.1.</span> <span class="nav-text">内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#碎片"><span class="nav-number">8.2.2.</span> <span class="nav-text">碎片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">8.3.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页表结构"><span class="nav-number">8.4.</span> <span class="nav-text">页表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#层次页表"><span class="nav-number">8.4.1.</span> <span class="nav-text">层次页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希页表（32位）"><span class="nav-number">8.4.2.</span> <span class="nav-text">哈希页表（32位）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向页表"><span class="nav-number">8.4.3.</span> <span class="nav-text">反向页表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分段"><span class="nav-number">8.5.</span> <span class="nav-text">分段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第9章-虚拟内存"><span class="nav-number">9.</span> <span class="nav-text">第9章 虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#按需调页"><span class="nav-number">9.1.</span> <span class="nav-text">按需调页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面置换"><span class="nav-number">9.2.</span> <span class="nav-text">页面置换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FIFO页置换"><span class="nav-number">9.2.1.</span> <span class="nav-text">FIFO页置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最优置换"><span class="nav-number">9.2.2.</span> <span class="nav-text">最优置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU页置换"><span class="nav-number">9.2.3.</span> <span class="nav-text">LRU页置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#近似LRU页置换"><span class="nav-number">9.2.4.</span> <span class="nav-text">近似LRU页置换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于计数的页置换"><span class="nav-number">9.2.5.</span> <span class="nav-text">基于计数的页置换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帧分配"><span class="nav-number">9.3.</span> <span class="nav-text">帧分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统颠簸"><span class="nav-number">9.4.</span> <span class="nav-text">系统颠簸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第10章-文件系统接口"><span class="nav-number">10.</span> <span class="nav-text">第10章 文件系统接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">10.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问方法"><span class="nav-number">10.2.</span> <span class="nav-text">访问方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">10.3.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单层结构目录（single-level）"><span class="nav-number">10.3.1.</span> <span class="nav-text">单层结构目录（single-level）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双层结构目录"><span class="nav-number">10.3.2.</span> <span class="nav-text">双层结构目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树状结构目录"><span class="nav-number">10.3.3.</span> <span class="nav-text">树状结构目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无环图目录"><span class="nav-number">10.3.4.</span> <span class="nav-text">无环图目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件共享"><span class="nav-number">10.4.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护"><span class="nav-number">10.5.</span> <span class="nav-text">保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第11章-文件系统实现"><span class="nav-number">11.</span> <span class="nav-text">第11章 文件系统实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统结构"><span class="nav-number">11.1.</span> <span class="nav-text">文件系统结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录实现"><span class="nav-number">11.2.</span> <span class="nav-text">目录实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配方法"><span class="nav-number">11.3.</span> <span class="nav-text">分配方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配（contiguous）"><span class="nav-number">11.3.1.</span> <span class="nav-text">连续分配（contiguous）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接分配（linked）"><span class="nav-number">11.3.2.</span> <span class="nav-text">链接分配（linked）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引分配（indexed）"><span class="nav-number">11.3.3.</span> <span class="nav-text">索引分配（indexed）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空闲空间管理"><span class="nav-number">11.4.</span> <span class="nav-text">空闲空间管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位向量（bit-vector）"><span class="nav-number">11.4.1.</span> <span class="nav-text">位向量（bit vector）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表（linked-list）"><span class="nav-number">11.4.2.</span> <span class="nav-text">链表（linked list）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组和计数（group-amp-count）"><span class="nav-number">11.4.3.</span> <span class="nav-text">组和计数（group&amp;count）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络文件系统（NFS）"><span class="nav-number">11.5.</span> <span class="nav-text">网络文件系统（NFS）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第12章-磁盘调度"><span class="nav-number">12.</span> <span class="nav-text">第12章 磁盘调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FCFS调度"><span class="nav-number">12.0.1.</span> <span class="nav-text">FCFS调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSTF调度"><span class="nav-number">12.0.2.</span> <span class="nav-text">SSTF调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCAN调度"><span class="nav-number">12.0.3.</span> <span class="nav-text">SCAN调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-SCAN调度"><span class="nav-number">12.0.4.</span> <span class="nav-text">C-SCAN调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOK调度"><span class="nav-number">12.0.5.</span> <span class="nav-text">LOOK调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-LOOK调度"><span class="nav-number">12.0.6.</span> <span class="nav-text">C-LOOK调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘管理"><span class="nav-number">12.1.</span> <span class="nav-text">磁盘管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID结构"><span class="nav-number">12.2.</span> <span class="nav-text">RAID结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第13章-I-O输入系统"><span class="nav-number">13.</span> <span class="nav-text">第13章 I/O输入系统</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -3405,6 +1818,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
