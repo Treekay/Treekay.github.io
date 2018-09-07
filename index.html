@@ -250,6 +250,376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/09/07/c++string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Treek">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/c++string/" itemprop="url">C++ string</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T10:55:10+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="构造函数-Constructors"><a href="#构造函数-Constructors" class="headerlink" title="构造函数(Constructors)"></a>构造函数(Constructors)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>();   </span><br><span class="line"><span class="built_in">string</span>( size_type length, <span class="keyword">char</span> ch );   </span><br><span class="line"><span class="built_in">string</span>( <span class="keyword">const</span> <span class="keyword">char</span> *str );   </span><br><span class="line"><span class="built_in">string</span>( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type length );   </span><br><span class="line"><span class="built_in">string</span>( <span class="built_in">string</span> &amp;str, size_type index, size_type length );   </span><br><span class="line"><span class="built_in">string</span>( input_iterator start, input_iterator end );</span><br></pre></td></tr></table></figure>
+<p>字符串的构造函数创建一个新字符串，包括:</p>
+<ul>
+<li>以 length 为长度的 ch 的拷贝（即 length 个 ch ）</li>
+<li>以 str 为初值 (长度任意),</li>
+<li>以 index 为索引开始的子串，长度为 length, 或者</li>
+<li>以从 start 到 end 的元素为初值.</li>
+</ul>
+<p>例如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str1</span><span class="params">( <span class="number">5</span>, <span class="string">'c'</span> )</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str2</span><span class="params">( <span class="string">"Now is the time..."</span> )</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str3</span><span class="params">( str2, <span class="number">11</span>, <span class="number">4</span> )</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str3 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ccccc</span><br><span class="line">Now is the time...</span><br><span class="line">time</span><br></pre></td></tr></table></figure>
+<h2 id="操作符-Operators"><a href="#操作符-Operators" class="headerlink" title="操作符(Operators)"></a>操作符(Operators)</h2><p><em>语法 :</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">==   &gt;   &lt;   &gt;=   &lt;=   !=   +   +=   []</span><br></pre></td></tr></table></figure>
+<p>你可以用 ==, &gt;, &lt;, &gt;=, &lt;=, and !=比较字符串. 可以用 + 或者 += 操作符连接两个字符串, 并且可以用[]获取特定的字符.</p>
+<h2 id="添加文本-append"><a href="#添加文本-append" class="headerlink" title="添加文本(append)"></a>添加文本(append)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">basic_string &amp;<span class="title">append</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">append</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">append</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index, size_type len )</span></span>;   <span class="function">basic_string &amp;<span class="title">append</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type num )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">append</span><span class="params">( size_type num, <span class="keyword">char</span> ch )</span></span>;  </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">append</span><span class="params">( input_iterator start, input_iterator end )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>append() 函数可以完成以下工作:</p>
+<ul>
+<li>在字符串的末尾添加 str,</li>
+<li>在字符串的末尾添加 str 的子串,子串以 index 索引开始，长度为 len</li>
+<li>在字符串的末尾添加 str中的 num个字符,</li>
+<li>在字符串的末尾添加 num 个字符 ch,</li>
+<li>在字符串的末尾添加以迭代器start和end表示的字符序列.</li>
+</ul>
+<p>例如以下代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str = <span class="string">"Hello World"</span>;</span><br><span class="line">str.append( <span class="number">10</span>, <span class="string">'!'</span> );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!!!!!!!!!!</span><br></pre></td></tr></table></figure>
+<h2 id="赋值-assign"><a href="#赋值-assign" class="headerlink" title="赋值(assign)"></a>赋值(assign)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">basic_string &amp;<span class="title">assign</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str )</span></span>;  </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">assign</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">assign</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type num )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">assign</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index, size_type len )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">assign</span><span class="params">( size_type num, <span class="keyword">char</span> ch )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>函数以下列方式赋值:</p>
+<ul>
+<li>用 str 为字符串赋值,</li>
+<li>用 str 的开始 num 个字符为字符串赋值,</li>
+<li>用 str 的子串为字符串赋值,子串以 index 索引开始，长度为 len</li>
+<li>用 num 个字符 ch 为字符串赋值.</li>
+</ul>
+<p>例如以下代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str1, str2 = <span class="string">"War and Peace"</span>;</span><br><span class="line">str1.assign( str2, <span class="number">4</span>, <span class="number">3</span> );  </span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; str1 &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and</span><br></pre></td></tr></table></figure>
+<h2 id="c-str"><a href="#c-str" class="headerlink" title="c_str"></a>c_str</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">c_str</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>c_str()函数返回一个指向正规C字符串的指针, 内容与本字符串相同.</p>
+<h2 id="data"><a href="#data" class="headerlink" title="data"></a>data</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">data</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>data()函数返回指向自己的第一个字符的指针.</p>
+<h2 id="substr"><a href="#substr" class="headerlink" title="substr"></a>substr</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">basic_string <span class="title">substr</span><span class="params">( size_type index, size_type num = npos )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>substr()返回本字符串的一个子串，从index开始，长num个字符。如果没有指定，将是默认值 <strong>string::npos</strong>。这样，substr()函数将简单的返回从index开始的剩余的字符串。</p>
+<p>例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(<span class="string">"What we have here is a failure to communicate"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> sub = s.substr(<span class="number">21</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"The original string is "</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"The substring is "</span> &lt;&lt; sub &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The original string is What we have here is a failure to communicate</span><br><span class="line">The substring is a failure to communicate</span><br></pre></td></tr></table></figure>
+<h2 id="at"><a href="#at" class="headerlink" title="at"></a>at</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">reference <span class="title">at</span><span class="params">( size_type index )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>at() 函数返回一个引用，指向在 index 位置的字符. 如果 index 不在字符串范围内, at() 将报告”out of range”错误，并抛出<strong>out_of_range</strong>异常。 比如下列代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> text = <span class="string">"ABCDEF"</span>;</span><br><span class="line"><span class="keyword">char</span> ch = text.at( <span class="number">2</span> );</span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C</span><br></pre></td></tr></table></figure>
+<h3 id="begin"><a href="#begin" class="headerlink" title="begin"></a>begin</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">begin</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>begin()函数返回一个<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>, 指向字符串的第一个元素.</p>
+<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iterator end();</span><br></pre></td></tr></table></figure>
+<p>end()函数返回一个<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>，指向字符串的末尾(最后一个字符的下一个位置).</p>
+<h3 id="rbegin"><a href="#rbegin" class="headerlink" title="rbegin"></a>rbegin</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const reverse_iterator rbegin();</span><br></pre></td></tr></table></figure>
+<p>rbegin()返回一个逆向<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>，指向字符串的最后一个字符。</p>
+<h3 id="rend"><a href="#rend" class="headerlink" title="rend"></a>rend</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const reverse_iterator rend();</span><br></pre></td></tr></table></figure>
+<p>rend()函数返回一个逆向<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>，指向字符串的开头（第一个字符的前一个位置）。</p>
+<h2 id="容量-capacity"><a href="#容量-capacity" class="headerlink" title="容量(capacity)"></a>容量(capacity)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">capacity</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>capacity()函数返回在重新申请更多的空间前字符串可以容纳的字符数. 这个数字至少与 <a href="https://www.cnblogs.com/aminxu/p/4686320.html#size" target="_blank" rel="noopener">size()</a>一样大.</p>
+<h3 id="max-size"><a href="#max-size" class="headerlink" title="max_size"></a>max_size</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_type max_size();</span><br></pre></td></tr></table></figure>
+<p>max_size()函数返回字符串能保存的最大字符数。</p>
+<h3 id="保留空间-reserve"><a href="#保留空间-reserve" class="headerlink" title="保留空间(reserve)"></a>保留空间(reserve)</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void reserve( size_type num );</span><br></pre></td></tr></table></figure>
+<p>reserve()函数设置本字符串的<a href="https://www.cnblogs.com/aminxu/p/4686320.html#capacity" target="_blank" rel="noopener">capacity</a> 以保留num个字符空间。</p>
+<h3 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void resize( size_type num );   </span><br><span class="line">void resize( size_type num, char ch );</span><br></pre></td></tr></table></figure>
+<p>resize()函数改变本字符串的大小到<em>num</em>, 新空间的内容不确定。也可以指定用ch填充。</p>
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_type size();</span><br></pre></td></tr></table></figure>
+<p>size()函数返回字符串中现在拥有的字符数。</p>
+<h3 id="length"><a href="#length" class="headerlink" title="length"></a>length</h3><p><em>语法:</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_type length();</span><br></pre></td></tr></table></figure>
+<p>length()函数返回字符串的长度. 这个数字应该和<a href="https://www.cnblogs.com/aminxu/p/4686320.html#size" target="_blank" rel="noopener">size()</a>返回的数字相同.</p>
+<h2 id="比较-compare"><a href="#比较-compare" class="headerlink" title="比较(compare)"></a>比较(compare)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str)</span></span>;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">( size_type index, size_type length, <span class="keyword">const</span> basic_string &amp;str)</span></span>;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">( size_type index, size_type length, <span class="keyword">const</span> basic_string &amp;str, size_type index2, size_type length2)</span></span>;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">( size_type index, size_type length, <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type length2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>compare()函数以多种方式比较本字符串和str,返回：</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小于零</td>
+<td>this &lt; str</td>
+</tr>
+<tr>
+<td>零</td>
+<td>this == str</td>
+</tr>
+<tr>
+<td>大于零</td>
+<td>this &gt; str</td>
+</tr>
+</tbody>
+</table>
+<p>不同的函数:</p>
+<ul>
+<li>比较自己和 str,</li>
+<li>比较自己的子串和 str,子串以 index 索引开始，长度为 length</li>
+<li>比较自己的子串和 str 的子串，其中 index2 和 length2 引用 str，index 和 length 引用自己</li>
+<li>比较自己的子串和 str 的子串，其中 str 的子串以索引 0 开始，长度为 length2，自己的子串以 index 开始，长度为 length</li>
+</ul>
+<h2 id="拷贝-copy"><a href="#拷贝-copy" class="headerlink" title="拷贝(copy)"></a>拷贝(copy)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">copy</span><span class="params">( <span class="keyword">char</span> *str, size_type num, size_type index)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>copy() 函数拷贝自己的 num 个字符到 str 中（从索引 index 开始）。返回值是拷贝的字符数</p>
+<h2 id="empty"><a href="#empty" class="headerlink" title="empty"></a>empty</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如果字符串为空则empty()返回真(true)，否则返回假(false).</p>
+<h2 id="插入-insert"><a href="#插入-insert" class="headerlink" title="插入(insert)"></a>插入(insert)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span><span class="params">( iterator i, <span class="keyword">const</span> <span class="keyword">char</span> &amp;ch )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">insert</span><span class="params">( size_type index, <span class="keyword">const</span> basic_string &amp;str )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">insert</span><span class="params">( size_type index, <span class="keyword">const</span> <span class="keyword">char</span> *str )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">insert</span><span class="params">( size_type index1, <span class="keyword">const</span> basic_string &amp;str, size_type index2, size_type num )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">insert</span><span class="params">( size_type index, <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type num )</span></span>;</span><br><span class="line"><span class="function">basic_string &amp;<span class="title">insert</span><span class="params">( size_type index, size_type num, <span class="keyword">char</span> ch )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">( iterator i, size_type num, <span class="keyword">const</span> <span class="keyword">char</span> &amp;ch )</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">( iterator i, iterator start, iterator end )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>insert()函数的功能非常多:</p>
+<ul>
+<li>在迭代器i表示的位置前面插入一个字符ch,</li>
+<li>在字符串的位置index插入字符串str,</li>
+<li>在字符串的位置index插入字符串str的子串(从<em>index2</em>开始，长num个字符),</li>
+<li>在字符串的位置index插入字符串str的num个字符,</li>
+<li>在字符串的位置index插入num个字符ch的拷贝,</li>
+<li>在迭代器i表示的位置前面插入num个字符ch的拷贝,</li>
+<li>在迭代器i表示的位置前面插入一段字符，从start开始，以end结束.</li>
+</ul>
+<h2 id="删除-erase"><a href="#删除-erase" class="headerlink" title="删除(erase)"></a>删除(erase)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">erase</span><span class="params">( iterator pos )</span></span>;   </span><br><span class="line"><span class="function">iterator <span class="title">erase</span><span class="params">( iterator start, iterator end )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">erase</span><span class="params">( size_type index = <span class="number">0</span>, size_type num = npos )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>erase()函数可以:</p>
+<ul>
+<li>删除 pos 指向的字符, 返回指向下一个字符的<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>,</li>
+<li>删除从 start 到 end 的所有字符, 返回一个<a href="http://www.cnblogs.com/iterators.html" target="_blank" rel="noopener">迭代器</a>, 指向被删除的最后一个字符的下一个位置</li>
+<li>删除从 index 索引开始的 num 个字符, 返回<strong><em>this</em></strong>.</li>
+</ul>
+<p>参数 <em>index</em> 和 <em>num</em> 有默认值, 这意味着 erase() 可以这样调用：只带有 <em>index</em> 以删除index后的所有字符，或者不带有任何参数以删除所有字符. 例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(<span class="string">"So, you like donuts, eh? Well, have all the donuts in the world!"</span>)</span></span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"The original string is '"</span> &lt;&lt; s &lt;&lt; <span class="string">"'"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">s.erase( <span class="number">50</span>, <span class="number">14</span> );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Now the string is '"</span> &lt;&lt; s &lt;&lt; <span class="string">"'"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">s.erase( <span class="number">24</span> );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Now the string is '"</span> &lt;&lt; s &lt;&lt; <span class="string">"'"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">s.erase();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Now the string is '"</span> &lt;&lt; s &lt;&lt; <span class="string">"'"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>将显示 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">The original string is &apos;So, you like donuts, eh? Well, have all the donuts in the world!&apos;</span><br><span class="line">Now the string is &apos;So, you like donuts, eh? Well, have all the donuts&apos;</span><br><span class="line">Now the string is &apos;So, you like donuts, eh?&apos;</span><br><span class="line">Now the string is &apos;&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="查找-find"><a href="#查找-find" class="headerlink" title="查找(find)"></a>查找(find)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">find</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type length )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find</span><span class="params">( <span class="keyword">char</span> ch, size_type index )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>find()函数:</p>
+<ul>
+<li>返回str在字符串中第一次出现的位置（从index开始查找）<em>。</em>如果没找到则返回<strong>string::npos</strong>,</li>
+<li>返回str在字符串中第一次出现的位置（从index开始查找，长度为length）。如果没找到就返回<strong>string::npos</strong>,</li>
+<li>返回字符ch在字符串中第一次出现的位置（从index开始查找）。如果没找到就返回<strong>string::npos</strong></li>
+</ul>
+<p>例如 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str1</span><span class="params">( <span class="string">"Alpha Beta Gamma Delta"</span> )</span></span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> loc = str1.find( <span class="string">"Omega"</span>, <span class="number">0</span> );</span><br><span class="line"><span class="keyword">if</span>( loc != <span class="built_in">string</span>::npos )</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Found Omega at "</span> &lt;&lt; loc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Didn't find Omega"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="find-first-of"><a href="#find-first-of" class="headerlink" title="find_first_of"></a>find_first_of</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">find_first_of</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index = <span class="number">0</span> )</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">find_first_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index = <span class="number">0</span> )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_first_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type num )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_first_of</span><span class="params">( <span class="keyword">char</span> ch, size_type index = <span class="number">0</span> )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>find_first_of()函数:</p>
+<ul>
+<li>查找在字符串中第一个与str中的某个字符匹配的字符，返回它的位置。搜索从index开始，如果没找到就返回<strong>string::npos</strong></li>
+<li>查找在字符串中第一个与str中的某个字符匹配的字符，返回它的位置。搜索从index开始，最多搜索num个字符。如果没找到就返回<strong>string::npos，</strong></li>
+<li>查找在字符串中第一个与ch匹配的字符，返回它的位置。搜索从index开始。</li>
+</ul>
+<h3 id="find-first-not-of"><a href="#find-first-not-of" class="headerlink" title="find_first_not_of"></a>find_first_not_of</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">find_first_not_of</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index = <span class="number">0</span> )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_first_not_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index = <span class="number">0</span> )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_first_not_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type num )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_first_not_of</span><span class="params">( <span class="keyword">char</span> ch, size_type index = <span class="number">0</span> )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>find_first_not_of()函数:</p>
+<ul>
+<li>在字符串中查找第一个与str中的字符都不匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找第一个与str中的字符都不匹配的字符，返回它的位置。搜索从index开始，最多查找num个字符。如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找第一个与ch不匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+</ul>
+<h3 id="find-last-of"><a href="#find-last-of" class="headerlink" title="find_last_of"></a>find_last_of</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">find_last_of</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index = npos )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index = npos )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type num )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_of</span><span class="params">( <span class="keyword">char</span> ch, size_type index = npos )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>find_last_of()函数:</p>
+<ul>
+<li>在字符串中查找最后一个与str中的某个字符匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找最后一个与str中的某个字符匹配的字符，返回它的位置。搜索从index开始，最多搜索num个字符。如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找最后一个与ch匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+</ul>
+<h3 id="find-last-not-of"><a href="#find-last-not-of" class="headerlink" title="find_last_not_of"></a>find_last_not_of</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">find_last_not_of</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index = npos )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_not_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index = npos)</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_not_of</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type num )</span></span>;   </span><br><span class="line"><span class="function">size_type <span class="title">find_last_not_of</span><span class="params">( <span class="keyword">char</span> ch, size_type index = npos )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>find_last_not_of()函数:</p>
+<ul>
+<li>在字符串中查找最后一个与str中的字符都不匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找最后一个与str中的字符都不匹配的字符，返回它的位置。搜索从index开始，最多查找num个字符如果没找到就返回<strong>string::nops</strong></li>
+<li>在字符串中查找最后一个与ch不匹配的字符，返回它的位置。搜索从index开始。如果没找到就返回<strong>string::nops</strong></li>
+</ul>
+<h3 id="rfind"><a href="#rfind" class="headerlink" title="rfind"></a>rfind</h3><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">size_type <span class="title">rfind</span><span class="params">( <span class="keyword">const</span> basic_string &amp;str, size_type index )</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">rfind</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index )</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">rfind</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type index, size_type num )</span></span>;</span><br><span class="line"><span class="function">size_type <span class="title">rfind</span><span class="params">( <span class="keyword">char</span> ch, size_type index )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>rfind()函数:</p>
+<ul>
+<li>返回最后一个与str中的某个字符匹配的字符，从index开始查找。如果没找到就返回<strong>string::npos</strong></li>
+<li>返回最后一个与str中的某个字符匹配的字符，从index开始查找,最多查找num个字符。如果没找到就返回<strong>string::npos</strong></li>
+<li>返回最后一个与ch匹配的字符，从index开始查找。如果没找到就返回<strong>string::npos</strong></li>
+</ul>
+<p>例如，在下列代码中第一次调用rfind()返回<strong>string::npos</strong>,因为目标词语不在开始的8个字符中。然而，第二次调用返回9，因为目标词语在开始的20个字符之中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> loc;</span><br><span class="line"><span class="built_in">string</span> s = <span class="string">"My cat's breath smells like cat food."</span>;</span><br><span class="line"></span><br><span class="line">loc = s.rfind( <span class="string">"breath"</span>, <span class="number">8</span> );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"The word breath is at index "</span> &lt;&lt; loc &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">loc = s.rfind( <span class="string">"breath"</span>, <span class="number">20</span> );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"The word breath is at index "</span> &lt;&lt; loc &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="get-allocator"><a href="#get-allocator" class="headerlink" title="get_allocator"></a>get_allocator</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">allocator_type <span class="title">get_allocator</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>get_allocator()函数返回本字符串的配置器.</p>
+<h2 id="替换-replace"><a href="#替换-replace" class="headerlink" title="替换(replace)"></a>替换(replace)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( size_type index, size_type num, <span class="keyword">const</span> basic_string &amp;str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( size_type index1, size_type num1, <span class="keyword">const</span> basic_string &amp;str, size_type index2, size_type num2 )</span></span>;   <span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( size_type index, size_type num, <span class="keyword">const</span> <span class="keyword">char</span> *str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( size_type index, size_type num1, <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type num2 )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( size_type index, size_type num1, size_type num2, <span class="keyword">char</span> ch )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( iterator start, iterator end, <span class="keyword">const</span> basic_string &amp;str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( iterator start, iterator end, <span class="keyword">const</span> <span class="keyword">char</span> *str )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( iterator start, iterator end, <span class="keyword">const</span> <span class="keyword">char</span> *str, size_type num )</span></span>;   </span><br><span class="line"><span class="function">basic_string &amp;<span class="title">replace</span><span class="params">( iterator start, iterator end, size_type num, <span class="keyword">char</span> ch )</span></span>; `</span><br></pre></td></tr></table></figure>
+<p>replace()函数:</p>
+<ul>
+<li>用str中的num个字符替换本字符串中的字符,从index开始</li>
+<li>用str中的num2个字符（从index2开始）替换本字符串中的字符，从index1开始，最多num1个字符</li>
+<li>用str中的num个字符（从index开始）替换本字符串中的字符</li>
+<li>用str中的num2个字符（从index2开始）替换本字符串中的字符，从index1开始，num1个字符</li>
+<li>用num2个ch字符替换本字符串中的字符，从index开始</li>
+<li>用str中的字符替换本字符串中的字符,迭代器start和end指示范围</li>
+<li>用str中的num个字符替换本字符串中的内容,迭代器start和end指示范围，</li>
+<li>用num个ch字符替换本字符串中的内容，迭代器start和end指示范围.</li>
+</ul>
+<p>例如，以下代码显示字符串”They say he carved it himself…find your soul-mate, Homer.”</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"They say he carved it himself...from a BIGGER spoon"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"find your soul-mate, Homer."</span>;</span><br><span class="line"></span><br><span class="line">s.replace( <span class="number">32</span>, s2.length(), s2 );</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="交换-swap"><a href="#交换-swap" class="headerlink" title="交换(swap)"></a>交换(swap)</h2><p><em>语法:</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">( basic_string &amp;str )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>swap()函数把str和本字符串交换。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">first</span><span class="params">( <span class="string">"This comes first"</span> )</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">second</span><span class="params">( <span class="string">"And this is second"</span> )</span></span>;</span><br><span class="line">first.swap( second );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; first &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; second &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">And this is second</span><br><span class="line">This comes first</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/07/29/es6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3376,7 +3746,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3387,7 +3757,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3398,7 +3768,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
