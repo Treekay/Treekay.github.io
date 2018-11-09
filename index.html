@@ -250,6 +250,242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/11/05/DES/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Treek">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/05/DES/" itemprop="url">DES</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-05T20:41:10+08:00">
+                2018-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="DES算法程序设计实验"><a href="#DES算法程序设计实验" class="headerlink" title="DES算法程序设计实验"></a>DES算法程序设计实验</h1><h2 id="算法原理概述"><a href="#算法原理概述" class="headerlink" title="算法原理概述"></a>算法原理概述</h2><h3 id="概述"><a href="#概述" class="headerlink" title="- 概述"></a>- 概述</h3><p>以64位为分组长度，64位一组的明文作为DES算法的输入，使用64位加密密钥定义变换过程，通过一系列复杂的变换操作，输出同样64位长度的密文，所有的保密性依赖于密钥。DES 算法的基本过程是换位和置换。</p>
+<h3 id="加密过程"><a href="#加密过程" class="headerlink" title="- 加密过程"></a>- 加密过程</h3><p>$$<br>C = E_k(M) = IP^{-1} · W · T_{16} · T_{15}  · … · T_1 · IP(M)<br>$$</p>
+<ul>
+<li>$$M$$ 为算法输入的64位明文块；</li>
+<li>$$E_k$$ 描述以 K 为密钥的加密函数，由连续的过程复合构成；</li>
+<li>$$IP$$ 为64位初始置换；</li>
+<li>$$T_1, T_2 , …, T_{16}$$ 是一系列的迭代变换；</li>
+<li>$$W$$ 为64位置换，将输入的高32位和低32位交换后输出；</li>
+<li>$$IP^{-1}$$ 是$$IP$$ 的逆置换；</li>
+<li>$$C$$为算法输出的64位密文块。</li>
+</ul>
+<h3 id="解密过程"><a href="#解密过程" class="headerlink" title="- 解密过程"></a>- 解密过程</h3><p>$$<br>M = D_k(C) = IP^{-1} · W · T_1 · T_2 · … · T_{16} · IP(C)<br>$$</p>
+<p>​     </p>
+<h2 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h2><ul>
+<li>基本的DES算法过程如上图所示，在本次实验的实现中采用了ECB模式实现对不定长内容进行加密：<ul>
+<li>将输入内容按64位分块</li>
+<li>对每个64位块用相同的密钥进行DES加密/解密</li>
+<li>将各个块按顺序排列输出</li>
+</ul>
+</li>
+</ul>
+<h2 id="模块分解"><a href="#模块分解" class="headerlink" title="模块分解"></a>模块分解</h2><h3 id="初始置换IP"><a href="#初始置换IP" class="headerlink" title="- 初始置换IP"></a>- 初始置换IP</h3><p>给定64位明文块M，通过一个固定的初始置换IP 来重排M 中的二进制位，得到二进制串$$M_0 = IP(M) = L_0R_0$$，这里$$L_0$$ 和$$R_0$$分别是$$M_0$$ 的前32位和后32位。</p>
+<h3 id="迭代T"><a href="#迭代T" class="headerlink" title="- 迭代T"></a>- 迭代T</h3><p>根据$$L_0R_0$$ 按下述规则进行16次迭代，即$$L_i = R_ {i-1}, R_i = L_ {i-1} ⊕ f(R_{i-1}, K_i), i = 1 .. 16$$.</p>
+<ul>
+<li>这里⊕是32位二进制串按位异或运算，f 是输出32位的Feistel轮函数；</li>
+<li>16个长度为48位的子密钥$$K_i (i = 1 .. 16)$$ 由密钥$$K$$ 生成；</li>
+<li>16次迭代后得到$$L_16R_16$$ ；</li>
+<li>左右交换输出$$R_16L_16$$ 。</li>
+</ul>
+<h3 id="逆置换"><a href="#逆置换" class="headerlink" title="- 逆置换"></a>- 逆置换</h3><p>对迭代T 输出的二进制串$$R _{16}L _{16}$$ 使用初始置换的逆置换$$IP^{-1}$$ 得到密文C，即：$$C = IP^{-1} (R_16L_16)$$</p>
+<h3 id="Feistel轮函数"><a href="#Feistel轮函数" class="headerlink" title="- Feistel轮函数"></a>- Feistel轮函数</h3><ol>
+<li>将长度为32位的串$$R_ {i-1}$$ 作$$E-扩展$$，成为48位的串$$E(R_{i-1})$$；</li>
+<li>将$$E(R_{i-1})$$ 和长度为48位的子密钥$$K_i$$ 作48位二进制串按位异或运算，$$K_i$$ 由密钥$$K$$ 生成；</li>
+<li>将(2) 得到的结果平均分成8个分组，每个分组长度6位。各个分组分别经过8个不同的S-盒进行6-4 转换，得到8个长度分别为4位的分组；<ul>
+<li>S-盒是一类选择函数，用于二进制6-4 转换。Feistel 轮函数使用8个S-盒$$S_1, …, S_8$$，每个S-盒是一个4行(编号0-3)、16列(编号0-15) 的表，表中的每个元素是一个十进制数，取值在0-15之间，用于表示一个4位二进制数。</li>
+<li>假设Si 的6位输入为$$b_1b_2b_3b_4b_5b_6$$，则由$$n = (b_1b_6)_10$$ 确定行号，由$$m = (b_2b_3b_4b_5) _10$$ 确定列号，$$[S_i] _{n,m}$$ 元素的值的二进制形式即为所要的$$S_i$$ 的输出。</li>
+</ul>
+</li>
+<li>将(3) 得到的分组结果顺序连接得到长度为32位的串；</li>
+<li>将(4) 的结果经过P-置换，得到的结果作为轮函数$$f(R_{i-1}, K_i)$$ 的最终32位输出。</li>
+</ol>
+<h3 id="子密钥生成"><a href="#子密钥生成" class="headerlink" title="- 子密钥生成"></a>- 子密钥生成</h3><ul>
+<li><p>子密钥生成过程根据给定的64位密钥$$K$$，生成16个48位的子密钥$$K_1-K_{16}$$，供Feistel 轮函数$$f (R_i-1, K_i)$$ 调用</p>
+<ul>
+<li><p>对$$K$$ 的56个非校验位实行置换$$PC^{-1}$$，得到$$C_0D_0$$，其中$$C_0$$ 和$$D_0$$分别由$$PC^{-1}$$ 置换后的前28位和后28位组成。</p>
+</li>
+<li><p>$$<br>C_i = LS_i(C_{i-1}) 和 D_i = LS_i(D_{i-1})<br>$$</p>
+<ul>
+<li>当i =1, 2, 9, 16 时，$$LS_i (A)$$ 表示将二进制串A循环左移一个位置；否则循环左移两个位置。</li>
+</ul>
+</li>
+<li><p>对56位的$$C_iD_i$$ 实行PC-2 压缩置换，得到48位的$$K_i$$ 。</p>
+</li>
+<li><p>如果已经得到K_{16}，密钥调度过程结束；否则转(2)。</p>
+</li>
+</ul>
+</li>
+<li>PC-2 压缩置换：从56位的$$C_iD_i$$ 中去掉第9, 18, 22, 25, 35, 38, 43,54位，将剩下的48位按照PC-2 置换表作置换，得到$$K_i$$ 。</li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>本次实验用C++语言实现DES算法，用 bitset数据类型存储字符的二进制形式，对于64位的数据用bitset<64>存储。64位明文，64位密文，64位密钥均用bitset<64>存储；字符串的存储形式如下：</64></64></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// e.g.</span></span><br><span class="line"><span class="built_in">string</span> s = <span class="string">"12345678"</span>;</span><br><span class="line"><span class="comment">// 字符'1'的二进制格式位为 00110001, 那么在bitset中的存储顺序为倒序10001100</span></span><br><span class="line"><span class="built_in">bitset</span> b = <span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt;(s);</span><br><span class="line"><span class="comment">// b[0]~b[7]位是'1'的倒序，b[8]~b[15]位是'2'的倒序，以此类推</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>信息空间由{0, 1} 组成的字符串构成，原始明文消息和经过DES加密的密文信息是8个字节(64位) 的分组，密钥也是64位</li>
+<li>原始明文消息按PKCS#5 (RFC 8018) 规范进行字节填充：<ul>
+<li>原始明文消息最后的分组不够8个字节(64位) 时，在末尾以字节填满，填入的字节取值相同，都是填充的字节数目；</li>
+<li>原始明文消息刚好分组完全时，在末尾填充8个字节(即增加一个完整分组)，字节取值都是08。</li>
+</ul>
+</li>
+<li>明文分组结构：$$M = m_1m_2 … m_64 , m_i ∈{0, 1}, i = 1 .. 64$$.</li>
+<li>密文分组结构：$$C = c_1c_2 … c_64 , c_i ∈{0, 1}, i = 1 .. 64$$.</li>
+<li>密钥结构：$$K = k_1k_2 … k_64 , k_i ∈{0, 1}, i = 1 .. 64$$.<ul>
+<li>除去$$k_8, k_16, …, k_64$$ 共8位奇偶校验位，起作用的仅56位 </li>
+</ul>
+</li>
+</ul>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><ul>
+<li>初始 IP 置换</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;64&gt; DES::initialPermutation(<span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt; M) &#123;</span><br><span class="line">    <span class="comment">// 初始IP置换</span></span><br><span class="line">    <span class="built_in">bitset</span>&lt;64&gt; M0;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++) &#123;</span><br><span class="line">        M0[<span class="number">63</span>-i] = M[<span class="number">64</span>-IP[i]]; <span class="comment">// 置换表是从1开始, 而bitset下标是从0开始, 且bitset为倒序存储</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> M0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成子密钥</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> DES::subkeyGeneration(<span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt; key) &#123;</span><br><span class="line">    <span class="comment">/* 生成16个子密钥 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* PC-1置换 */</span></span><br><span class="line">    <span class="built_in">bitset</span>&lt;56&gt; realKey;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">56</span>; i++) &#123;</span><br><span class="line">        realKey[<span class="number">55</span>-i] = key[<span class="number">64</span> - PC1[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 16轮生成16个子密钥</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">bitset</span>&lt;28&gt; C; <span class="comment">// 前28位</span></span><br><span class="line">        <span class="built_in">bitset</span>&lt;28&gt; D; <span class="comment">// 后28位</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">28</span>; i &lt; <span class="number">56</span>; i++) &#123;</span><br><span class="line">            C[i - <span class="number">28</span>] = realKey[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">28</span>; i++) &#123;</span><br><span class="line">            D[i] = realKey[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* LS置换 */</span></span><br><span class="line">        <span class="keyword">int</span> shift = LS[i];</span><br><span class="line">        <span class="built_in">bitset</span>&lt;28&gt; tempC = C;</span><br><span class="line">        <span class="built_in">bitset</span>&lt;28&gt; tempD = D;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">27</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            C[j] = tempC[(j + <span class="number">28</span> - shift) % <span class="number">28</span>];</span><br><span class="line">            D[j] = tempD[(j + <span class="number">28</span> - shift) % <span class="number">28</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将左右两部分重新组合成56位</span></span><br><span class="line">        <span class="built_in">bitset</span>&lt;56&gt; LR;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">28</span>; j &lt; <span class="number">56</span>; j++) &#123;</span><br><span class="line">            LR[j] = C[j - <span class="number">28</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">28</span>; j++) &#123;</span><br><span class="line">            LR[j] = D[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* PC-2 压缩置换 */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">48</span>; j++) &#123;</span><br><span class="line">            subkeys[i][<span class="number">47</span> - j] = LR[<span class="number">56</span> - PC2[j]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>迭代 T</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;64&gt; DES::TIteration(<span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt; M0) &#123;</span><br><span class="line">    <span class="built_in">bitset</span>&lt;32&gt; L; <span class="comment">// 前32位</span></span><br><span class="line">    <span class="built_in">bitset</span>&lt;32&gt; R; <span class="comment">// 后32位</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">32</span>; i &lt; <span class="number">64</span>; i++) &#123;</span><br><span class="line">        L[i - <span class="number">32</span>] = M0[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        R[i] = M0[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 16 次迭代 */</span></span><br><span class="line">    <span class="built_in">bitset</span>&lt;32&gt; nextL;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++) &#123;</span><br><span class="line">        nextL = R;</span><br><span class="line">        <span class="built_in">bitset</span>&lt;32&gt; f;</span><br><span class="line">        <span class="keyword">if</span> (mode == <span class="number">0</span>)</span><br><span class="line">            f = feistel(R, subkeys[i]);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            f = feistel(R, subkeys[<span class="number">15</span> - i]);</span><br><span class="line">        R = L ^ f;</span><br><span class="line">        L = nextL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* W 置换 */</span></span><br><span class="line">    <span class="comment">// 左右交换 L16-R16 得到 R16-L16, 连接</span></span><br><span class="line">    <span class="built_in">bitset</span>&lt;64&gt; RL;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        RL[i] = L[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">32</span>; i &lt; <span class="number">64</span>; i++) &#123;</span><br><span class="line">        RL[i] = R[i - <span class="number">32</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> RL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>逆置换</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;64&gt; DES::inversePermutation(<span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt; RL) &#123;</span><br><span class="line">    <span class="built_in">bitset</span>&lt;64&gt; C;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">64</span>; i++) &#123;</span><br><span class="line">        C[<span class="number">63</span> - i] = RL[<span class="number">64</span> - Inverse_IP[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><ul>
+<li>输入明文采用运行时键盘输入，并将加密后密文结果二进制形式保存到文件；</li>
+<li>密文的读取直接从文件中读出，并输出解密后的内容</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">bitset</span>&lt;64&gt;&gt; PKCS_IN(<span class="built_in">string</span> input, <span class="keyword">int</span> mode) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">bitset</span>&lt;64&gt;&gt; blocks;</span><br><span class="line">    <span class="keyword">int</span> len = input.length();</span><br><span class="line">    <span class="comment">// 加密模式，将输入内容按8个字节一组分成64位的块</span></span><br><span class="line">    <span class="keyword">if</span> (mode == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> blocksNum = len / <span class="number">8</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 对最后一块不足64位的块要补位，补上值为欠缺字节数；若未补位时恰好满足，也要补上8个0x08</span></span><br><span class="line">        <span class="keyword">int</span> addNum = <span class="number">8</span> - len % <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; addNum; i++) &#123;</span><br><span class="line">            input += to_string(addNum);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 分组, 每组64位</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; blocksNum; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> s = input.substr(i * <span class="number">8</span>, <span class="number">8</span>);</span><br><span class="line">            <span class="built_in">bitset</span>&lt;64&gt; bits = charsToBitset(s.c_str());</span><br><span class="line">            blocks.push_back(bits);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 解密模式，读取二进制串，直接转换位64位的分组</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (mode == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> blocksNum = len / <span class="number">64</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; blocksNum; i++) &#123;</span><br><span class="line">            <span class="built_in">bitset</span>&lt;64&gt; bits = <span class="built_in">bitset</span>&lt;<span class="number">64</span>&gt;(input.substr(i * <span class="number">64</span>, <span class="number">64</span>));</span><br><span class="line">            blocks.push_back(bits);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    remove(<span class="string">"cipher"</span>);</span><br><span class="line">    <span class="keyword">return</span> blocks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://treekay.github.io/2018/09/07/c++string/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2766,7 +3002,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2788,7 +3024,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
