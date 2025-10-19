@@ -8,8 +8,7 @@
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Creating Maintainable SoftwareMaintenance task types:
-cor...">
+<meta name="description" content="Creating Maintainable SoftwareBetter maintainability → lo...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -19,7 +18,7 @@ cor...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?56224642">
+<link rel="stylesheet" href="/css/journal.css?54997361">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -181,12 +180,14 @@ cor...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="Creating-Maintainable-Software"><a href="#Creating-Maintainable-Software" class="headerlink" title="Creating Maintainable Software"></a>Creating Maintainable Software</h1><h2 id="Maintenance-task-types"><a href="#Maintenance-task-types" class="headerlink" title="Maintenance task types:"></a>Maintenance task types:</h2><ul>
+                    <h1 id="Creating-Maintainable-Software"><a href="#Creating-Maintainable-Software" class="headerlink" title="Creating Maintainable Software"></a>Creating Maintainable Software</h1><p>Better maintainability → lower maintenance cost → higher overall software quality.</p>
+<h2 id="Maintenance"><a href="#Maintenance" class="headerlink" title="Maintenance:"></a>Maintenance:</h2><ul>
 <li>corrective - remove defects</li>
 <li>adaptive - change the product to a <strong>changed</strong> <strong>environment</strong></li>
 <li>preventative - improving some aspect of its quality</li>
 <li>perfective - improve some aspect of its usefulness, including <strong>adding new features</strong></li>
 </ul>
+<hr>
 <h2 id="Maintainability"><a href="#Maintainability" class="headerlink" title="Maintainability"></a>Maintainability</h2><p><strong>definition:</strong> The degree of <strong>effectiveness</strong> and <strong>efficiency</strong> with which maintenance activities can be carried out on the product.</p>
 <p>Maintenance costs dominate the lifetime cost of a software product. The more maintainable the software, the lower the maintenance costs, and so the lower the lifetime cost.</p>
 <p>Each part of Maintenance is <strong>independent</strong>. (E.G. some code is “hard” to understand but “easy” to change)</p>
@@ -197,7 +198,7 @@ cor...">
 <li><strong>testability</strong> : test criteria can be established.</li>
 </ul>
 <p>​</p>
-<h2 id="Comprehensibility"><a href="#Comprehensibility" class="headerlink" title="Comprehensibility"></a>Comprehensibility</h2><h3 id="PCM"><a href="#PCM" class="headerlink" title="PCM"></a><strong>PCM</strong></h3><blockquote>
+<h3 id="Comprehensibility"><a href="#Comprehensibility" class="headerlink" title="Comprehensibility"></a>Comprehensibility</h3><h4 id="PCM"><a href="#PCM" class="headerlink" title="PCM"></a><strong>PCM</strong></h4><blockquote>
 <p>Program Comprehension Model</p>
 </blockquote>
 <p><img src="/2025/10/18/uoa/compsci_701/PCM.png" alt="Program Comprehension Model"></p>
@@ -220,7 +221,7 @@ cor...">
 <p><strong>How to use PCM</strong></p>
 <p>Figure out the occasion <strong>affects which links</strong> between these parts.</p>
 <p>Comprehensibility depends on what is in KB, what is available in the ER, how efficient the assimilation process is.</p>
-<h2 id="Alterability"><a href="#Alterability" class="headerlink" title="Alterability"></a>Alterability</h2><p><strong>Change Cases</strong>: specifying what needs to change:</p>
+<h3 id="Alterability"><a href="#Alterability" class="headerlink" title="Alterability"></a>Alterability</h3><p><strong>Change Cases</strong>: specifying what needs to change:</p>
 <ul>
 <li>likelihood (the case will occur)</li>
 <li>potential impact<ul>
@@ -243,7 +244,7 @@ cor...">
 <li>fewer places to deal with -&gt; efficiency</li>
 <li>less likely to make mistakes -&gt; effectiveness</li>
 </ul>
-<h2 id="Testability"><a href="#Testability" class="headerlink" title="Testability"></a>Testability</h2><p><strong>Testing Scopes</strong></p>
+<h3 id="Testability"><a href="#Testability" class="headerlink" title="Testability"></a>Testability</h3><p><strong>Testing Scopes</strong></p>
 <ul>
 <li>unit testing - single class or subsystem (small number of classes)</li>
 <li>integration testing - combination of subsystems</li>
@@ -257,12 +258,14 @@ cor...">
 <p><strong>Test Criteria</strong></p>
 <p>requirements on a set of test cases must pass</p>
 <p><strong>improving testability</strong> : controllability, observability -&gt; more classes, methods -&gt; automate</p>
+<hr>
 <h2 id="Naming"><a href="#Naming" class="headerlink" title="Naming"></a>Naming</h2><p>using PCM to determine better name: easy to add to MM &gt; easily found in KB &gt; avoid going to ER</p>
 <p><strong>Meaningful Names</strong></p>
 <ul>
 <li>Intention-Revealing : the name can explain its function without comments</li>
 <li>Avoid Encoding : don’t use special prefix or name styles for different types</li>
 </ul>
+<hr>
 <h2 id="Code-Quality-Principles-CQP"><a href="#Code-Quality-Principles-CQP" class="headerlink" title="Code Quality Principles (CQP)"></a>Code Quality Principles (CQP)</h2><blockquote>
 <p>Code Style Mode</p>
 </blockquote>
@@ -307,6 +310,7 @@ cor...">
 <ul>
 <li>implementation (structure, process) are consistent with the nature of the problem</li>
 </ul>
+<hr>
 <h2 id="Maintainable-Functions"><a href="#Maintainable-Functions" class="headerlink" title="Maintainable Functions"></a>Maintainable Functions</h2><p>structured programming: breaks things into separately-callable units</p>
 <ul>
 <li><p>small</p>
@@ -348,6 +352,7 @@ cor...">
 <li><p>have no side effects</p>
 </li>
 </ul>
+<hr>
 <h2 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h2><ul>
 <li>Organisation<ul>
 <li>order: constants -&gt; other static -&gt; instance -&gt; constructors -&gt; public methods -&gt; non public methods</li>
@@ -364,6 +369,7 @@ cor...">
 <li>single responsibility principle</li>
 <li>cohesion : fields associated with methods (rather than using a few fields in methods)</li>
 </ul>
+<hr>
 <h2 id="Tools-for-comprehending-programs"><a href="#Tools-for-comprehending-programs" class="headerlink" title="Tools for comprehending programs"></a>Tools for comprehending programs</h2><ul>
 <li><p>program analysis tools</p>
 <ul>
@@ -467,7 +473,7 @@ cor...">
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?8714445"></script>
+<script src="/js/journal.js?81842249"></script>
 
 
 
