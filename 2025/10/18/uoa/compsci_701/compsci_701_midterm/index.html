@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Creating Maintainable Software - midterm review - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="Creating Maintainable Software
+Better maintainability → ...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?55500329">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Creating Maintainable Software - midterm review
+                    <div class="post-meta">
+                        <time datetime="2025-10-18T10:16:22.000Z" itemprop="datePublished">
+                            2025-10-18 23:16
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/UoA/'>UoA</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="creating-maintainable-software">Creating Maintainable Software</h1>
+<p>Better maintainability → lower maintenance cost → higher overall software quality.</p>
+<h2 id="maintenance">Maintenance:</h2>
+<ul>
+<li>corrective - remove defects</li>
+<li>adaptive - change the product to a <strong>changed</strong> <strong>environment</strong></li>
+<li>preventative - improving some aspect of its quality</li>
+<li>perfective - improve some aspect of its usefulness, including <strong>adding new features</strong></li>
+</ul>
+<hr />
+<h2 id="maintainability">Maintainability</h2>
+<p><strong>definition:</strong> The degree of <strong>effectiveness</strong> and <strong>efficiency</strong> with which maintenance activities can be carried out on the product.</p>
+<p>Maintenance costs dominate the lifetime cost of a software product. The more maintainable the software, the lower the maintenance costs, and so the lower the lifetime cost.</p>
+<p>Each part of Maintenance is <strong>independent</strong>. (E.G. some code is “hard” to understand but “easy” to change)</p>
+<p><strong>maintenance activities:</strong></p>
+<ul>
+<li><strong>comprehensibility</strong> (analysability) : implementation can be understood.</li>
+<li><strong>alterability</strong> (modifiability) : system can be changed without introducing defects.</li>
+<li><strong>testability</strong> : test criteria can be established.</li>
+</ul>
+<p>​</p>
+<h3 id="comprehensibility">Comprehensibility</h3>
+<h4 id="pcm"><strong>PCM</strong></h4>
+<blockquote>
+<p>Program Comprehension Model</p>
+</blockquote>
+<figure>
+<img src="PCM.png" alt="Program Comprehension Model" /><figcaption aria-hidden="true">Program Comprehension Model</figcaption>
+</figure>
+<ul>
+<li><p><strong>Knowledge base</strong></p>
+<ul>
+<li><p>context schema - &gt; domain knowledge</p></li>
+<li><p>design schema -&gt; knowledge of programming language</p></li>
+<li><p><strong>Mental model</strong> : current understanding of the code</p></li>
+</ul></li>
+<li><p><strong>Assimilation Process</strong> : use information to update Mental model to understand the program</p></li>
+<li><p><strong>External Representation</strong> : code, documents …</p></li>
+</ul>
+<p><strong>How to use PCM</strong></p>
+<p>Figure out the occasion <strong>affects which links</strong> between these parts.</p>
+<p>Comprehensibility depends on what is in KB, what is available in the ER, how efficient the assimilation process is.</p>
+<h3 id="alterability">Alterability</h3>
+<p><strong>Change Cases</strong>: specifying what needs to change:</p>
+<ul>
+<li>likelihood (the case will occur)</li>
+<li>potential impact
+<ul>
+<li>to the requirements, to the behavior of existing system</li>
+</ul></li>
+</ul>
+<p><strong>Assess the alterability of the design</strong></p>
+<p>Focus on change cases with high likelihood and high impact</p>
+<p>(lower likelihood, lower impact -&gt; less affect on alterability assessment)</p>
+<ul>
+<li>change one… have less work than multiple…
+<ul>
+<li>class, method, statement</li>
+</ul></li>
+<li>simple work have less work than complex work</li>
+</ul>
+<p><strong>less need to change -&gt; more alterable</strong></p>
+<ul>
+<li>fewer places to deal with -&gt; efficiency</li>
+<li>less likely to make mistakes -&gt; effectiveness</li>
+</ul>
+<h3 id="testability">Testability</h3>
+<p><strong>Testing Scopes</strong></p>
+<ul>
+<li>unit testing - single class or subsystem (small number of classes)</li>
+<li>integration testing - combination of subsystems</li>
+<li>system testing - the whole system</li>
+</ul>
+<p><strong>Test Case</strong></p>
+<p>a set of actions performed on the Implementation Under Test (IUT) to determine if it results in the correct behavior</p>
+<ul>
+<li>pretest state -&gt; inputs -&gt; expected state or behavior</li>
+</ul>
+<p><strong>Test Criteria</strong></p>
+<p>requirements on a set of test cases must pass</p>
+<p><strong>improving testability</strong> : controllability, observability -&gt; more classes, methods -&gt; automate</p>
+<hr />
+<h2 id="naming">Naming</h2>
+<p>using PCM to determine better name: easy to add to MM &gt; easily found in KB &gt; avoid going to ER</p>
+<p><strong>Meaningful Names</strong></p>
+<ul>
+<li>Intention-Revealing : the name can explain its function without comments</li>
+<li>Avoid Encoding : don’t use special prefix or name styles for different types</li>
+</ul>
+<hr />
+<h2 id="code-quality-principles-cqp">Code Quality Principles (CQP)</h2>
+<blockquote>
+<p>Code Style Mode</p>
+</blockquote>
+<p><strong>Clear Layout -&gt; Clear Presentation</strong></p>
+<ul>
+<li>clear layout between different elements:
+<ul>
+<li>characters, space, indentations, brackets, line length</li>
+</ul></li>
+</ul>
+<p><strong>Explanatory Language</strong></p>
+<ul>
+<li>clear intent and meaning: documentation, names(variables, functions), language feature(annotations)</li>
+<li>don’t reuse for different purposes within the same scope</li>
+</ul>
+<p><strong>Simple Constructs</strong></p>
+<ul>
+<li>minimize nesting</li>
+<li>easy flow of control (with few breaks and exceptions)</li>
+<li>easy expression</li>
+</ul>
+<p><strong>Be Consistent</strong></p>
+<ul>
+<li>consistent implementation for similar jobs</li>
+<li>using language idiom (documentation, notation) consistently</li>
+</ul>
+<p><strong>Avoid Duplication -&gt; Single Definition</strong></p>
+<ul>
+<li>using loops or methods, classes instead of repeated codes</li>
+</ul>
+<p><strong>No Unused Content -&gt; Contributing Content</strong></p>
+<ul>
+<li>remove unreachable code, redundant branches, unused documentation</li>
+</ul>
+<p><strong>Modular Structure</strong></p>
+<ul>
+<li>placing related code together with a clear task</li>
+<li>minimal dependence on other modules, and the scope of constants and variables</li>
+<li>functions aim to a single task, minimum parameters</li>
+</ul>
+<p><strong>Congruent Implementation</strong></p>
+<ul>
+<li>implementation (structure, process) are consistent with the nature of the problem</li>
+</ul>
+<hr />
+<h2 id="maintainable-functions">Maintainable Functions</h2>
+<p>structured programming: breaks things into separately-callable units</p>
+<ul>
+<li><p>small</p>
+<ul>
+<li>decomposed a large function into several smaller functions</li>
+</ul></li>
+<li><p>do one thing &lt;- identify duplication</p>
+<ul>
+<li>reduce revisiting</li>
+</ul></li>
+<li><p>explain yourself in code</p>
+<ul>
+<li>use small function to create “self-documenting” code</li>
+<li>avoid use of literal values</li>
+</ul></li>
+<li><p>one level of abstraction per function -&gt; small</p>
+<ul>
+<li>avoid “high level” and “low level” concepts in the same function</li>
+<li>reduce number of levels of abstraction</li>
+</ul></li>
+<li><p>reading code from top to bottom -&gt; order of functions ▽</p>
+<ul>
+<li>the first function is the most abstract, call to other</li>
+</ul></li>
+<li><p>use descriptive names &lt;- the one thing it does</p></li>
+<li><p>reduce number of parameters</p>
+<ul>
+<li>Wrap some of the existing arguments into a class</li>
+</ul></li>
+<li><p>reduce returns</p></li>
+<li><p>have no side effects</p></li>
+</ul>
+<hr />
+<h2 id="classes">Classes</h2>
+<ul>
+<li>Organisation
+<ul>
+<li>order: constants -&gt; other static -&gt; instance -&gt; constructors -&gt; public methods -&gt; non public methods</li>
+</ul></li>
+<li>Encapsulation -&gt; object behavior is consistent with the concept it represents</li>
+<li>Small</li>
+<li>Single Responsibility Principle (SRP)</li>
+<li>Cohesion</li>
+</ul>
+<p><strong>Class Quality</strong></p>
+<ul>
+<li>abstraction (matches a concept from the context or design schema)</li>
+<li>single responsibility principle</li>
+<li>cohesion : fields associated with methods (rather than using a few fields in methods)</li>
+</ul>
+<hr />
+<h2 id="tools-for-comprehending-programs">Tools for comprehending programs</h2>
+<ul>
+<li><p>program analysis tools</p>
+<ul>
+<li>AST (abstract syntax tree), identify potential quality issues</li>
+</ul></li>
+<li><p>software visualization tools &lt;- limited evidence shows helps</p>
+<ul>
+<li>software metrics (number of classes), relationships between elements</li>
+</ul></li>
+<li><p>program languages</p></li>
+<li><p>PMD - linter to detect</p></li>
+<li><p>NcssCount (Non-commenting Source Statements)</p></li>
+<li><p>ControlStatementBraces</p></li>
+<li><p>FieldVisibility : fields should not accessible from other classes</p></li>
+<li><p>Visualizations of object creation</p></li>
+<li><p>Automated “Concept” Extraction (ACE)</p>
+<ul>
+<li>things to recognise
+<ul>
+<li>Design (and Architecture) Patterns — common structure organizations</li>
+<li>Abstractions — high-level ideas (typically from problem)</li>
+<li>Across Abstractions — characteristics that occur across abstractions</li>
+<li>Across Packages — characteristics that occur across packages</li>
+</ul></li>
+<li>Threat to Validity: Not use meaningful names in a consistent manner</li>
+<li>Benefits to understanding: Seeing dependencies that between different concepts</li>
+<li>Extraction Process
+<ul>
+<li>divide names into component -&gt; keywords</li>
+<li>look for classes at the top of inheritance corresponding to keywords</li>
+<li>look for keywords occur in multiple places, corresponding to patterns</li>
+</ul></li>
+</ul></li>
+<li><p>UML (Unified Modeling Language)</p></li>
+</ul>
+<blockquote>
+<p>a visual language used to describe software: class, sequence, use case, deployment</p>
+</blockquote>
+<ul>
+<li>Remix Programming language</li>
+</ul>
+<blockquote>
+<p>use standard compiler technology to make code readable</p>
+</blockquote>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2025/10/20/uoa/compsci_701/compsci_701_final/">
+        Previous post<br>Creating Maintainable Software
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/10/18/aws/sg_vs_acl/">
+        Next post<br>Security Group and NACL
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?9515025"></script>
+
+
+
+</body>
+</html>

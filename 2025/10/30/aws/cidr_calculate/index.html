@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>CIDR calculate example - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="Questions
+
+CIDR_exercise
+
+Company W has a VPC with an...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?82043299">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    CIDR calculate example
+                    <div class="post-meta">
+                        <time datetime="2025-10-30T03:28:56.000Z" itemprop="datePublished">
+                            2025-10-30 16:28
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/AWS/'>AWS</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="questions">Questions</h1>
+<figure>
+<img src="CIDR_exercise.jpg" alt="CIDR_exercise" /><figcaption aria-hidden="true">CIDR_exercise</figcaption>
+</figure>
+<p>Company W has a VPC with an IPv4 CIDR block of <span class="math inline">10.0.0.0/16</span>, as shown in the figure below. The company is international, with multiple branch locations. The company has 3 branches in each city. The company operates in 13 cities in the north hemisphere and 45 cities in the south hemisphere. According to the customer distributions, the company decided all the branches in the north hemisphere will have 3 subnets at each location and all the branches in the south hemisphere will have 2 subnets at each location.</p>
+<ol type="1">
+<li>What is the appropriate CIDR block size for this network address allocation scheme?</li>
+<li>What are the first and last usable host addresses in the 27th subnet (NOT AWS specific)?</li>
+<li>According to the figure, if Company N would</li>
+</ol>
+<h1 id="resolving-steps">Resolving Steps</h1>
+<ol type="1">
+<li>Calculate the block size by the number of subnets needed</li>
+<li>Calculate the subnet network id</li>
+<li>the first usable address = subnet network address + 1<br />
+the last usable address = broadcast address - 1 (broadcast address = network address + nums of addresses in each subnet - 1)</li>
+</ol>
+<h1 id="answer">Answer</h1>
+<ol type="1">
+<li><span class="math inline">13 * 3 * 3 + 45 * 3 * 2 = 387</span>,<br />
+<span class="math inline">2<sup>8</sup> = 256 &lt; 387</span>,<br />
+<span class="math inline">2<sup>9</sup> = 512 &gt; 387</span>,<br />
+so block size = <span class="math inline">16 + 9 = 25</span></li>
+<li>each subnets has <span class="math inline">2<sup>7</sup> = 128</span> ip,<br />
+for the 27th subnet, <span class="math inline">26 * 128 = 3328</span>, <span class="math inline">3328/256 = 13</span>, <span class="math inline">3328 <em>m</em><em>o</em><em>d</em> 256 = 0</span>,<br />
+so the 27th subnet is: <span class="math inline">10.0.13.0/25</span><br />
+the first usable host address: <span class="math inline">10.0.13.0 + 1 = 10.0.13.1</span><br />
+the last usable host address: <span class="math inline">10.0.13.127 − 1 = 10.0.13.126</span></li>
+<li>internet gateway attach to VPC, supporting connecting VPC to the internet; for public subnets route table, target <span class="math inline">0.0.0.0/0</span> to igw;<br />
+for instances, allocate ip address for each instance to support communicate with the internet.<br />
+Ensure security group associated with the ec2 instance and acl associated with the public subnet allowing inbound and outbound traffic.</li>
+</ol>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2025/10/31/aws/aws_automation_design/">
+        Previous post<br>AWS Automation Design
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/10/27/aws/aws_review/">
+        Next post<br>AWS - INFOSYS-735 Review
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?70837653"></script>
+
+
+
+</body>
+</html>

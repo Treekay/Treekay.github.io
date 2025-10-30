@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>AWS - INFOSYS-735 Review - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="AWS - INFOSYS-735 Review
+
+Cloud Architecture
+
+What is...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?85771783">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    AWS - INFOSYS-735 Review
+                    <div class="post-meta">
+                        <time datetime="2025-10-27T04:22:00.000Z" itemprop="datePublished">
+                            2025-10-27 17:22
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/AWS/'>AWS</a>, 
+                        
+                        <a href='/tags/UoA/'>UoA</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="aws---infosys-735-review">AWS - INFOSYS-735 Review</h1>
+<hr />
+<h2 id="cloud-architecture">Cloud Architecture</h2>
+<blockquote>
+<p><strong>What</strong> is cloud architecture ?</p>
+<p>applying cloud characteristics to a solution that uses cloud services and features to meet an organization’s technical needs and business use cases</p>
+</blockquote>
+<blockquote>
+<p><strong>Why</strong> uses cloud architecture?</p>
+<p>Having well architected systems increases the likelihood that the technology deliverables will help meet business goals.</p>
+</blockquote>
+<p><img src="C:\Users\82333\AppData\Roaming\Typora\typora-user-images\image-20251029123532523.png" alt="image-20251029123532523" style="zoom: 67%;" /></p>
+<p>In cloud architecture,</p>
+<p>the <strong>customer</strong> or decision maker outlines business goals and requirements.</p>
+<p>The cloud <strong>architect</strong> (You) designs a solution that is like a blueprint for a building.</p>
+<p>Then, the <strong>delivery team</strong> (AWS) works to implement the solution.</p>
+<hr />
+<h3 id="role-of-a-cloud-architect">Role of a cloud architect</h3>
+<blockquote>
+<p>managing an organization’s cloud computing architecture</p>
+</blockquote>
+<ul>
+<li><p>Engage with <strong>decision makers</strong> to identify the <strong>business goal</strong>s and the <strong>capabilities</strong> that need improvement</p></li>
+<li><p>Ensure <strong>alignment</strong> between the <strong>technology</strong> deliverables of a solution and the <strong>business goals</strong></p></li>
+<li><p>Work with the <strong>delivery teams</strong> that are implementing the solution to <strong>ensure</strong> that the <strong>technology features</strong> are</p>
+<p><strong>appropriate</strong></p></li>
+</ul>
+<p>Do the following:</p>
+<ul>
+<li><p>Develop the technical cloud strategy based on business needs.</p></li>
+<li><p>Assist with cloud migration efforts.</p></li>
+<li><p>Review workload requirements.</p></li>
+<li><p>Provide guidance about how to address high risk issues</p></li>
+</ul>
+<hr />
+<h3 id="well-architected-framework">Well-Architected Framework</h3>
+<p>provides a consistent approach to evaluate cloud architectures and also provides guidance to help implement design</p>
+<blockquote>
+<p>6 pillars:</p>
+<ul>
+<li>Operations Excellence
+<ul>
+<li><u>Run and monitor</u> systems that deliver business value</li>
+<li><u>Continually</u> improve <u>supporting</u> processes and procedures</li>
+<li>View the entire <u>workload as code</u> (applications, infrastructure, policies, governance, and operations)</li>
+</ul></li>
+<li>Security</li>
+<li>Reliability</li>
+<li>Performance Efficiency</li>
+<li>Cost Optimization</li>
+<li>Sustainability</li>
+</ul>
+</blockquote>
+<h3 id="design-and-evaluate">Design and Evaluate</h3>
+<blockquote>
+<p>how to design and evaluate architectures using the AWS well-architected framework)</p>
+</blockquote>
+<h3 id="best-practices">Best practices</h3>
+<blockquote>
+<p>apply best practices for <strong>building</strong> solutions on AWS</p>
+</blockquote>
+<h3 id="aws-global-infrastructure">AWS Global Infrastructure</h3>
+<blockquote>
+<p>Describe how to make informed decisions about where to place AWS resources.</p>
+</blockquote>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2025/10/30/aws/cidr_calculate/">
+        Previous post<br>CIDR calculate example
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/10/23/aws/aws_build_webserver_with_alb_asg/">
+        Next post<br>build a Webserver with a high-available, scalable environment
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?40822732"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>AWS S3 selection - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="AWS S3 selection
+读题关键条件：
+
+访问频率（frequent / infrequent /...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?72739959">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    AWS S3 selection
+                    <div class="post-meta">
+                        <time datetime="2025-10-30T11:08:54.000Z" itemprop="datePublished">
+                            2025-10-31 00:08
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/AWS/'>AWS</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="aws-s3-selection">AWS S3 selection</h1>
+<p><strong>读题关键条件：</strong></p>
+<ul>
+<li>访问频率（frequent / infrequent / rarely accessed）</li>
+<li>保存时间（e.g. 3 years / 10 years）</li>
+<li>访问速度要求（immediate / within minutes / within hours）</li>
+<li>成本限制（cost-effective solution）</li>
+<li>合规要求（must retain / cannot delete / audit needs）</li>
+<li>灾备要求（backup / multi-region / redundancy）</li>
+</ul>
+<p><strong>判断最合适的 S3 存储类型（或组合）</strong></p>
+<ul>
+<li>高访问频率：S3 Standard</li>
+<li>不常访问但需要快速取回：S3 Standard-IA</li>
+<li>很少访问（几小时取回即可）：S3 Glacier Flexible Retrieval / Deep Archive</li>
+<li>动态变化：S3 Intelligent-Tiering</li>
+</ul>
+<p><strong>指出关键服务或机制：</strong></p>
+<ul>
+<li><strong>Lifecycle policy</strong>（自动在不同 tier 间转移）</li>
+<li><strong>Versioning</strong>（保留文件历史）</li>
+<li><strong>Cross-region replication (CRR)</strong>（灾备）</li>
+<li><strong>S3 Object Lock</strong>（合规要求，不可修改/删除）</li>
+<li><strong>AWS Backup / AWS Glacier Vault Lock</strong>（长期合规与安全）</li>
+</ul>
+<h2 id="常见-s3-存储类型对比表"><strong>常见 S3 存储类型对比表</strong></h2>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 21%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>S3 Type</th>
+<th>Access Frequency</th>
+<th>Retrieval Speed</th>
+<th>Cost (Storage)</th>
+<th>Use Case</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>S3 Standard</strong></td>
+<td>Frequent</td>
+<td>Immediate</td>
+<td>💰💰💰</td>
+<td>Active data, websites, analytics</td>
+<td>High availability, 3 AZs</td>
+</tr>
+<tr class="even">
+<td><strong>S3 Intelligent-Tiering</strong></td>
+<td>Variable</td>
+<td>Immediate</td>
+<td>💰💰</td>
+<td>Data with unpredictable access</td>
+<td>Auto-moves to cheaper tier</td>
+</tr>
+<tr class="odd">
+<td><strong>S3 Standard-IA (Infrequent Access)</strong></td>
+<td>Less frequent</td>
+<td>Immediate</td>
+<td>💰</td>
+<td>Backup, disaster recovery</td>
+<td>Retrieval cost per GB</td>
+</tr>
+<tr class="even">
+<td><strong>S3 One Zone-IA</strong></td>
+<td>Less frequent</td>
+<td>Immediate</td>
+<td>💰</td>
+<td>Secondary backup</td>
+<td>Stored in one AZ only</td>
+</tr>
+<tr class="odd">
+<td><strong>S3 Glacier Instant Retrieval</strong></td>
+<td>Rarely</td>
+<td>Seconds–Minutes</td>
+<td>💰</td>
+<td>Archive data needing quick access</td>
+<td>Cheapest instant retrieval</td>
+</tr>
+<tr class="even">
+<td><strong>S3 Glacier Flexible Retrieval</strong></td>
+<td>Rarely</td>
+<td>Minutes–Hours</td>
+<td>💵</td>
+<td>Archive, compliance storage</td>
+<td>Retrieval within 1–5 hours</td>
+</tr>
+<tr class="odd">
+<td><strong>S3 Glacier Deep Archive</strong></td>
+<td>Very rare</td>
+<td>Up to 12 hours</td>
+<td>💵 (lowest)</td>
+<td>Long-term backup (≥7–10 years)</td>
+<td>Cheapest, for legal or compliance data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="应用场景总结"><strong>应用场景总结</strong></h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 35%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Recommended Storage</th>
+<th>Key AWS Features</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data accessed daily</td>
+<td>S3 Standard</td>
+<td>High durability and availability</td>
+</tr>
+<tr class="even">
+<td>Data after 60 days, rarely accessed</td>
+<td>Lifecycle → Glacier Flexible Retrieval</td>
+<td>Cost-effective long-term</td>
+</tr>
+<tr class="odd">
+<td>Legal records for 10 years</td>
+<td>Glacier Deep Archive + Object Lock</td>
+<td>Compliance and WORM protection</td>
+</tr>
+<tr class="even">
+<td>Disaster recovery copy</td>
+<td>Cross-Region Replication</td>
+<td>Multi-region redundancy</td>
+</tr>
+<tr class="odd">
+<td>Data with unpredictable usage</td>
+<td>Intelligent-Tiering</td>
+<td>Automatic tiering and cost saving</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-template"><em>Example template</em></h2>
+<p>Use <strong>Amazon S3</strong> with a lifecycle policy. Store active data in <strong>S3 Standard</strong>, and move older or rarely accessed data to <strong>S3 Glacier (or Glacier Deep Archive)</strong> for cost optimization. For redundancy and disaster recovery, enable <strong>cross-region replication</strong> and <strong>versioning/Object Lock</strong> to protect data from loss or modification.</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/10/31/aws/aws_ec2_selection/">
+        Next post<br>AWS EC2 selection
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2025 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?19474404"></script>
+
+
+
+</body>
+</html>
