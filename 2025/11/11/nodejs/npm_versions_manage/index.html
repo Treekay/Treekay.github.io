@@ -4,11 +4,16 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>nvm for Node.js version management - Kai&#39;s Journal</title>
+    <title>Node.js version management - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Using nvm to manage Node.js version for different project...">
+<meta name="description" content="Options for Node.js version management
+
+nvm
+fnm
+
+nvm...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -18,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?11429450">
+<link rel="stylesheet" href="/css/journal.css?84130512">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -160,7 +165,7 @@
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    nvm for Node.js version management
+                    Node.js version management
                     <div class="post-meta">
                         <time datetime="2025-11-11T02:01:16.000Z" itemprop="datePublished">
                             2025-11-11 15:01
@@ -180,8 +185,13 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="using-nvm-to-manage-node.js-version-for-different-projects">Using nvm to manage Node.js version for different projects</h1>
-<h2 id="install-nvm">install nvm</h2>
+                    <h1 id="options-for-node.js-version-management">Options for Node.js version management</h1>
+<ul>
+<li>nvm</li>
+<li>fnm</li>
+</ul>
+<h2 id="nvm">nvm</h2>
+<h3 id="install-nvm">install nvm</h3>
 <ul>
 <li>Linux/macOS</li>
 </ul>
@@ -191,22 +201,28 @@
 <ul>
 <li>Windows Download from the official website: <a href="https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fcoreybutler%2Fnvm-windows%2Freleases">nvm for Windows</a></li>
 </ul>
-<h2 id="after-installing-nvm">After installing nvm</h2>
+<h3 id="after-installing-nvm">After installing nvm</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ensure nvm installation finishing</span></span><br><span class="line">nvm -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># check installed Node.js version</span></span><br><span class="line">nvm <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
-<h2 id="install-specific-version-of-node.js">Install specific version of Node.js</h2>
+<h3 id="install-specific-version-of-node.js">Install specific version of Node.js</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nvm install &lt;version&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># e.g.</span></span><br><span class="line">nvm install 16.9.0</span><br></pre></td></tr></table></figure>
-<h2 id="uninstall-versions">Uninstall versions</h2>
+<h3 id="uninstall-versions">Uninstall versions</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm uninstall &lt;version&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="switch-version">Switch Version</h2>
+<h3 id="switch-version">Switch Version</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Caution! This would change the version globally in your system</span></span><br><span class="line">nvm use &lt;version&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="assign-specific-version-for-different-projects-linuxmacos">Assign specific version for different projects (Linux/macOS)</h2>
+<h3 id="assign-specific-version-for-different-projects-linuxmacos">Assign specific version for different projects (Linux/macOS)</h3>
 <p>Create and edit a file named <code>.nvmrc</code> in the root path of projects</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># specify version needed</span></span><br><span class="line">16.9.0</span><br></pre></td></tr></table></figure>
 <p>run <code>nvm use</code> in the root path, and it will use the version specified in the <code>nvmrc</code> file automatically.</p>
-<h3 id="using-vscode-plugin-vsc-nvm-linuxmacos">using VSCode Plugin <code>vsc-nvm</code> (Linux/macOS)</h3>
+<h4 id="using-vscode-plugin-vsc-nvm-linuxmacos">using VSCode Plugin <code>vsc-nvm</code> (Linux/macOS)</h4>
 <p>Using vsc-nvm version in <code>nvmrc</code> automatically whenever you open the project in VSCode.</p>
-<h2 id="using-vscode-plugin-node-visual-manager-windows">using VSCode Plugin <code>Node Visual Manager</code> (Windows)</h2>
+<h4 id="using-vscode-plugin-node-visual-manager-windows">using VSCode Plugin <code>Node Visual Manager</code> (Windows)</h4>
 <p>Using Node Visual Manager to switch version, or manually using <code>nvm use &lt;version&gt;</code> on Windows system.</p>
+<h2 id="fnm">fnm</h2>
+<h3 id="install-fnm">install fnm</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux/macOS</span></span><br><span class="line">brew install fnm</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Windows</span></span><br><span class="line">winget install Schniz.fnm</span><br></pre></td></tr></table></figure>
+<h3 id="using-fnm">using fnm</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node -v &gt; .node-version</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> .node-version</span><br><span class="line"></span><br><span class="line">fnm install</span><br><span class="line"></span><br><span class="line">fnm use</span><br><span class="line"></span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
                 </div>
             </div>
@@ -247,7 +263,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?82278345"></script>
+<script src="/js/journal.js?75743842"></script>
 
 
 
