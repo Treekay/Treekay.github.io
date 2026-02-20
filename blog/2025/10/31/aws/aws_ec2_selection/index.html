@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>AWS EC2 selection - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="AWS EC2 selection
+识别工作负载类型
+
+长期稳定运行 → predictable workload...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?23441587">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    AWS EC2 selection
+                    <div class="post-meta">
+                        <time datetime="2025-10-31T00:07:59.000Z" itemprop="datePublished">
+                            2025-10-31 00:07
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/AWS/'>AWS</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="aws-ec2-selection">AWS EC2 selection</h1>
+<p><strong>识别工作负载类型</strong></p>
+<ul>
+<li>长期稳定运行 → predictable workload</li>
+<li>临时任务 / 测试 → short-term / flexible</li>
+<li>计算密集 → CPU/GPU heavy</li>
+<li>不常使用 → low utilization</li>
+</ul>
+<h2 id="选择合适的定价模型-pricing-model">选择合适的定价模型 (Pricing
+Model)</h2>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 13%" />
+<col style="width: 16%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>适用场景</th>
+<th>成本特点</th>
+<th>举例句式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>On-Demand</strong></td>
+<td>临时测试、开发环境</td>
+<td>成本最高、灵活</td>
+<td>“Use On-Demand for flexibility.”</td>
+</tr>
+<tr class="even">
+<td><strong>Reserved Instances / Savings Plans</strong></td>
+<td>长期稳定运行任务</td>
+<td>成本低（最高可省 72%）</td>
+<td>“Use Reserved Instances for predictable workloads.”</td>
+</tr>
+<tr class="odd">
+<td><strong>Spot Instances</strong></td>
+<td>容错任务、批量分析</td>
+<td>成本最低，但可能中断</td>
+<td>“Use Spot Instances for cost saving in flexible jobs.”</td>
+</tr>
+<tr class="even">
+<td><strong>Dedicated / Host Instances</strong></td>
+<td>合规、安全要求高</td>
+<td>成本高</td>
+<td>“Use Dedicated for compliance isolation.”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="选择合适的实例类型-instance-type">选择合适的实例类型 (Instance
+Type)</h2>
+<table>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 23%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>General (t, m)</strong></td>
+<td>平衡 CPU/内存</td>
+<td>Web server, app server</td>
+</tr>
+<tr class="even">
+<td><strong>Compute optimized (c)</strong></td>
+<td>高 CPU 性能</td>
+<td>Batch computing, video encoding</td>
+</tr>
+<tr class="odd">
+<td><strong>Memory optimized (r, x)</strong></td>
+<td>大内存</td>
+<td>Database, caching</td>
+</tr>
+<tr class="even">
+<td><strong>Storage optimized (i, d)</strong></td>
+<td>高 IO 性能</td>
+<td>Data warehouse, Hadoop</td>
+</tr>
+<tr class="odd">
+<td><strong>GPU (g)</strong></td>
+<td>图形渲染 / AI 训练</td>
+<td>Graphic design, ML training</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附加优化策略">附加优化策略</h2>
+<p><strong>Auto Scaling</strong> → 动态扩展</p>
+<p><strong>Elastic Load Balancing</strong> → 负载分配</p>
+<p><strong>EBS-backed instances → 停止后数据保留</strong></p>
+<p><strong>Custom AMI</strong> → 保持配置一致</p>
+<p><strong>AWS Systems Manager / CloudWatch</strong> →
+自动打补丁、监控</p>
+<h2 id="example-template">Example template</h2>
+<p>Company X should match each workload with the right EC2 pricing
+model. Use <strong>Reserved Instances</strong> for long-running tasks,
+<strong>Spot Instances</strong> for variable or flexible workloads, and
+<strong>On-Demand</strong> for short-term development. Enable
+<strong>Auto Scaling</strong> to handle demand changes.</p>
+<p>Use <strong>GPU-based</strong> instance because designers need
+high-performance graphics for rendering images and videos.</p>
+<p>Use <strong>EBS-backed</strong> EC2 instances, which allow users to
+stop and start instances without losing data. Designers can pause work
+and resume later from the same state.</p>
+<p>Create a custom Amazon Machine Image (<strong>AMI</strong>) from the
+configured instance. This ensures every new instance launched has the
+same software and settings for consistent collaboration.</p>
+<p>Key factors: <strong>cost-effective, compliant, flexibility,
+performance, and reliability, secure, long-term data
+protection.</strong></p>
+<h2 id="ec2-相关核心服务对比总结表">EC2 相关核心服务对比总结表</h2>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 42%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>功能</th>
+<th>服务/选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>定价模型</strong></td>
+<td>On-Demand / Reserved / Spot / Dedicated</td>
+<td>成本与灵活度权衡</td>
+</tr>
+<tr class="even">
+<td><strong>数据持久化</strong></td>
+<td>EBS-backed vs Instance Store</td>
+<td>EBS 保存数据，Instance Store 随实例删除</td>
+</tr>
+<tr class="odd">
+<td><strong>配置保持</strong></td>
+<td>AMI (Amazon Machine Image)</td>
+<td>保存系统设置与软件环境</td>
+</tr>
+<tr class="even">
+<td><strong>自动扩展</strong></td>
+<td>Auto Scaling Group (ASG)</td>
+<td>按需增加/减少实例</td>
+</tr>
+<tr class="odd">
+<td><strong>负载均衡</strong></td>
+<td>Elastic Load Balancer (ELB)</td>
+<td>分配流量防止过载</td>
+</tr>
+<tr class="even">
+<td><strong>维护与监控</strong></td>
+<td>Systems Manager / CloudWatch</td>
+<td>自动补丁、性能监控</td>
+</tr>
+</tbody>
+</table>
+<p>常见题型总结</p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 46%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题型</th>
+<th>解题关键词</th>
+<th>常用方案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>成本优化类</strong></td>
+<td>“cost-effective / optimize / reduce cost”</td>
+<td>Reserved + Spot + Auto Scaling</td>
+</tr>
+<tr class="even">
+<td><strong>高性能计算类</strong></td>
+<td>“graphics / video / simulation”</td>
+<td>GPU instance (G5/G4dn)</td>
+</tr>
+<tr class="odd">
+<td><strong>弹性伸缩类</strong></td>
+<td>“traffic spikes / unpredictable workload”</td>
+<td>Auto Scaling + On-Demand</td>
+</tr>
+<tr class="even">
+<td><strong>定期任务类</strong></td>
+<td>“periodic / batch job”</td>
+<td>Spot + Lambda</td>
+</tr>
+<tr class="odd">
+<td><strong>配置保持类</strong></td>
+<td>“same configuration / resume work”</td>
+<td>EBS-backed + AMI</td>
+</tr>
+<tr class="even">
+<td><strong>灾备/高可用类</strong></td>
+<td>“redundancy / backup”</td>
+<td>Multi-AZ + Load Balancer</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/blog/2025/10/31/aws/aws_s3_selection/">
+        Previous post<br>AWS S3 selection
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2025/10/31/aws/aws_decoupling_severless_microservices/">
+        Next post<br>AWS Decoupling Severless and Microservices
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?68287244"></script>
+
+
+
+</body>
+</html>

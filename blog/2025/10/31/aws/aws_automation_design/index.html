@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>AWS Automation Design - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="Automation Design
+
+
+
+
+
+
+
+
+题型方向
+常见关键词
+典型 AWS 服务
+
+
+
+
+弹性扩展 (...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?67984263">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    AWS Automation Design
+                    <div class="post-meta">
+                        <time datetime="2025-10-31T00:02:31.000Z" itemprop="datePublished">
+                            2025-10-31 00:02
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/AWS/'>AWS</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="automation-design">Automation Design</h1>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 43%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>题型方向</th>
+<th>常见关键词</th>
+<th>典型 AWS 服务</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>弹性扩展 (Scaling)</strong></td>
+<td>auto scale / high demand / variable workload</td>
+<td>Auto Scaling Group, ELB</td>
+</tr>
+<tr class="even">
+<td><strong>自动部署 (Deployment)</strong></td>
+<td>manage resources / consistent setup / repeatable process</td>
+<td>CloudFormation, Elastic Beanstalk</td>
+</tr>
+<tr class="odd">
+<td><strong>监控与恢复 (Monitoring &amp; Recovery)</strong></td>
+<td>detect failures / ensure availability</td>
+<td>CloudWatch, Lambda, SNS</td>
+</tr>
+<tr class="even">
+<td><strong>安全与运维自动化 (Ops Automation)</strong></td>
+<td>patch / configuration / compliance</td>
+<td>Systems Manager, Config, Inspector</td>
+</tr>
+<tr class="odd">
+<td><strong>成本优化自动化</strong></td>
+<td>shut down idle / schedule start-stop</td>
+<td>Lambda, EventBridge, CloudWatch</td>
+</tr>
+</tbody>
+</table>
+<h2 id="template">Template</h2>
+<h3 id="step-1-说明要自动化的内容what"><strong>Step 1 —
+说明要自动化的内容（What）</strong></h3>
+<blockquote>
+<p>Identify which part of the cloud environment needs automation e.g.,
+scaling, deployment, monitoring, patching, or cost control.</p>
+</blockquote>
+<h3 id="step-2-指定具体-aws-服务how"><strong>Step 2 — 指定具体 AWS
+服务（How）</strong></h3>
+<blockquote>
+<p>Name the service and briefly describe how it works. e.g., “Use AWS
+Auto Scaling to automatically adjust EC2 capacity based on CPU
+usage.”</p>
+</blockquote>
+<h3 id="step-3-连接-well-architected-framework-原则why"><strong>Step 3 —
+连接 Well-Architected Framework 原则（Why）</strong></h3>
+<blockquote>
+<p>Tie it to a pillar:</p>
+<ul>
+<li><strong>Operational Excellence:</strong> automate deployments
+(CloudFormation)</li>
+<li><strong>Reliability:</strong> automated recovery and failover
+(CloudWatch + Lambda)</li>
+<li><strong>Performance Efficiency:</strong> auto scaling to meet
+demand</li>
+<li><strong>Cost Optimization:</strong> automatically remove idle
+resources</li>
+</ul>
+</blockquote>
+<h2 id="场景和服务">场景和服务</h2>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 35%" />
+<col style="width: 24%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>场景</th>
+<th>AWS 服务</th>
+<th>Well-Architected Pillar</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>自动伸缩</strong></td>
+<td>Auto Scaling + ELB</td>
+<td>Performance Efficiency</td>
+<td>应对需求波动，维持性能</td>
+</tr>
+<tr class="even">
+<td><strong>自动部署</strong></td>
+<td>CloudFormation / Elastic Beanstalk</td>
+<td>Operational Excellence</td>
+<td>模板化、可重复部署</td>
+</tr>
+<tr class="odd">
+<td><strong>自动恢复</strong></td>
+<td>CloudWatch Alarm + Lambda</td>
+<td>Reliability</td>
+<td>自动重启或替换异常实例</td>
+</tr>
+<tr class="even">
+<td><strong>自动补丁</strong></td>
+<td>Systems Manager Patch Manager</td>
+<td>Operational Excellence</td>
+<td>减少人工维护错误</td>
+</tr>
+<tr class="odd">
+<td><strong>自动监控报警</strong></td>
+<td>CloudWatch + SNS</td>
+<td>Reliability</td>
+<td>即时通知系统状态</td>
+</tr>
+<tr class="even">
+<td><strong>成本调度</strong></td>
+<td>Lambda + EventBridge</td>
+<td>Cost Optimization</td>
+<td>定时关闭空闲实例</td>
+</tr>
+<tr class="odd">
+<td><strong>配置合规监控</strong></td>
+<td>AWS Config + CloudTrail</td>
+<td>Security / Governance</td>
+<td>自动检测配置变更</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/blog/2025/10/31/aws/aws_IAM/">
+        Previous post<br>AWS IAM
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2025/10/30/aws/cidr_calculate/">
+        Next post<br>CIDR calculate example
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?58235601"></script>
+
+
+
+</body>
+</html>
