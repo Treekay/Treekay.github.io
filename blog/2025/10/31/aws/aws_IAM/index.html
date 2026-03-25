@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="IAM policy
+<meta name="description" content="IAM Policy
 
 
 
@@ -17,15 +17,9 @@
 
 
 
-题型类别
-常见关键词
-典型考点
-
-
-
-
-访问控制设计题
-“restrict ...">
+Question Type
+Common Keywords
+Key Conc...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -35,7 +29,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?64058799">
+<link rel="stylesheet" href="/blog/css/journal.css?37458956">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -197,59 +191,62 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="iam-policy">IAM policy</h1>
+                    <h1 id="iam-policy">IAM Policy</h1>
 <table>
 <colgroup>
-<col style="width: 17%" />
-<col style="width: 49%" />
-<col style="width: 33%" />
+<col style="width: 23%" />
+<col style="width: 40%" />
+<col style="width: 35%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>题型类别</th>
-<th>常见关键词</th>
-<th>典型考点</th>
+<th>Question Type</th>
+<th>Common Keywords</th>
+<th>Key Concepts</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>访问控制设计题</strong></td>
+<td><strong>Access Control Design</strong></td>
 <td>“restrict access / manage permissions / different users”</td>
-<td>IAM <strong>Users / Groups / Roles / Policies</strong></td>
+<td>IAM Users / Groups / Roles / Policies</td>
 </tr>
 <tr class="even">
-<td><strong>安全改进题</strong></td>
+<td><strong>Security Improvement</strong></td>
 <td>“public/private key login / shared credentials / security
 concern”</td>
-<td>改成 IAM Role、Group、最小权限原则</td>
+<td>Use IAM Roles, Groups, and apply least privilege principle</td>
 </tr>
 <tr class="odd">
-<td><strong>运维管理题</strong></td>
+<td><strong>Operations Management</strong></td>
 <td>“too many users / need central management”</td>
-<td>IAM Groups、Policies、Organizations</td>
+<td>IAM Groups, Policies, Organizations</td>
 </tr>
 <tr class="even">
-<td><strong>应用访问 AWS 资源题</strong></td>
+<td><strong>Application Access to AWS Resources</strong></td>
 <td>“EC2 accessing S3 / Lambda accessing DynamoDB”</td>
-<td>绑定 IAM Role 给服务访问权限</td>
+<td>Attach IAM Roles to services</td>
 </tr>
 <tr class="odd">
-<td><strong>多账户与合规题</strong></td>
+<td><strong>Multi-Account &amp; Compliance</strong></td>
 <td>“multiple departments / compliance”</td>
 <td>AWS Organizations + Service Control Policies</td>
 </tr>
 </tbody>
 </table>
-<p>Example:</p>
+<hr />
+<h2 id="example">Example</h2>
 <p>Use <strong>IAM Roles and Groups</strong> instead of individual IAM
-users or key-based access. Assign permissions through <strong>IAM
-Policies</strong> following the <strong>principle of least
-privilege</strong>.</p>
+users or key-based access.<br />
+Assign permissions through <strong>IAM Policies</strong> following the
+<strong>principle of least privilege</strong>.</p>
 <p>Create <strong>Groups</strong> based on job functions (e.g., Admin,
-Developer, Auditor). Attach policies defining what each group can
-access. Attach <strong>IAM Roles</strong> to AWS resources (like EC2,
-Lambda) so they can access only required services (e.g., S3, RDS).</p>
-<p>Benefits:</p>
+Developer, Auditor).<br />
+Attach policies to define what each group can access.<br />
+Attach <strong>IAM Roles</strong> to AWS resources (such as EC2, Lambda)
+so they can access only required services (e.g., S3, RDS).</p>
+<hr />
+<h2 id="benefits">Benefits</h2>
 <ul>
 <li>Centralized permission management</li>
 <li>Easier to update or revoke access</li>
@@ -257,64 +254,67 @@ Lambda) so they can access only required services (e.g., S3, RDS).</p>
 <li>Enforces <strong>least privilege</strong> and improves
 compliance</li>
 </ul>
-<p>Cons:</p>
+<hr />
+<h2 id="cons">Cons</h2>
 <ul>
 <li>Requires careful policy planning</li>
-<li>Initial setup is time-consuming</li>
-<li>May need training for administrators</li>
+<li>Initial setup can be time-consuming</li>
+<li>May require training for administrators</li>
 </ul>
-<h2 id="关键概念对比表">关键概念对比表</h2>
+<hr />
+<h2 id="key-concepts-comparison-table">Key Concepts Comparison
+Table</h2>
 <table>
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 20%" />
-<col style="width: 37%" />
-<col style="width: 25%" />
+<col style="width: 11%" />
+<col style="width: 28%" />
+<col style="width: 29%" />
+<col style="width: 30%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>项目</th>
-<th>定义</th>
-<th>典型用途</th>
-<th>注意点</th>
+<th>Item</th>
+<th>Definition</th>
+<th>Typical Use</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>IAM User</strong></td>
-<td>单个用户身份</td>
-<td>日常操作、控制台登录</td>
-<td>不宜过多创建</td>
+<td>Individual identity</td>
+<td>Daily operations, console login</td>
+<td>Avoid creating too many users</td>
 </tr>
 <tr class="even">
 <td><strong>IAM Group</strong></td>
-<td>用户集合</td>
-<td>同类用户权限集中管理</td>
-<td>不能嵌套组</td>
+<td>Collection of users</td>
+<td>Manage permissions for similar users</td>
+<td>Cannot nest groups</td>
 </tr>
 <tr class="odd">
 <td><strong>IAM Role</strong></td>
-<td>临时授权身份</td>
-<td>EC2、Lambda 等服务访问 AWS 资源</td>
-<td>无长期凭证，更安全</td>
+<td>Temporary identity with permissions</td>
+<td>Access by AWS services (EC2, Lambda)</td>
+<td>No long-term credentials, more secure</td>
 </tr>
 <tr class="even">
 <td><strong>Policy</strong></td>
-<td>JSON 格式权限规则</td>
-<td>限定具体操作与资源</td>
-<td>遵循 least privilege</td>
+<td>JSON-based permission rules</td>
+<td>Define allowed actions and resources</td>
+<td>Follow least privilege</td>
 </tr>
 <tr class="odd">
 <td><strong>Root User</strong></td>
-<td>账户所有者</td>
-<td>仅用于账户级操作</td>
-<td>禁止日常使用</td>
+<td>Account owner</td>
+<td>Account-level operations only</td>
+<td>Should not be used daily</td>
 </tr>
 <tr class="even">
 <td><strong>Access Key</strong></td>
-<td>编程访问凭证</td>
-<td>CLI/API 操作</td>
-<td>应定期轮换或改用 Role</td>
+<td>Programmatic credentials</td>
+<td>CLI/API access</td>
+<td>Rotate regularly or replace with Roles</td>
 </tr>
 </tbody>
 </table>
@@ -325,7 +325,7 @@ compliance</li>
             <nav class="post-pagination">
     
     <a class="newer-posts" href="/blog/2025/10/31/aws/aws_decoupling_severless_microservices/">
-        Previous post<br>AWS Decoupling Severless and Microservices
+        Previous post<br>AWS Decoupling Serverless and Microservices
     </a>
     
     <span class="page-number"></span>
@@ -362,7 +362,7 @@ compliance</li>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?39452737"></script>
+<script src="/blog/js/journal.js?2150426"></script>
 
 
 

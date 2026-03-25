@@ -4,14 +4,14 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Record of debuging on AWS Learner Lab - Kai&#39;s Journal</title>
+    <title>Record of Debugging on AWS Learner Lab - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="AWS Learner Lab 环境 Debug
-记录
-问题背景
-ALB 连接的前端 target group 中...">
+<meta name="description" content="AWS Learner Lab Debugging
+Record
+Problem Background
+The s...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -21,7 +21,7 @@ ALB 连接的前端 target group 中...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?75284217">
+<link rel="stylesheet" href="/blog/css/journal.css?79767326">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -163,7 +163,7 @@ ALB 连接的前端 target group 中...">
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    Record of debuging on AWS Learner Lab
+                    Record of Debugging on AWS Learner Lab
                     <div class="post-meta">
                         <time datetime="2025-10-18T10:19:25.000Z" itemprop="datePublished">
                             2025-10-18 10:19
@@ -185,102 +185,142 @@ ALB 连接的前端 target group 中...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="aws-learner-lab-环境-debug-记录">AWS Learner Lab 环境 Debug
-记录</h1>
-<h2 id="问题背景">问题背景</h2>
-<p>ALB 连接的前端 target group 中的 server instance 健康检查状态一直是
-unhealthy: request timed out 504，无法访问到网页内容</p>
-<h2 id="问题分析">问题分析</h2>
-<p>504 表示请求已经发给了服务器但是服务器处理超时没有返回。那么 ALB
--&gt; priavte subnet 的通道应该是正常的。
-服务器健康检查失败的原因有可能是 check path 或者端口跟 ALB
-设置不一致，经检查也不是这个问题。 那就只可能是 server
-服务没有启动，该服务器没有在正常监听处理请求导致的。</p>
-<h2 id="初步措施">初步措施</h2>
-<p>给 ALB 的 Target group 对应的 AutoScaling Group Launch template 加上
-userdata，在 instance 初始化时安装并启动 nginx
-服务。但是操作之后，依然健康检查失败。只能连上 instance 去查看 nginx
-服务到底有没有启动了，但是由于 instance 在 private subnet，还需要经过
-public subnet 的跳板机才能进行 ssh 连接。</p>
-<h2 id="nat-instance-和-跳板机-配置">NAT instance 和 跳板机 配置</h2>
-<p>为了节省费用，创建了一个 EC2 同时用作 NAT instance 和 Bastion
-跳板机。 首先创建 AmazonLinux2023 EC2 实例， Security Group 选 NAT
-security group，放在 public-subnet，记得勾选 keypair - vocky 以便进行
-ssh 连接。</p>
-<h3 id="nat-instance-的-network-interface-设置">NAT instance 的 network
-interface 设置</h3>
-<p>NAT network interface 中的 source/dest check 必须去掉 enable，不然
-AWS 会丢弃所有不是 NAT 自己发出的包（包括你私网 EC2 的出站包）。 由于
-AWS Learner Lab 在实验超时或者暂停之后会关闭所有 EC2 instance，所有在
-lab 重启之后，如果 NAT instance 被重置，上面操作就要重复进行。</p>
-<h3 id="nat-instance-设置">NAT instance 设置</h3>
+                    <h1 id="aws-learner-lab-debugging-record">AWS Learner Lab Debugging
+Record</h1>
+<h2 id="problem-background">Problem Background</h2>
+<p>The server instances in the frontend target group connected to the
+ALB were consistently marked as <strong>unhealthy: request timed out
+(504)</strong>, and the web content could not be accessed.</p>
+<hr />
+<h2 id="problem-analysis">Problem Analysis</h2>
+<p>A 504 error indicates that the request reached the server, but the
+server did not respond in time. This suggests that the connection from
+the ALB to the private subnet is functioning correctly.</p>
+<p>Possible causes of failed health checks include mismatched check
+paths or ports between the ALB and the instances. After verification,
+these were not the issue.</p>
+<p>The most likely cause was that the server service was not running,
+meaning the instance was not properly listening for and handling
+requests.</p>
+<hr />
+<h2 id="initial-actions">Initial Actions</h2>
+<p>Added <strong>userdata</strong> to the Auto Scaling Group launch
+template associated with the ALB target group to install and start Nginx
+during instance initialization.</p>
+<p>However, health checks still failed.</p>
+<p>To further investigate, it was necessary to connect to the instance
+to verify whether Nginx was running. Since the instance was in a private
+subnet, SSH access required a bastion host in a public subnet.</p>
+<hr />
+<h2 id="nat-instance-and-bastion-host-setup">NAT Instance and Bastion
+Host Setup</h2>
+<p>To reduce costs, a single EC2 instance was configured to act as both
+a <strong>NAT instance</strong> and a <strong>bastion host</strong>.</p>
 <ul>
-<li>NAT security group<br />
-inbound: ssh | my-ip<br />
-Inbound: all traffic | VPC CIDR</li>
-<li>Frontend security group<br />
-Outbound: All traffic | Destination: 0.0.0.0/0</li>
+<li>Created an Amazon Linux 2023 EC2 instance</li>
+<li>Assigned NAT security group</li>
+<li>Placed in a public subnet</li>
+<li>Enabled key pair (vockey) for SSH access</li>
 </ul>
-<p>private subnet route table -&gt; nat instance<br />
-lab 重启之后 NAT instance 如果被重置就要重复操作， network interface
-会变</p>
-<h2 id="ssh-连接-nat-instance">SSH 连接 NAT instance</h2>
+<hr />
+<h3 id="nat-instance-network-interface-configuration">NAT Instance
+Network Interface Configuration</h3>
+<p>The <strong>source/destination check must be disabled</strong>,
+otherwise AWS will drop packets not originating from the NAT instance
+itself (including outbound traffic from private EC2 instances).</p>
+<p>Since AWS Learner Lab resets EC2 instances after timeout or restart,
+this configuration must be reapplied after each restart.</p>
+<hr />
+<h3 id="nat-instance-configuration">NAT Instance Configuration</h3>
+<ul>
+<li><p><strong>NAT Security Group</strong></p>
+<ul>
+<li>Inbound: SSH | My IP</li>
+<li>Inbound: All traffic | VPC CIDR</li>
+</ul></li>
+<li><p><strong>Frontend Security Group</strong></p>
+<ul>
+<li>Outbound: All traffic | 0.0.0.0/0</li>
+</ul></li>
+<li><p>Private subnet route table → NAT instance</p></li>
+</ul>
+<p>Note: After lab restart, NAT instance settings may need to be
+reconfigured due to network interface changes.</p>
+<hr />
+<h2 id="ssh-into-nat-instance">SSH into NAT Instance</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh ec2-user@public-ip</span><br></pre></td></tr></table></figure>
-<p>连上 instance 之后 执行以下脚本 ( lab 重启之后得重新执行)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 允许 IP 转发</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/^#net.ipv4.ip_forward.*/net.ipv4.ip_forward = 1/&#x27;</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用 NAT 转换（SNAT）</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y iptables-services</span><br><span class="line"><span class="comment">## 根据 ip link 看到的网卡决定 -o 填哪个</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -t nat -A POSTROUTING -o ens5 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久保存规则</span></span><br><span class="line"><span class="built_in">sudo</span> service iptables save</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> iptables</span><br><span class="line"><span class="built_in">sudo</span> systemctl start iptables</span><br></pre></td></tr></table></figure>
-<h2 id="通过跳板机-ssh-连接-private-subnet-instance">通过跳板机 SSH 连接
-private subnet instance</h2>
-<p>用 putty 连接 NAT instance 当跳板机连接 private subnet:</p>
-<p>PuTTY → “Connection → SSH → Auth → Allow agent forwarding” 在 Windows
-上启动 Pageant（PuTTY 自带的 SSH agent）并加载 vockey.ppk。 这样登录 NAT
-时，NAT 会“借用”你本机的密钥去认证私网 EC2，不需要上传密钥。 登录 NAT
-后直接执行：<code>ssh ec2-user@10.0.XX.XXX</code></p>
-<p>连上 ec2 之后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看 ec2 上 nginx服务有没有启动</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装 nginx   卡在这一步, 同理 userdata 也执行不了这一步</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 nginx</span></span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
-<h2 id="排除完网络问题-进一步分析">排除完网络问题, 进一步分析</h2>
-<p>解决了 private subnet 的网络问题之后，还是安装不了 nginx，怀疑是
-learner lab 环境下官方 S3 repo 仓库源无法访问。 (因为 NAT instance
-是可以安装 nginx 的，NAT 实例本身在 Public Subnet，直接连 Internet
-Gateway，所以它的出网流量走的是公网路由，没有经过 Learner Lab 的 NAT
-Egress 限制)</p>
-<h2 id="备选解决方案">备选解决方案</h2>
+<p>Run the following script after connecting (must re-run after lab
+restart):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># Enable IP forwarding</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/^#net.ipv4.ip_forward.*/net.ipv4.ip_forward = 1/&#x27;</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable NAT (SNAT)</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y iptables-services</span><br><span class="line"><span class="comment"># Choose the correct interface based on `ip link`</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -t nat -A POSTROUTING -o ens5 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="comment"># Save rules permanently</span></span><br><span class="line"><span class="built_in">sudo</span> service iptables save</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> iptables</span><br><span class="line"><span class="built_in">sudo</span> systemctl start iptables</span><br></pre></td></tr></table></figure>
+<h2 id="ssh-into-private-subnet-instance-via-bastion">SSH into Private
+Subnet Instance via Bastion</h2>
+<p>Using PuTTY:</p>
+<p>Enable Allow agent forwarding Use Pageant to load vockey.ppk</p>
+<p>After logging into NAT:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh ec2-user@10.0.XX.XXX</span><br></pre></td></tr></table></figure>
+<h2 id="on-private-instance">On Private Instance</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Check nginx status</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install nginx (this step failed)</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start nginx</span></span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<h2 id="further-analysis">Further Analysis</h2>
+<p>After resolving networking issues, nginx installation still
+failed.</p>
+<p>Suspected cause: In the Learner Lab environment, access to the
+official S3 repository might be restricted.</p>
+<p>Observation:</p>
+<ul>
+<li>NAT instance (in public subnet) can install nginx successfully</li>
+<li>Private instance cannot, likely due to restricted outbound
+access</li>
+</ul>
+<h2 id="alternative-solutions">Alternative Solutions</h2>
 <ol type="1">
-<li>在 NAT instance 自建 repo proxy 反代，把流量重定向</li>
-<li>Chatgpt 说 换成 Amazon Linux 2 AMI 源 Leaner lab
-就允许了？？(不知道可不可信但这个贵)</li>
+<li>Build a repo proxy on NAT instance</li>
+<li>Use Amazon Linux 2 AMI (potential workaround, but more costly)</li>
 </ol>
-<h3 id="方案-a---nat-反代">方案 A - NAT 反代</h3>
-<h4 id="nat-执行以下命令">NAT 执行以下命令</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NAT 安装 Squid 代理</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y squid</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> squid</span><br><span class="line"><span class="built_in">sudo</span> systemctl start squid</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许私网段访问 NAT 代理</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/squid/squid.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在第一个 http_access deny all 之前加上</span></span><br><span class="line">acl vpcnet src 10.0.0.0/16</span><br><span class="line">http_access allow vpcnet</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存文件重启服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl restart squid</span><br></pre></td></tr></table></figure>
-<h4 id="private-subnet-instance-执行以下命令">private subnet instance
-执行以下命令</h4>
-<p>注意这里的 ip address 要改成 NAT instance 实际的 private ip</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">sudo</span> dnf clean all</span><br><span class="line"><span class="built_in">sudo</span> dnf makecache -y</span><br><span class="line"><span class="built_in">sudo</span> dnf install -y nginx</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>理论上这些命令加到 NAT instance 和 private subnet instance 的
-userdata 中应该就可以在创建时自行完成 nginx
-安装和启动，但是实际上操作时还是没法自动完成，原因还有待进一步排查。（不过基本上问题都是由于
-Learner Lab 的网络和权限限制以及重启资源造成的）</p>
-<h2 id="最新进展">最新进展</h2>
-<p>因为 vpc 中是有 endpoint 的，所以正常不需要 NAT
-去做反代也应该能访问到 S3 源。反而是因为 userdata 中安装 nginx
-的命令执行太早，在网络服务等还没初始化好的情况下就执行失败了，所以才会出现后续手动连接上去能安装成功但是启动时却总是失败的问题。
-另一个发现是 EC2 连不同 AZ 的 NAT
-会出问题，没办法正常访问外网，所以还是要分开两个
-NAT，分别设置两个路由表</p>
-<h3 id="nat-instance-设置-1">NAT instance 设置</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 允许 IP 转发</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/^#net.ipv4.ip_forward.*/net.ipv4.ip_forward = 1/&#x27;</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用 NAT 转换（SNAT）</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y iptables-services</span><br><span class="line"><span class="comment">## 根据 ip link 看到的网卡决定 -o 填哪个</span></span><br><span class="line"><span class="built_in">sudo</span> iptables -t nat -A POSTROUTING -o ens5 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久保存规则</span></span><br><span class="line"><span class="built_in">sudo</span> service iptables save</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> iptables</span><br><span class="line"><span class="built_in">sudo</span> systemctl start iptables</span><br></pre></td></tr></table></figure>
-<h3 id="nat-security-group-设置">NAT Security group 设置</h3>
-<p>inbound: ssh | my-ip Inbound: all traffic | VPC CIDR</p>
-<h3 id="frontend-security-group-设置">Frontend security group 设置</h3>
-<p>Outbound: All traffic | Destination: 0.0.0.0/0</p>
-<h3 id="private-subnet-route-table-设置">Private subnet Route table
-设置</h3>
-<p>0.0.0.0/0 -&gt; nat instance id<br />
-lab 重启之后要检查是否要改， 因为 network interface 有可能会变</p>
-<h3 id="web-userdata-内容">web userdata 内容</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#install Apache Web Server</span></span><br><span class="line">dnf install -y httpd</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;OK - Web Server is Running&quot;</span> &gt; /var/www/html/index.html</span><br><span class="line"><span class="comment">#Start the web server</span></span><br><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
-<h3 id="app-userdata-内容">app userdata 内容</h3>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;powershell&gt;</span><br><span class="line"><span class="comment"># 安装 IIS</span></span><br><span class="line"><span class="built_in">Install-WindowsFeature</span> <span class="literal">-name</span> Web<span class="literal">-Server</span> <span class="literal">-IncludeManagementTools</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建简单的 index 页面</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&quot;C:\inetpub\wwwroot\index.html&quot;</span></span><br><span class="line"><span class="string">&quot;OK - Backend Server is Running&quot;</span> | <span class="built_in">Out-File</span> <span class="literal">-FilePath</span> <span class="variable">$path</span> <span class="literal">-Encoding</span> utf8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 IIS</span></span><br><span class="line"><span class="built_in">Start-Service</span> W3SVC</span><br><span class="line"><span class="built_in">Set-Service</span> W3SVC <span class="literal">-StartupType</span> Automatic</span><br><span class="line">&lt;/powershell&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="solution-a-nat-proxy">Solution A — NAT Proxy</h2>
+<h3 id="on-nat-instance">On NAT Instance</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install Squid proxy</span></span><br><span class="line"><span class="built_in">sudo</span> yum install -y squid</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> squid</span><br><span class="line"><span class="built_in">sudo</span> systemctl start squid</span><br><span class="line"></span><br><span class="line"><span class="comment"># Allow private subnet access</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/squid/squid.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add before &quot;http_access deny all&quot;</span></span><br><span class="line">acl vpcnet src 10.0.0.0/16</span><br><span class="line">http_access allow vpcnet</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart service</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl restart squid</span><br></pre></td></tr></table></figure>
+<h3 id="on-private-instance-1">On Private Instance</h3>
+<p>Replace IP with NAT private IP:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">sudo</span> dnf clean all</span><br><span class="line"><span class="built_in">sudo</span> dnf makecache -y</span><br><span class="line"><span class="built_in">sudo</span> dnf install -y nginx</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+<p>Note: These commands theoretically should work in userdata, but in
+practice, automatic execution still failed due to Learner Lab
+limitations.</p>
+<h2 id="latest-findings">Latest Findings</h2>
+<p>Since the VPC includes endpoints, NAT proxy should not be required to
+access S3 repositories.</p>
+<p>Actual root cause:</p>
+<ul>
+<li>Userdata executed too early before network initialization
+completed</li>
+<li>This caused installation failures during startup</li>
+</ul>
+<p>Additional issue:</p>
+<ul>
+<li>Cross-AZ NAT usage caused connectivity problems</li>
+<li>Solution: deploy separate NAT instances per AZ with corresponding
+route tables</li>
+</ul>
+<h2 id="final-configuration">Final Configuration</h2>
+<h3 id="nat-instance-setup">NAT Instance Setup</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/^#net.ipv4.ip_forward.*/net.ipv4.ip_forward = 1/&#x27;</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> yum install -y iptables-services</span><br><span class="line"><span class="built_in">sudo</span> iptables -t nat -A POSTROUTING -o ens5 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> service iptables save</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> iptables</span><br><span class="line"><span class="built_in">sudo</span> systemctl start iptables</span><br></pre></td></tr></table></figure>
+<h2 id="nat-security-group">NAT Security Group</h2>
+<ul>
+<li>Inbound: SSH | My IP</li>
+<li>Inbound: All traffic | VPC CIDR</li>
+</ul>
+<h2 id="frontend-security-group">Frontend Security Group</h2>
+<ul>
+<li>Outbound: All traffic | 0.0.0.0/0</li>
+</ul>
+<h2 id="private-subnet-route-table">Private Subnet Route Table</h2>
+<ul>
+<li>0.0.0.0/0 → NAT instance ID Note: Must verify after lab restart due
+to possible interface changes.</li>
+</ul>
+<h2 id="web-userdata">Web Userdata</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dnf install -y httpd</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;OK - Web Server is Running&quot;</span> &gt; /var/www/html/index.html</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
+<h2 id="app-userdata">App Userdata</h2>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;powershell&gt;</span><br><span class="line"><span class="comment"># Install IIS</span></span><br><span class="line"><span class="built_in">Install-WindowsFeature</span> <span class="literal">-name</span> Web<span class="literal">-Server</span> <span class="literal">-IncludeManagementTools</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create index page</span></span><br><span class="line"><span class="variable">$path</span> = <span class="string">&quot;C:\inetpub\wwwroot\index.html&quot;</span></span><br><span class="line"><span class="string">&quot;OK - Backend Server is Running&quot;</span> | <span class="built_in">Out-File</span> <span class="literal">-FilePath</span> <span class="variable">$path</span> <span class="literal">-Encoding</span> utf8</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start IIS</span></span><br><span class="line"><span class="built_in">Start-Service</span> W3SVC</span><br><span class="line"><span class="built_in">Set-Service</span> W3SVC <span class="literal">-StartupType</span> Automatic</span><br><span class="line">&lt;/powershell&gt;</span><br></pre></td></tr></table></figure>
 
                 </div>
             </div>
@@ -325,7 +365,7 @@ lab 重启之后要检查是否要改， 因为 network interface 有可能会�
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?59632112"></script>
+<script src="/blog/js/journal.js?588678"></script>
 
 
 

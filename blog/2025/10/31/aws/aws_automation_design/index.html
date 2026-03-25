@@ -8,7 +8,8 @@
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Automation Design
+<meta name="description" content="AWS Automation Design
+Automation Design
 
 
 
@@ -17,14 +18,8 @@
 
 
 
-题型方向
-常见关键词
-典型 AWS 服务
-
-
-
-
-弹性扩展 (...">
+Category
+...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -34,7 +29,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?67984263">
+<link rel="stylesheet" href="/blog/css/journal.css?65955423">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -196,66 +191,71 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="automation-design">Automation Design</h1>
+                    <h1 id="aws-automation-design">AWS Automation Design</h1>
+<h2 id="automation-design">Automation Design</h2>
 <table>
 <colgroup>
-<col style="width: 29%" />
-<col style="width: 43%" />
 <col style="width: 26%" />
+<col style="width: 45%" />
+<col style="width: 27%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>题型方向</th>
-<th>常见关键词</th>
-<th>典型 AWS 服务</th>
+<th>Category</th>
+<th>Common Keywords</th>
+<th>Typical AWS Services</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>弹性扩展 (Scaling)</strong></td>
+<td><strong>Scaling</strong></td>
 <td>auto scale / high demand / variable workload</td>
 <td>Auto Scaling Group, ELB</td>
 </tr>
 <tr class="even">
-<td><strong>自动部署 (Deployment)</strong></td>
+<td><strong>Deployment</strong></td>
 <td>manage resources / consistent setup / repeatable process</td>
 <td>CloudFormation, Elastic Beanstalk</td>
 </tr>
 <tr class="odd">
-<td><strong>监控与恢复 (Monitoring &amp; Recovery)</strong></td>
+<td><strong>Monitoring &amp; Recovery</strong></td>
 <td>detect failures / ensure availability</td>
 <td>CloudWatch, Lambda, SNS</td>
 </tr>
 <tr class="even">
-<td><strong>安全与运维自动化 (Ops Automation)</strong></td>
+<td><strong>Security &amp; Ops Automation</strong></td>
 <td>patch / configuration / compliance</td>
 <td>Systems Manager, Config, Inspector</td>
 </tr>
 <tr class="odd">
-<td><strong>成本优化自动化</strong></td>
+<td><strong>Cost Optimization Automation</strong></td>
 <td>shut down idle / schedule start-stop</td>
 <td>Lambda, EventBridge, CloudWatch</td>
 </tr>
 </tbody>
 </table>
+<hr />
 <h2 id="template">Template</h2>
-<h3 id="step-1-说明要自动化的内容what"><strong>Step 1 —
-说明要自动化的内容（What）</strong></h3>
+<h3 id="step-1-define-what-to-automate-what"><strong>Step 1 — Define
+What to Automate (What)</strong></h3>
 <blockquote>
-<p>Identify which part of the cloud environment needs automation e.g.,
-scaling, deployment, monitoring, patching, or cost control.</p>
+<p>Identify which part of the cloud environment needs automation,<br />
+e.g., scaling, deployment, monitoring, patching, or cost control.</p>
 </blockquote>
-<h3 id="step-2-指定具体-aws-服务how"><strong>Step 2 — 指定具体 AWS
-服务（How）</strong></h3>
+<hr />
+<h3 id="step-2-specify-aws-services-how"><strong>Step 2 — Specify AWS
+Services (How)</strong></h3>
 <blockquote>
-<p>Name the service and briefly describe how it works. e.g., “Use AWS
-Auto Scaling to automatically adjust EC2 capacity based on CPU
-usage.”</p>
+<p>Name the service and briefly describe how it works.<br />
+e.g., “Use AWS Auto Scaling to automatically adjust EC2 capacity based
+on CPU usage.”</p>
 </blockquote>
-<h3 id="step-3-连接-well-architected-framework-原则why"><strong>Step 3 —
-连接 Well-Architected Framework 原则（Why）</strong></h3>
+<hr />
+<h3 id="step-3-link-to-well-architected-framework-why"><strong>Step 3 —
+Link to Well-Architected Framework (Why)</strong></h3>
 <blockquote>
-<p>Tie it to a pillar:</p>
+<p>Connect the solution to a pillar:</p>
+</blockquote>
 <ul>
 <li><strong>Operational Excellence:</strong> automate deployments
 (CloudFormation)</li>
@@ -266,65 +266,65 @@ demand</li>
 <li><strong>Cost Optimization:</strong> automatically remove idle
 resources</li>
 </ul>
-</blockquote>
-<h2 id="场景和服务">场景和服务</h2>
+<hr />
+<h2 id="scenarios-and-services">Scenarios and Services</h2>
 <table>
 <colgroup>
+<col style="width: 20%" />
+<col style="width: 25%" />
 <col style="width: 16%" />
-<col style="width: 35%" />
-<col style="width: 24%" />
-<col style="width: 23%" />
+<col style="width: 37%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>场景</th>
-<th>AWS 服务</th>
+<th>Scenario</th>
+<th>AWS Services</th>
 <th>Well-Architected Pillar</th>
-<th>说明</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>自动伸缩</strong></td>
+<td><strong>Auto Scaling</strong></td>
 <td>Auto Scaling + ELB</td>
 <td>Performance Efficiency</td>
-<td>应对需求波动，维持性能</td>
+<td>Handle demand fluctuations and maintain performance</td>
 </tr>
 <tr class="even">
-<td><strong>自动部署</strong></td>
+<td><strong>Automated Deployment</strong></td>
 <td>CloudFormation / Elastic Beanstalk</td>
 <td>Operational Excellence</td>
-<td>模板化、可重复部署</td>
+<td>Template-based, repeatable deployments</td>
 </tr>
 <tr class="odd">
-<td><strong>自动恢复</strong></td>
+<td><strong>Automated Recovery</strong></td>
 <td>CloudWatch Alarm + Lambda</td>
 <td>Reliability</td>
-<td>自动重启或替换异常实例</td>
+<td>Automatically restart or replace failed instances</td>
 </tr>
 <tr class="even">
-<td><strong>自动补丁</strong></td>
+<td><strong>Automated Patching</strong></td>
 <td>Systems Manager Patch Manager</td>
 <td>Operational Excellence</td>
-<td>减少人工维护错误</td>
+<td>Reduce manual maintenance errors</td>
 </tr>
 <tr class="odd">
-<td><strong>自动监控报警</strong></td>
+<td><strong>Monitoring &amp; Alerts</strong></td>
 <td>CloudWatch + SNS</td>
 <td>Reliability</td>
-<td>即时通知系统状态</td>
+<td>Real-time system notifications</td>
 </tr>
 <tr class="even">
-<td><strong>成本调度</strong></td>
+<td><strong>Cost Scheduling</strong></td>
 <td>Lambda + EventBridge</td>
 <td>Cost Optimization</td>
-<td>定时关闭空闲实例</td>
+<td>Automatically shut down idle instances</td>
 </tr>
 <tr class="odd">
-<td><strong>配置合规监控</strong></td>
+<td><strong>Configuration Compliance</strong></td>
 <td>AWS Config + CloudTrail</td>
 <td>Security / Governance</td>
-<td>自动检测配置变更</td>
+<td>Automatically detect configuration changes</td>
 </tr>
 </tbody>
 </table>
@@ -372,7 +372,7 @@ resources</li>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?58235601"></script>
+<script src="/blog/js/journal.js?58422997"></script>
 
 
 

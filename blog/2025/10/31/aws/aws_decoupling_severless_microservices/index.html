@@ -4,12 +4,12 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>AWS Decoupling Severless and Microservices - Kai&#39;s Journal</title>
+    <title>AWS Decoupling Serverless and Microservices - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Decoupling and
-serverless, Microservices
+<meta name="description" content="Decoupling, Serverless,
+and Microservices
 
 
 
@@ -20,8 +20,7 @@ serverless, Microservices
 
 
 
-题型
-核心目...">
+Categ...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -31,7 +30,7 @@ serverless, Microservices
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?72432948">
+<link rel="stylesheet" href="/blog/css/journal.css?84034661">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -173,7 +172,7 @@ serverless, Microservices
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    AWS Decoupling Severless and Microservices
+                    AWS Decoupling Serverless and Microservices
                     <div class="post-meta">
                         <time datetime="2025-10-31T00:05:46.000Z" itemprop="datePublished">
                             2025-10-31 00:05
@@ -193,84 +192,93 @@ serverless, Microservices
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="decoupling-and-serverless-microservices">Decoupling and
-serverless, Microservices</h1>
-<table style="width:100%;">
+                    <h1 id="decoupling-serverless-and-microservices">Decoupling, Serverless,
+and Microservices</h1>
+<table>
 <colgroup>
-<col style="width: 7%" />
-<col style="width: 16%" />
-<col style="width: 30%" />
-<col style="width: 21%" />
-<col style="width: 23%" />
+<col style="width: 6%" />
+<col style="width: 31%" />
+<col style="width: 17%" />
+<col style="width: 18%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>题型</th>
-<th>核心目标</th>
-<th>常用 AWS 服务</th>
-<th>答题关键词</th>
-<th>常见陷阱</th>
+<th>Category</th>
+<th>Core Objective</th>
+<th>Common AWS Services</th>
+<th>Answer Keywords</th>
+<th>Common Pitfalls</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Decoupling</strong></td>
-<td>减少组件间依赖，使系统更灵活、更易扩展</td>
-<td><strong>SQS</strong>, <strong>SNS</strong>,
-<strong>EventBridge</strong>, <strong>S3</strong>, <strong>API
-Gateway</strong></td>
+<td>Reduce dependencies between components for flexibility and
+scalability</td>
+<td>SQS, SNS, EventBridge, S3, API Gateway</td>
 <td>asynchronous, loose coupling, message queue</td>
-<td>忘记提“message queue”或“asynchronous communication”</td>
+<td>Forgetting to mention “message queue” or “asynchronous
+communication”</td>
 </tr>
 <tr class="even">
 <td><strong>Serverless</strong></td>
-<td>去除服务器管理，按需执行代码、自动扩展</td>
-<td><strong>Lambda</strong>, <strong>API Gateway</strong>,
-<strong>S3</strong>, <strong>DynamoDB</strong>,
-<strong>CloudFront</strong></td>
+<td>Eliminate server management, execute code on demand with auto
+scaling</td>
+<td>Lambda, API Gateway, S3, DynamoDB, CloudFront</td>
 <td>managed, pay-per-use, auto scale</td>
-<td>忘记提“cold start”或“runtime limits”缺点</td>
+<td>Forgetting “cold start” or “runtime limits” drawbacks</td>
 </tr>
 <tr class="odd">
 <td><strong>Microservices</strong></td>
-<td>将单体应用拆分为独立模块，各自部署维护</td>
-<td><strong>ECS/EKS</strong>, <strong>Fargate</strong>, <strong>API
-Gateway</strong>, <strong>CloudWatch</strong>,
-<strong>X-Ray</strong></td>
+<td>Split monolithic apps into independent modules for separate
+deployment and maintenance</td>
+<td>ECS/EKS, Fargate, API Gateway, CloudWatch, X-Ray</td>
 <td>containerized, isolated, independently deployable</td>
-<td>忘记提“monitoring complexity”或“data consistency”挑战</td>
+<td>Forgetting “monitoring complexity” or “data consistency”
+challenges</td>
 </tr>
 </tbody>
 </table>
-<h3 id="decoupling-题型"><strong>(1) Decoupling 题型</strong></h3>
+<hr />
+<h3 id="decoupling-questions"><strong>(1) Decoupling
+Questions</strong></h3>
 <blockquote>
-<p><strong>Solution:</strong> Use <strong>Amazon SQS</strong> or
-<strong>SNS</strong> to decouple components, so that backend services
-process requests asynchronously. <strong>Benefits:</strong> Improves
-scalability, fault tolerance, and allows components to fail
-independently. <strong>Cons:</strong> Adds message delivery delay and
-complexity in tracking asynchronous processes.</p>
+<p><strong>Solution:</strong> Use Amazon SQS or SNS to decouple
+components, allowing backend services to process requests
+asynchronously.<br />
+<strong>Benefits:</strong> Improves scalability and fault tolerance, and
+allows components to fail independently.<br />
+<strong>Cons:</strong> Introduces message delivery delay and adds
+complexity to tracking asynchronous processes.</p>
 </blockquote>
 <hr />
-<h3 id="serverless-题型"><strong>(2) Serverless 题型</strong></h3>
+<h3 id="serverless-questions"><strong>(2) Serverless
+Questions</strong></h3>
 <blockquote>
-<p><strong>Solution:</strong> Use <strong>AWS Lambda</strong> for
-backend functions triggered via <strong>API Gateway</strong>, and host
-static frontend on <strong>S3 + CloudFront</strong>.
-<strong>Benefits:</strong> No server management, automatic scaling,
-cost-efficient for variable workloads. <strong>Cons:</strong> Cold start
-latency and limited execution duration.</p>
+<p><strong>Solution:</strong> Use AWS Lambda for backend functions
+triggered via API Gateway, and host static frontend on S3 +
+CloudFront.<br />
+<strong>Benefits:</strong> No server management, automatic scaling, and
+cost-efficient for variable workloads.<br />
+<strong>Cons:</strong> Cold start latency and limited execution
+duration.</p>
 </blockquote>
 <hr />
-<h3 id="microservices-题型"><strong>(3) Microservices 题型</strong></h3>
+<h3 id="microservices-questions"><strong>(3) Microservices
+Questions</strong></h3>
 <blockquote>
-<p><strong>Solution:</strong> Break the monolithic app into independent
-microservices using <strong>ECS/EKS</strong> with <strong>API
-Gateway</strong> for routing. <strong>Benefits:</strong> Each service
-can scale and deploy independently; failures are isolated.
+<p><strong>Solution:</strong> Break the monolithic application into
+independent microservices using ECS/EKS, with API Gateway for
+routing.<br />
+<strong>Benefits:</strong> Each service can scale and deploy
+independently; failures are isolated.<br />
 <strong>Cons:</strong> Increases operational complexity and requires
 centralized logging and monitoring (CloudWatch).</p>
 </blockquote>
+<hr />
+<h2 id="well-architected-pillar-mapping">Well-Architected Pillar
+Mapping</h2>
 <table>
 <colgroup>
 <col style="width: 31%" />
@@ -279,7 +287,7 @@ centralized logging and monitoring (CloudWatch).</p>
 <thead>
 <tr class="header">
 <th>Pillar</th>
-<th>对应三类题重点</th>
+<th>Focus Across These Topics</th>
 </tr>
 </thead>
 <tbody>
@@ -312,7 +320,7 @@ centralized logging and monitoring (CloudWatch).</p>
             <nav class="post-pagination">
     
     <a class="newer-posts" href="/blog/2025/10/31/aws/aws_ec2_selection/">
-        Previous post<br>AWS EC2 selection
+        Previous post<br>AWS EC2 Selection
     </a>
     
     <span class="page-number"></span>
@@ -349,7 +357,7 @@ centralized logging and monitoring (CloudWatch).</p>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?73096700"></script>
+<script src="/blog/js/journal.js?51013787"></script>
 
 
 
