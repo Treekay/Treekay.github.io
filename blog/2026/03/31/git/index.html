@@ -4,22 +4,12 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>AWS Automation Design - Kai&#39;s Journal</title>
+    <title>Notes for Git - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="AWS Automation Design
-Automation Design
-
-
-
-
-
-
-
-
-Category
-...">
+<meta name="description" content="global config user and email
+123git config --global user....">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -29,7 +19,7 @@ Category
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?754681">
+<link rel="stylesheet" href="/blog/css/journal.css?6269133">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -171,10 +161,10 @@ Category
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    AWS Automation Design
+                    Notes for Git
                     <div class="post-meta">
-                        <time datetime="2025-10-31T00:02:31.000Z" itemprop="datePublished">
-                            2025-10-31 00:02
+                        <time datetime="2026-03-31T19:53:17.000Z" itemprop="datePublished">
+                            2026-03-31 19:53
                         </time>&nbsp;
                         
     
@@ -182,7 +172,7 @@ Category
                         
                         <i class="material-icons" style="">label</i>
                         
-                        <a href='/blog/tags/AWS/'>AWS</a>
+                        <a href='/blog/tags/Git/'>Git</a>
                         
                         
                     </div>
@@ -191,157 +181,27 @@ Category
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="aws-automation-design">AWS Automation Design</h1>
-<h2 id="automation-design">Automation Design</h2>
-<table>
-<colgroup>
-<col style="width: 26%" />
-<col style="width: 45%" />
-<col style="width: 27%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Common Keywords</th>
-<th>Typical AWS Services</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Scaling</strong></td>
-<td>auto scale / high demand / variable workload</td>
-<td>Auto Scaling Group, ELB</td>
-</tr>
-<tr class="even">
-<td><strong>Deployment</strong></td>
-<td>manage resources / consistent setup / repeatable process</td>
-<td>CloudFormation, Elastic Beanstalk</td>
-</tr>
-<tr class="odd">
-<td><strong>Monitoring &amp; Recovery</strong></td>
-<td>detect failures / ensure availability</td>
-<td>CloudWatch, Lambda, SNS</td>
-</tr>
-<tr class="even">
-<td><strong>Security &amp; Ops Automation</strong></td>
-<td>patch / configuration / compliance</td>
-<td>Systems Manager, Config, Inspector</td>
-</tr>
-<tr class="odd">
-<td><strong>Cost Optimization Automation</strong></td>
-<td>shut down idle / schedule start-stop</td>
-<td>Lambda, EventBridge, CloudWatch</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="template">Template</h2>
-<h3 id="step-1-define-what-to-automate-what"><strong>Step 1 — Define
-What to Automate (What)</strong></h3>
-<blockquote>
-<p>Identify which part of the cloud environment needs automation,<br />
-e.g., scaling, deployment, monitoring, patching, or cost control.</p>
-</blockquote>
-<hr />
-<h3 id="step-2-specify-aws-services-how"><strong>Step 2 — Specify AWS
-Services (How)</strong></h3>
-<blockquote>
-<p>Name the service and briefly describe how it works.<br />
-e.g., “Use AWS Auto Scaling to automatically adjust EC2 capacity based
-on CPU usage.”</p>
-</blockquote>
-<hr />
-<h3 id="step-3-link-to-well-architected-framework-why"><strong>Step 3 —
-Link to Well-Architected Framework (Why)</strong></h3>
-<blockquote>
-<p>Connect the solution to a pillar:</p>
-</blockquote>
-<ul>
-<li><strong>Operational Excellence:</strong> automate deployments
-(CloudFormation)</li>
-<li><strong>Reliability:</strong> automated recovery and failover
-(CloudWatch + Lambda)</li>
-<li><strong>Performance Efficiency:</strong> auto scaling to meet
-demand</li>
-<li><strong>Cost Optimization:</strong> automatically remove idle
-resources</li>
-</ul>
-<hr />
-<h2 id="scenarios-and-services">Scenarios and Services</h2>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 25%" />
-<col style="width: 16%" />
-<col style="width: 37%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Scenario</th>
-<th>AWS Services</th>
-<th>Well-Architected Pillar</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Auto Scaling</strong></td>
-<td>Auto Scaling + ELB</td>
-<td>Performance Efficiency</td>
-<td>Handle demand fluctuations and maintain performance</td>
-</tr>
-<tr class="even">
-<td><strong>Automated Deployment</strong></td>
-<td>CloudFormation / Elastic Beanstalk</td>
-<td>Operational Excellence</td>
-<td>Template-based, repeatable deployments</td>
-</tr>
-<tr class="odd">
-<td><strong>Automated Recovery</strong></td>
-<td>CloudWatch Alarm + Lambda</td>
-<td>Reliability</td>
-<td>Automatically restart or replace failed instances</td>
-</tr>
-<tr class="even">
-<td><strong>Automated Patching</strong></td>
-<td>Systems Manager Patch Manager</td>
-<td>Operational Excellence</td>
-<td>Reduce manual maintenance errors</td>
-</tr>
-<tr class="odd">
-<td><strong>Monitoring &amp; Alerts</strong></td>
-<td>CloudWatch + SNS</td>
-<td>Reliability</td>
-<td>Real-time system notifications</td>
-</tr>
-<tr class="even">
-<td><strong>Cost Scheduling</strong></td>
-<td>Lambda + EventBridge</td>
-<td>Cost Optimization</td>
-<td>Automatically shut down idle instances</td>
-</tr>
-<tr class="odd">
-<td><strong>Configuration Compliance</strong></td>
-<td>AWS Config + CloudTrail</td>
-<td>Security / Governance</td>
-<td>Automatically detect configuration changes</td>
-</tr>
-</tbody>
-</table>
+                    <h1 id="global-config-user-and-email">global config user and email</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;YOUR NAME&quot;</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">&quot;YOUR_EMAIL@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="generate-ssh-key-for-connecting-githubgitlab">generate SSH key
+(for connecting Github/Gitlab)</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;YOUR_EMAIL@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># id_rsa.pub saved in .ssh/</span></span><br><span class="line"><span class="comment"># adding into your Github SSH keys setting</span></span><br></pre></td></tr></table></figure>
+<h1 id="list-all-the-git-config">list all the git config</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/blog/2025/10/31/aws/aws_IAM/">
-        Previous post<br>AWS IAM
+    <a class="newer-posts" href="/blog/2026/03/31/linux/">
+        Previous post<br>Notes for Linux
     </a>
     
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/blog/2025/10/30/aws/cidr_calculate/">
-        Next post<br>CIDR calculate example
+    <a class="older-posts" href="/blog/2026/03/31/wsl/">
+        Next post<br>Notes for WSL on windows
     </a>
     
 </nav>
@@ -372,7 +232,7 @@ resources</li>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?7305763"></script>
+<script src="/blog/js/journal.js?16453988"></script>
 
 
 
