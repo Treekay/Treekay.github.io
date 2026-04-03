@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Nested Subqueries - Kai&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Treek">
+<meta name="description" content="IN and NOT IN (set
+membership)
+1234567891011121314151617-...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?84941545">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Kai&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Kai&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Kai's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            treek
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Nested Subqueries
+                    <div class="post-meta">
+                        <time datetime="2026-04-03T13:34:56.000Z" itemprop="datePublished">
+                            2026-04-03 13:34
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/SQL/'>SQL</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="in-and-not-in-set-membership">IN and NOT IN (set
+membership)</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Courses offered in Fall 2017 and Spring 2018 using IN</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> course_id</span><br><span class="line"><span class="keyword">from</span> section</span><br><span class="line"><span class="keyword">where</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">and</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2017</span></span><br><span class="line">  <span class="keyword">and</span> course_id <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> course_id <span class="keyword">from</span> section</span><br><span class="line">    <span class="keyword">where</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">and</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2018</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Fall 2017 but not Spring 2018</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> course_id</span><br><span class="line"><span class="keyword">from</span> section</span><br><span class="line"><span class="keyword">where</span> semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">and</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2017</span></span><br><span class="line">  <span class="keyword">and</span> course_id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> course_id <span class="keyword">from</span> section</span><br><span class="line">    <span class="keyword">where</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">and</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2018</span></span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>Note: NOT IN can be tricky if the subquery returns NULLs; prefer NOT
+EXISTS for robustness.</p>
+<h1 id="some-and-all-set-comparison">SOME and ALL (set comparison)</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Salary greater than some Biology instructor</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> salary <span class="operator">&gt;</span> <span class="keyword">some</span> (</span><br><span class="line">  <span class="keyword">select</span> salary <span class="keyword">from</span> instructor <span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Salary greater than all Biology instructors</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> salary <span class="operator">&gt;</span> <span class="keyword">all</span> (</span><br><span class="line">  <span class="keyword">select</span> salary <span class="keyword">from</span> instructor <span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span></span><br><span class="line">);</span><br><span class="line">Implementation note: <span class="keyword">some</span> systems don’t support <span class="keyword">SOME</span><span class="operator">/</span><span class="keyword">ALL</span>; use equivalent constructs <span class="keyword">with</span> aggregates <span class="keyword">or</span> EXISTS.</span><br></pre></td></tr></table></figure>
+<h1 id="exists-and-not-exists-correlated-subqueries">EXISTS and NOT
+EXISTS (correlated subqueries)</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Courses taught in both Fall 2017 and Spring 2018</span></span><br><span class="line"><span class="keyword">select</span> S.course_id</span><br><span class="line"><span class="keyword">from</span> section <span class="keyword">as</span> S</span><br><span class="line"><span class="keyword">where</span> S.semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span> <span class="keyword">and</span> S.year <span class="operator">=</span> <span class="number">2017</span></span><br><span class="line">  <span class="keyword">and</span> <span class="keyword">exists</span> (</span><br><span class="line">    <span class="keyword">select</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">from</span> section <span class="keyword">as</span> T</span><br><span class="line">    <span class="keyword">where</span> T.semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">and</span> T.year <span class="operator">=</span> <span class="number">2018</span></span><br><span class="line">      <span class="keyword">and</span> T.course_id <span class="operator">=</span> S.course_id</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Students who have taken all Biology courses</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> S.ID, S.name</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> S</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">not</span> <span class="keyword">exists</span> (</span><br><span class="line">  (<span class="keyword">select</span> C.course_id <span class="keyword">from</span> course <span class="keyword">as</span> C <span class="keyword">where</span> C.dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span>)</span><br><span class="line">  <span class="keyword">except</span></span><br><span class="line">  (<span class="keyword">select</span> T.course_id <span class="keyword">from</span> takes <span class="keyword">as</span> T <span class="keyword">where</span> T.ID <span class="operator">=</span> S.ID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="unique-no-duplicates-in-subquery-result">UNIQUE (no duplicates
+in subquery result)</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Courses offered at most once in 2017</span></span><br><span class="line"><span class="keyword">select</span> C.course_id</span><br><span class="line"><span class="keyword">from</span> course <span class="keyword">as</span> C</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">unique</span> (</span><br><span class="line">  <span class="keyword">select</span> R.course_id</span><br><span class="line">  <span class="keyword">from</span> section <span class="keyword">as</span> R</span><br><span class="line">  <span class="keyword">where</span> R.course_id <span class="operator">=</span> C.course_id <span class="keyword">and</span> R.year <span class="operator">=</span> <span class="number">2017</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="subqueries-in-from-derived-tables-and-with">Subqueries in FROM
+(derived tables) and WITH</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Departments with avg salary &gt; 42000 using a derived table</span></span><br><span class="line"><span class="keyword">select</span> dept_name, avg_salary</span><br><span class="line"><span class="keyword">from</span> (</span><br><span class="line">  <span class="keyword">select</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line">  <span class="keyword">from</span> instructor</span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> dept_name</span><br><span class="line">) <span class="keyword">as</span> dept_avg</span><br><span class="line"><span class="keyword">where</span> avg_salary <span class="operator">&gt;</span> <span class="number">42000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Same idea using WITH (common table expressions)</span></span><br><span class="line"><span class="keyword">with</span> max_budget(<span class="keyword">value</span>) <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span> <span class="built_in">max</span>(budget) <span class="keyword">from</span> department</span><br><span class="line">)</span><br><span class="line"><span class="keyword">select</span> D.dept_name</span><br><span class="line"><span class="keyword">from</span> department <span class="keyword">as</span> D, max_budget</span><br><span class="line"><span class="keyword">where</span> D.budget <span class="operator">=</span> max_budget.value;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Departments with total salary above the average of all departments</span></span><br><span class="line"><span class="keyword">with</span> dept_total(dept_name, <span class="keyword">value</span>) <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span> dept_name, <span class="built_in">sum</span>(salary) <span class="keyword">from</span> instructor <span class="keyword">group</span> <span class="keyword">by</span> dept_name</span><br><span class="line">),</span><br><span class="line">dept_total_avg(<span class="keyword">value</span>) <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span> <span class="built_in">avg</span>(<span class="keyword">value</span>) <span class="keyword">from</span> dept_total</span><br><span class="line">)</span><br><span class="line"><span class="keyword">select</span> dept_name</span><br><span class="line"><span class="keyword">from</span> dept_total, dept_total_avg</span><br><span class="line"><span class="keyword">where</span> dept_total.value <span class="operator">&gt;</span> dept_total_avg.value;</span><br></pre></td></tr></table></figure>
+<h1 id="scalar-subqueries-in-select">Scalar subqueries in SELECT</h1>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- List departments with the number of instructors in each</span></span><br><span class="line"><span class="keyword">select</span> D.dept_name,</span><br><span class="line">  (<span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> instructor I</span><br><span class="line">   <span class="keyword">where</span> I.dept_name <span class="operator">=</span> D.dept_name) <span class="keyword">as</span> num_instructors</span><br><span class="line"><span class="keyword">from</span> department D;</span><br></pre></td></tr></table></figure>
+<p>Scalar subqueries must return exactly one value per outer row; if
+multiple are returned, an error occurs.</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/blog/2026/04/03/SQL/brief-summary/">
+        Previous post<br>Brief summary for SQL
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2026/04/03/SQL/Aggregate-Functions/">
+        Next post<br>Aggregate Functions
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://github.com/treekay">Kai&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?69975666"></script>
+
+
+
+</body>
+</html>
