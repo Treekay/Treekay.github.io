@@ -4,13 +4,13 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Design Patterns - Kai&#39;s Journal</title>
+    <title>String Matching and LIKE patterns - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Composite Pattern
-Intent:
-Treat individual objects and co...">
+<meta name="description" content="LIKE patterns
+
+% matches any substring (including empty)....">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -20,7 +20,7 @@ Treat individual objects and co...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?74631759">
+<link rel="stylesheet" href="/blog/css/journal.css?56105849">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -162,10 +162,10 @@ Treat individual objects and co...">
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    Design Patterns
+                    String Matching and LIKE patterns
                     <div class="post-meta">
-                        <time datetime="2025-11-22T16:51:00.000Z" itemprop="datePublished">
-                            2025-11-22 16:51
+                        <time datetime="2026-04-03T13:01:17.000Z" itemprop="datePublished">
+                            2026-04-03 13:01
                         </time>&nbsp;
                         
     
@@ -173,7 +173,9 @@ Treat individual objects and co...">
                         
                         <i class="material-icons" style="">label</i>
                         
-                        <a href='/blog/tags/Program/'>Program</a>
+                        <a href='/blog/tags/database/'>database</a>, 
+                        
+                        <a href='/blog/tags/SQL/'>SQL</a>
                         
                         
                     </div>
@@ -182,196 +184,34 @@ Treat individual objects and co...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="composite-pattern">Composite Pattern</h1>
-<p><strong>Intent:</strong><br />
-Treat individual objects and compositions of objects uniformly.</p>
-<p><strong>Structure:</strong></p>
+                    <h1 id="like-patterns">LIKE patterns</h1>
 <ul>
-<li>Component (interface/abstract class)</li>
-<li>Leaf (individual objects)</li>
-<li>Composite (contains children)</li>
+<li><p>% matches any substring (including empty).</p></li>
+<li><p>_ matches exactly one character.</p></li>
+<li><p>Patterns are typically case-sensitive unless configured
+otherwise.</p></li>
+<li><p>Escape special characters using ESCAPE: like ‘100 %’ escape
+’'</p></li>
 </ul>
-<p><strong>Use Case:</strong><br />
-Tree structures (e.g., file systems, UI components)</p>
-<p><strong>Pros:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Name contains &#x27;dar&#x27;</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;%dar%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Name has exactly 4 characters</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;____&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Name has at least 4 characters</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;____%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="common-string-functions">Common string functions</h1>
 <ul>
-<li>Simplifies client code</li>
-<li>Easy to add new components</li>
+<li>Concatenation: expr1 || expr2</li>
+<li>Case conversion: UPPER(str), LOWER(str)</li>
+<li>Length and substrings: LENGTH(str), SUBSTRING(str FROM start FOR
+len) or vendor variants</li>
 </ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Harder to restrict component types</li>
-</ul>
-<hr />
-<h1 id="command-pattern">Command Pattern</h1>
-<p><strong>Intent:</strong><br />
-Encapsulate a request as an object, allowing parameterization and
-queuing.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Command (interface)</li>
-<li>ConcreteCommand</li>
-<li>Invoker</li>
-<li>Receiver</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Undo/redo, task queues, remote controls</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Decouples sender and receiver</li>
-<li>Supports undo/redo</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Increases number of classes</li>
-</ul>
-<hr />
-<h1 id="observer-pattern">Observer Pattern</h1>
-<p><strong>Intent:</strong><br />
-Define a one-to-many dependency so that when one object changes state,
-all dependents are notified.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Subject</li>
-<li>Observer</li>
-<li>ConcreteSubject</li>
-<li>ConcreteObserver</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Event systems, UI updates, pub-sub systems</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Loose coupling</li>
-<li>Easy to add observers</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Potential performance issues with many observers</li>
-</ul>
-<hr />
-<h1 id="adapter-pattern">Adapter Pattern</h1>
-<p><strong>Intent:</strong><br />
-Convert one interface into another expected by the client.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Target</li>
-<li>Adapter</li>
-<li>Adaptee</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Integrating incompatible interfaces</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Reuse existing code</li>
-<li>Improves compatibility</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Adds extra layer of abstraction</li>
-</ul>
-<hr />
-<h1 id="strategy-pattern">Strategy Pattern</h1>
-<p><strong>Intent:</strong><br />
-Define a family of algorithms and make them interchangeable.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Strategy (interface)</li>
-<li>ConcreteStrategy</li>
-<li>Context</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Different algorithms (e.g., sorting, payment methods)</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Easy to switch algorithms</li>
-<li>Eliminates conditional logic</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Increases number of classes</li>
-</ul>
-<hr />
-<h1 id="decorator-pattern">Decorator Pattern</h1>
-<p><strong>Intent:</strong><br />
-Add behavior to objects dynamically without modifying their
-structure.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Component</li>
-<li>ConcreteComponent</li>
-<li>Decorator</li>
-<li>ConcreteDecorator</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Extending functionality (e.g., adding features to UI elements)</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Flexible alternative to inheritance</li>
-<li>Supports combination of behaviors</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Can lead to many small objects</li>
-</ul>
-<hr />
-<h1 id="factory-method">Factory Method</h1>
-<p><strong>Intent:</strong><br />
-Define an interface for creating objects, but let subclasses decide
-which class to instantiate.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>Creator</li>
-<li>ConcreteCreator</li>
-<li>Product</li>
-<li>ConcreteProduct</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Object creation logic delegation</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Promotes loose coupling</li>
-<li>Follows Open/Closed Principle</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Requires more subclasses</li>
-</ul>
-<hr />
-<h1 id="template-method">Template Method</h1>
-<p><strong>Intent:</strong><br />
-Define the skeleton of an algorithm, letting subclasses override
-specific steps.</p>
-<p><strong>Structure:</strong></p>
-<ul>
-<li>AbstractClass</li>
-<li>Template Method</li>
-<li>ConcreteClass</li>
-</ul>
-<p><strong>Use Case:</strong><br />
-Processes with fixed steps but variable details</p>
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Code reuse</li>
-<li>Enforces algorithm structure</li>
-</ul>
-<p><strong>Cons:</strong></p>
-<ul>
-<li>Less flexibility due to inheritance</li>
-</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Format names as UPPER(Name) (Dept)</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">UPPER</span>(name) <span class="operator">||</span> <span class="string">&#x27; (&#x27;</span> <span class="operator">||</span> dept_name <span class="operator">||</span> <span class="string">&#x27;)&#x27;</span> <span class="keyword">as</span> formatted</span><br><span class="line"><span class="keyword">from</span> instructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- First 3 letters of name</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">SUBSTRING</span>(name <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">for</span> <span class="number">3</span>) <span class="keyword">as</span> prefix</span><br><span class="line"><span class="keyword">from</span> instructor;</span><br></pre></td></tr></table></figure>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/blog/2026/03/26/TaskFlow-build-up/">
-        Previous post<br>TaskFlow build-up
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/blog/2025/11/11/nodejs/npm_versions_manage/">
-        Next post<br>Node.js version management
+    <a class="older-posts" href="/blog/2026/04/03/database/Note-Cards-for-SQL/">
+        Next post<br>Note Cards for SQL
     </a>
     
 </nav>
@@ -402,7 +242,7 @@ Processes with fixed steps but variable details</p>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?60990265"></script>
+<script src="/blog/js/journal.js?98410210"></script>
 
 
 
