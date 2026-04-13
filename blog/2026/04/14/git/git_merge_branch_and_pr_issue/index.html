@@ -4,13 +4,13 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Aggregate Functions - Kai&#39;s Journal</title>
+    <title>Git merge Quick Guide - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Aggregate Functions, GROUP
-BY, HAVING
-Aggregate functions...">
+<meta name="description" content="1. Basic Branch Workflow
+Create &amp;amp; switch to a
+feature...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -20,7 +20,7 @@ Aggregate functions...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?79403875">
+<link rel="stylesheet" href="/blog/css/journal.css?83287931">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -162,10 +162,10 @@ Aggregate functions...">
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    Aggregate Functions
+                    Git merge Quick Guide
                     <div class="post-meta">
-                        <time datetime="2026-04-03T13:18:44.000Z" itemprop="datePublished">
-                            2026-04-03 13:18
+                        <time datetime="2026-04-14T01:23:36.000Z" itemprop="datePublished">
+                            2026-04-14 01:23
                         </time>&nbsp;
                         
     
@@ -173,7 +173,7 @@ Aggregate functions...">
                         
                         <i class="material-icons" style="">label</i>
                         
-                        <a href='/blog/tags/SQL/'>SQL</a>
+                        <a href='/blog/tags/Git/'>Git</a>
                         
                         
                     </div>
@@ -182,39 +182,56 @@ Aggregate functions...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="aggregate-functions-group-by-having">Aggregate Functions, GROUP
-BY, HAVING</h1>
-<h2 id="aggregate-functions">Aggregate functions</h2>
-<ul>
-<li>avg, min, max, sum, count</li>
-<li>count(*) counts rows, including those with NULLs; count(expr) counts
-non-NULL expr values.</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Average salary in Comp. Sci.</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(salary)</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Comp. Sci.&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Number of distinct instructors who taught in Spring 2018</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> ID)</span><br><span class="line"><span class="keyword">from</span> teaches</span><br><span class="line"><span class="keyword">where</span> semester <span class="operator">=</span> <span class="string">&#x27;Spring&#x27;</span> <span class="keyword">and</span> <span class="keyword">year</span> <span class="operator">=</span> <span class="number">2018</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Number of rows in course</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">from</span> course;</span><br></pre></td></tr></table></figure>
-<h2 id="group-by-and-having">GROUP BY and HAVING</h2>
-<ul>
-<li>GROUP BY partitions rows; SELECT may include only grouped columns
-and aggregates.</li>
-<li>WHERE filters rows before grouping; HAVING filters groups after
-aggregation.</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Average salary by department</span></span><br><span class="line"><span class="keyword">select</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dept_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Departments whose avg salary &gt; 42000</span></span><br><span class="line"><span class="keyword">select</span> dept_name, <span class="built_in">avg</span>(salary) <span class="keyword">as</span> avg_salary</span><br><span class="line"><span class="keyword">from</span> instructor</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> dept_name</span><br><span class="line"><span class="keyword">having</span> <span class="built_in">avg</span>(salary) <span class="operator">&gt;</span> <span class="number">42000</span>;</span><br></pre></td></tr></table></figure>
-<p>Common mistake: selecting non-grouped, non-aggregated columns (e.g.,
-dept_name, ID, avg(salary) with group by dept_name) is invalid.</p>
+                    <h1 id="basic-branch-workflow">1. Basic Branch Workflow</h1>
+<h2 id="create-switch-to-a-feature-branch">Create &amp; switch to a
+feature branch</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature/xxx</span><br></pre></td></tr></table></figure>
+<h2 id="push-branch-to-remote">Push branch to remote</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature/xxx</span><br></pre></td></tr></table></figure>
+<h1 id="sync-with-dev-during-development">2. Sync with dev (during
+development)</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature/xxx</span><br><span class="line">git fetch origin</span><br><span class="line">git merge origin/dev</span><br><span class="line"><span class="comment"># or (cleaner history)</span></span><br><span class="line">git rebase origin/dev</span><br></pre></td></tr></table></figure>
+<h1 id="merge-into-dev-submit-your-work">3. Merge into dev (submit your
+work)</h1>
+<h2 id="option-a-local-merge">Option A: Local merge</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git pull origin dev</span><br><span class="line">git merge feature/xxx</span><br><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
+<h2 id="option-b-recommended-pr">Option B (recommended): PR</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feature/xxx → dev</span><br></pre></td></tr></table></figure>
+<h1 id="commit-pr-message-standard">4. Commit / PR Message Standard</h1>
+<h2 id="simple-format">Simple format</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;short description&gt;</span><br><span class="line"></span><br><span class="line">Closes #&lt;issue-number&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="example">Example</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Add login API</span><br><span class="line"></span><br><span class="line">Closes #12</span><br></pre></td></tr></table></figure>
+<h1 id="link-issue-with-pr">5. Link Issue with PR</h1>
+<h2 id="auto-close-issue-recommended">Auto close issue
+(recommended)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Closes #12</span><br><span class="line">Fixes #12</span><br><span class="line">Resolves #12</span><br></pre></td></tr></table></figure>
+<h2 id="link-only-do-not-close">Link only (do NOT close)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Refs #12</span><br><span class="line">Related to #12</span><br></pre></td></tr></table></figure>
+<h2 id="multiple-issues">Multiple issues</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Closes #12</span><br><span class="line">Closes #15</span><br></pre></td></tr></table></figure>
+<h1 id="recommended-naming">6. Recommended Naming</h1>
+<h2 id="branch">Branch</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">feature/login-12</span><br><span class="line">fix/token-bug-15</span><br></pre></td></tr></table></figure>
+<h2 id="commit-optional-convention">Commit (optional convention)</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">feat: add login API</span><br><span class="line">fix: resolve token issue</span><br></pre></td></tr></table></figure>
+<h1 id="undo-fix">7. Undo / Fix</h1>
+<h2 id="undo-last-commit-keep-changes">Undo last commit (keep
+changes)</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD~1</span><br></pre></td></tr></table></figure>
+<h2 id="undo-last-commit-discard-changes">Undo last commit (discard
+changes)</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/blog/2026/04/03/SQL/nested-subqueries/">
-        Previous post<br>Nested Subqueries
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/blog/2026/04/03/SQL/string-pattern/">
-        Next post<br>String Matching and LIKE patterns
+    <a class="older-posts" href="/blog/2026/04/07/react/react-basic/">
+        Next post<br>React Basic
     </a>
     
 </nav>
@@ -245,7 +262,7 @@ dept_name, ID, avg(salary) with group by dept_name) is invalid.</p>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?6537110"></script>
+<script src="/blog/js/journal.js?56742159"></script>
 
 
 
