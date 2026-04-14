@@ -4,23 +4,12 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>AWS Decoupling Serverless and Microservices - Kai&#39;s Journal</title>
+    <title>The process of requesting a web page - Kai&#39;s Journal</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Treek">
-<meta name="description" content="Decoupling, Serverless,
-and Microservices
-
-
-
-
-
-
-
-
-
-
-Categ...">
+<meta name="description" content="
+A user opens a web browser, enters www.myweb.com into th...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -30,7 +19,7 @@ Categ...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?13010269">
+<link rel="stylesheet" href="/blog/css/journal.css?65027136">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -172,10 +161,10 @@ Categ...">
             <div class="post-head-wrapper-text-only"
                  style="background-image: url('')">
                 <div class="post-title">
-                    AWS Decoupling Serverless and Microservices
+                    The process of requesting a web page
                     <div class="post-meta">
-                        <time datetime="2025-10-31T00:05:46.000Z" itemprop="datePublished">
-                            2025-10-31 00:05
+                        <time datetime="2025-11-04T14:29:00.000Z" itemprop="datePublished">
+                            2025-11-04 14:29
                         </time>&nbsp;
                         
     
@@ -183,7 +172,7 @@ Categ...">
                         
                         <i class="material-icons" style="">label</i>
                         
-                        <a href='/blog/tags/AWS/'>AWS</a>
+                        <a href='/blog/tags/Network/'>Network</a>
                         
                         
                     </div>
@@ -192,141 +181,48 @@ Categ...">
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h1 id="decoupling-serverless-and-microservices">Decoupling, Serverless,
-and Microservices</h1>
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 31%" />
-<col style="width: 17%" />
-<col style="width: 18%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Core Objective</th>
-<th>Common AWS Services</th>
-<th>Answer Keywords</th>
-<th>Common Pitfalls</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Decoupling</strong></td>
-<td>Reduce dependencies between components for flexibility and
-scalability</td>
-<td>SQS, SNS, EventBridge, S3, API Gateway</td>
-<td>asynchronous, loose coupling, message queue</td>
-<td>Forgetting to mention “message queue” or “asynchronous
-communication”</td>
-</tr>
-<tr class="even">
-<td><strong>Serverless</strong></td>
-<td>Eliminate server management, execute code on demand with auto
-scaling</td>
-<td>Lambda, API Gateway, S3, DynamoDB, CloudFront</td>
-<td>managed, pay-per-use, auto scale</td>
-<td>Forgetting “cold start” or “runtime limits” drawbacks</td>
-</tr>
-<tr class="odd">
-<td><strong>Microservices</strong></td>
-<td>Split monolithic apps into independent modules for separate
-deployment and maintenance</td>
-<td>ECS/EKS, Fargate, API Gateway, CloudWatch, X-Ray</td>
-<td>containerized, isolated, independently deployable</td>
-<td>Forgetting “monitoring complexity” or “data consistency”
-challenges</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="decoupling-questions"><strong>(1) Decoupling
-Questions</strong></h3>
-<blockquote>
-<p><strong>Solution:</strong> Use Amazon SQS or SNS to decouple
-components, allowing backend services to process requests
-asynchronously.<br />
-<strong>Benefits:</strong> Improves scalability and fault tolerance, and
-allows components to fail independently.<br />
-<strong>Cons:</strong> Introduces message delivery delay and adds
-complexity to tracking asynchronous processes.</p>
-</blockquote>
-<hr />
-<h3 id="serverless-questions"><strong>(2) Serverless
-Questions</strong></h3>
-<blockquote>
-<p><strong>Solution:</strong> Use AWS Lambda for backend functions
-triggered via API Gateway, and host static frontend on S3 +
-CloudFront.<br />
-<strong>Benefits:</strong> No server management, automatic scaling, and
-cost-efficient for variable workloads.<br />
-<strong>Cons:</strong> Cold start latency and limited execution
-duration.</p>
-</blockquote>
-<hr />
-<h3 id="microservices-questions"><strong>(3) Microservices
-Questions</strong></h3>
-<blockquote>
-<p><strong>Solution:</strong> Break the monolithic application into
-independent microservices using ECS/EKS, with API Gateway for
-routing.<br />
-<strong>Benefits:</strong> Each service can scale and deploy
-independently; failures are isolated.<br />
-<strong>Cons:</strong> Increases operational complexity and requires
-centralized logging and monitoring (CloudWatch).</p>
-</blockquote>
-<hr />
-<h2 id="well-architected-pillar-mapping">Well-Architected Pillar
-Mapping</h2>
-<table>
-<colgroup>
-<col style="width: 31%" />
-<col style="width: 68%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Pillar</th>
-<th>Focus Across These Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Performance Efficiency</strong></td>
-<td>Auto scaling, serverless event-driven design</td>
-</tr>
-<tr class="even">
-<td><strong>Reliability</strong></td>
-<td>Decoupling via SQS/SNS, fault isolation in microservices</td>
-</tr>
-<tr class="odd">
-<td><strong>Operational Excellence</strong></td>
-<td>Automation, observability (CloudWatch, X-Ray)</td>
-</tr>
-<tr class="even">
-<td><strong>Cost Optimization</strong></td>
-<td>Serverless and event-driven workloads</td>
-</tr>
-<tr class="odd">
-<td><strong>Security</strong></td>
-<td>IAM roles for each microservice/function</td>
-</tr>
-</tbody>
-</table>
+                    <ol type="1">
+<li><p>A user opens a web browser, enters www.myweb.com into the address
+bar, and presses Enter. The request for www.myweb.com is routed to a DNS
+resolver, which is typically managed by the user’s internet service
+provider (ISP).</p></li>
+<li><p>The DNS resolver for the ISP forwards the request for
+www.myweb.com to a DNS root name server, which returns the location of
+the top-level domain (TLD) name server for .com.</p></li>
+<li><p>The DNS resolver for the ISP forwards the request for
+www.myweb.com again, this time to one of the TLD name servers for .com
+domains. The name server for .com domains responds to the request with
+the names of multiple name servers that are associated with the
+example.com domain.</p></li>
+<li><p>The DNS resolver for the ISP chooses a name server and forwards
+the request for www.myweb.com to that name server. The name server looks
+in the myweb.com hosted zone for the www.myweb.com record, gets the
+associated value (such as the IP address for a web server, 192.0.3.4),
+and returns the IP address to the DNS resolver.</p></li>
+<li><p>The DNS resolver for the ISP finally has the IP address that the
+user needs. The resolver returns that value to the web browser.</p></li>
+<li><p>The DNS resolver also caches the IP address for myweb.com for an
+amount of time that you specify so that it can respond more quickly the
+next time someone browses to myweb.com.</p></li>
+<li><p>The web browser sends a request for www.myweb.com to the IP
+address that it got from the DNS resolver. The myweb server at 192.0.3.4
+returns the web page for www.myweb.com to the web browser, and the web
+browser displays the page</p></li>
+</ol>
 
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/blog/2025/10/31/aws/aws_ec2_selection/">
-        Previous post<br>AWS EC2 Selection
+    <a class="newer-posts" href="/blog/2025/11/11/nodejs/npm_versions_manage/">
+        Previous post<br>Node.js version management
     </a>
     
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/blog/2025/10/31/aws/aws_IAM/">
-        Next post<br>AWS IAM
+    <a class="older-posts" href="/blog/2025/10/31/aws/aws_s3_selection/">
+        Next post<br>AWS S3 Selection
     </a>
     
 </nav>
@@ -357,7 +253,7 @@ Mapping</h2>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?21039104"></script>
+<script src="/blog/js/journal.js?96241107"></script>
 
 
 
