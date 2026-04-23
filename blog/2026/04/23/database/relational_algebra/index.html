@@ -19,7 +19,7 @@ Relational algebra is the basic set of...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?66454649">
+<link rel="stylesheet" href="/blog/css/journal.css?14183284">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -185,12 +185,14 @@ Relational algebra is the basic set of...">
                 <div class="post-body">
                     <h1 id="relational-algebra">Relational Algebra</h1>
 <p>Relational algebra is the basic set of operations for the relational
-model. - Provides a formal foundation for relational model
-operations</p>
+model.</p>
+<ul>
+<li>Provides a formal foundation for relational model operations</li>
+</ul>
 <h1 id="raltional-algebra-operations">Raltional Algebra Operations</h1>
 <h2 id="unary-relational-operations">Unary Relational Operations</h2>
-<ul>
-<li>SELECT (symbol: <span class="math inline"><em>σ</em></span> (sigma))
+<h3 id="select-symbol-sigma-sigma">SELECT (symbol: <span
+class="math inline"><em>σ</em></span> (sigma))</h3>
 <ul>
 <li>usage: acts as a filter:
 <ul>
@@ -219,8 +221,9 @@ class="math inline"><em>σ</em><sub> &lt; <em>c</em><em>o</em><em>n</em><em>
 = <span
 class="math inline"><em>σ</em><sub> &lt; <em>c</em><em>o</em><em>n</em><em>d</em><em>i</em><em>t</em><em>i</em><em>o</em><em>n</em> 1&gt; <em>A</em><em>N</em><em>D</em>  &lt; <em>c</em><em>o</em><em>n</em><em>d</em><em>i</em><em>t</em><em>i</em><em>o</em><em>n</em> 2&gt;</sub>(<em>R</em>)</span></li>
 </ul></li>
-</ul></li>
-<li>PROJECT (symbol: <span class="math inline"><em>π</em></span> (pi))
+</ul>
+<h3 id="project-symbol-pi-pi">PROJECT (symbol: <span
+class="math inline"><em>π</em></span> (pi))</h3>
 <ul>
 <li>usage: keeps certain columns, and discards the other columns
 <ul>
@@ -233,16 +236,18 @@ is the desired list of attributes from relation R</li>
 tuples</strong></li>
 </ul></li>
 <li>not commutative !!</li>
-</ul></li>
-<li>assignment operation <span class="math inline">←</span>
+</ul>
+<h3 id="assignment-operation-leftarrow">Assignment operation <span
+class="math inline">←</span></h3>
 <ul>
 <li>usage: assign a algebra expression a name
 <ul>
 <li><span
 class="math inline"><em>D</em><em>E</em><em>P</em>5_<em>E</em><em>M</em><em>P</em><em>S</em> ← <em>σ</em><sub><em>D</em><em>n</em><em>o</em> = 5</sub>(<em>E</em><em>M</em><em>P</em><em>L</em><em>O</em><em>Y</em><em>E</em><em>E</em>)</span></li>
 </ul></li>
-</ul></li>
-<li>RENAME (symbol: <span class="math inline"><em>ρ</em></span> (rho))
+</ul>
+<h3 id="rename-symbol-rho-rho">RENAME (symbol: <span
+class="math inline"><em>ρ</em></span> (rho))</h3>
 <ul>
 <li>usage: rename the attributes or the relation
 <ul>
@@ -264,30 +269,23 @@ class="math inline"><em>ρ</em><sub><em>R</em><em>E</em><em>S</em><em>U</em><em>
 class="math inline"><em>R</em><em>E</em><em>S</em><em>U</em><em>L</em><em>T</em>(<em>F</em>,<em>L</em>,<em>S</em><em>A</em><em>L</em>) ← <em>π</em><sub><em>F</em><em>n</em><em>a</em><em>m</em><em>e</em>, <em>L</em><em>n</em><em>a</em><em>m</em><em>e</em>, <em>S</em><em>a</em><em>l</em><em>a</em><em>r</em><em>y</em></sub>(<em>D</em><em>E</em><em>P</em>5_<em>E</em><em>M</em><em>P</em><em>S</em>)</span>
 = <span
 class="math inline"><em>ρ</em><sub><em>R</em><em>E</em><em>S</em><em>U</em><em>L</em><em>T</em>(<em>F</em>,<em>L</em>,<em>S</em><em>A</em><em>L</em>)</sub>(<em>π</em><sub><em>F</em><em>n</em><em>a</em><em>m</em><em>e</em>, <em>L</em><em>n</em><em>a</em><em>m</em><em>e</em>, <em>S</em><em>a</em><em>l</em><em>a</em><em>r</em><em>y</em></sub>(<em>D</em><em>E</em><em>P</em>5_<em>E</em><em>M</em><em>P</em><em>S</em>))</span></li>
-</ul></li>
 </ul>
 <h2 id="relational-algebra-operations-from-set-theory">Relational
 Algebra Operations From Set Theory</h2>
-<ul>
-<li>UNION ( <span class="math inline">∪</span> )
+<h3 id="union-cup">UNION ( <span class="math inline">∪</span> )</h3>
 <ul>
 <li>the result of <span
 class="math inline"><em>R</em> ∪ <em>S</em></span> is a relation that
 includes all tuples that are either in <span
 class="math inline"><em>R</em></span> or in <span
 class="math inline"><em>S</em></span> or in both.</li>
-<li>commutative and associative 满足交换律和结合律</li>
-</ul></li>
-<li>INTERSECTION ( <span class="math inline">∩</span> )
-<ul>
+<li>commutative and associative 满足交换律和结合律 ### INTERSECTION (
+<span class="math inline">∩</span> )</li>
 <li>the result of <span
 class="math inline"><em>R</em> ∩ <em>S</em></span> is a realtion that
 includes all tuples that are in both.</li>
-<li>commutative and associative 满足交换律和结合律</li>
-</ul></li>
-<li>DIFFERENCE ( <span class="math inline">–</span> ) or MINUS, or
-EXCEPT
-<ul>
+<li>commutative and associative 满足交换律和结合律 ### DIFFERENCE (
+<span class="math inline">–</span> ) or MINUS, or EXCEPT</li>
 <li>The result of <span
 class="math inline"><em>R</em>–<em>S</em></span>, is a relation that
 includes all tuples that are in <span
@@ -295,11 +293,10 @@ class="math inline"><em>R</em></span> but not in <span
 class="math inline"><em>S</em></span>.</li>
 <li>Two operand relations must be ‘type compatible’</li>
 <li>not commutative 不满足交换律 <span
-class="math inline"><em>R</em> − <em>S</em> ≠ <em>S</em> − <em>R</em></span></li>
-</ul></li>
-<li>CARTESIAN PRODUCT ( <span class="math inline">×</span> ) or CROSS
-JOIN
-<ul>
+class="math inline"><em>R</em> − <em>S</em> ≠ <em>S</em> − <em>R</em></span>
+### CARTESIAN PRODUCT ( <span class="math inline">×</span> ) or CROSS
+JOIN<br />
+</li>
 <li>This operation is used to combine tuples from two relations in a
 combinatorial fashion.</li>
 <li>if <span class="math inline"><em>R</em></span> has <span
@@ -318,20 +315,101 @@ class="math inline"><em>n</em><sub><em>S</em></sub></span> tuples, then
 class="math inline"><em>n</em><sub><em>R</em></sub> * <em>n</em><sub><em>S</em></sub></span>
 tuples.</li>
 <li>The two operands do NOT have to be ‘type compatible’</li>
-</ul></li>
 </ul>
 <h2 id="binary-relational-operations">Binary Relational Operations</h2>
+<h3 id="join-bowtie">JOIN ( <span class="math inline">⋈</span> )</h3>
 <ul>
-<li>JOIN (several variations of JOIN exist)</li>
-<li>DIVISION</li>
+<li>usage: identify and select related tuples from the result of
+CARTESIAN PRODUCT of two relations</li>
+<li><span
+class="math inline"><em>R</em>⋈<sub> &lt; <em>j</em><em>o</em><em>i</em><em>n</em> <em>c</em><em>o</em><em>n</em><em>d</em><em>i</em><em>t</em><em>i</em><em>o</em><em>n</em>&gt;</sub><em>S</em></span>
+<ul>
+<li><span
+class="math inline"><em>E</em><em>M</em><em>P</em>_<em>D</em><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em><em>S</em> ← <em>E</em><em>M</em><em>P</em><em>N</em><em>A</em><em>M</em><em>E</em><em>S</em> × <em>D</em><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em></span><br />
++<span
+class="math inline"><em>A</em><em>C</em><em>T</em><em>U</em><em>A</em><em>L</em><sub><em>D</em></sub><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em><em>S</em> ← <em>σ</em><sub><em>S</em><em>s</em><em>n</em> = <em>E</em><em>s</em><em>s</em><em>n</em></sub>(<em>E</em><em>M</em><em>P</em>_<em>D</em><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em><em>S</em>)</span><br />
+= <span
+class="math inline"><em>A</em><em>C</em><em>T</em><em>U</em><em>A</em><em>L</em><sub><em>D</em></sub><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em><em>S</em> ← <em>E</em><em>M</em><em>P</em><em>N</em><em>A</em><em>M</em><em>E</em><em>S</em>⋈<sub><em>S</em><em>s</em><em>n</em> = <em>E</em><em>s</em><em>s</em><em>n</em></sub><em>D</em><em>E</em><em>P</em><em>E</em><em>N</em><em>D</em><em>E</em><em>N</em><em>T</em></span></li>
+</ul></li>
+</ul>
+<h3 id="natural-join">NATURAL JOIN ( <span class="math inline">*</span>
+)</h3>
+<ul>
+<li>usage: join by (all) same name attributes and then remove the
+duplicate columns</li>
+<li><span
+class="math inline"><em>D</em><em>E</em><em>P</em><em>T</em>_<em>L</em><em>O</em><em>C</em><em>S</em> ← <em>D</em><em>E</em><em>P</em><em>A</em><em>R</em><em>T</em><em>M</em><em>E</em><em>N</em><em>T</em> * <em>D</em><em>E</em><em>P</em><em>T</em>_<em>L</em><em>O</em><em>C</em><em>A</em><em>T</em><em>I</em><em>O</em><em>N</em><em>S</em></span></li>
+</ul>
+<h3 id="division-div">DIVISION ( <span class="math inline">÷</span>
+)</h3>
+<ul>
+<li>usage: finds tuples that are related to all tuples in another
+relation<br />
+<img src="division_example.png" /></li>
+</ul>
+<p><img src="relational_algebra_1.png" /> <img
+src="relational_algebra_2.png" /></p>
+<h2 id="aggregate-functions">AGGREGATE FUNCTIONS</h2>
+<ul>
+<li><span
+class="math inline">ℱ<sub><em>F</em><em>U</em><em>N</em><em>C</em></sub> <sub><em>A</em><em>T</em><em>T</em><em>R</em><em>I</em><em>B</em><em>U</em><em>T</em><em>E</em></sub>(<em>R</em><em>E</em><em>L</em><em>A</em><em>T</em><em>I</em><em>O</em><em>N</em>)</span>
+<ul>
+<li>e.g. <span
+class="math inline">ℱ<sub><em>M</em><em>A</em><em>X</em></sub> <sub><em>S</em><em>A</em><em>L</em><em>A</em><em>R</em><em>Y</em></sub>(<em>E</em><em>M</em><em>P</em><em>L</em><em>O</em><em>Y</em><em>E</em><em>E</em>)</span>
+retrieves the maximun salary from the employee</li>
+<li>e.g. <span
+class="math inline">ℱ<sub><em>C</em><em>O</em><em>U</em><em>N</em><em>T</em></sub> <sub><em>S</em><em>s</em><em>n</em>,</sub> <sub><em>A</em><em>V</em><em>E</em><em>R</em><em>A</em><em>G</em><em>E</em></sub> <sub><em>S</em><em>a</em><em>l</em><em>a</em><em>r</em><em>y</em></sub>(<em>E</em><em>M</em><em>P</em><em>L</em><em>O</em><em>Y</em><em>E</em><em>E</em>)</span>
+computes the count (number) of employees and their average salary</li>
+</ul></li>
+<li>function:
+<ul>
+<li>SUM<br />
+</li>
+<li>AVG</li>
+<li>MAX</li>
+<li>MIN</li>
+<li>COUNT</li>
+</ul></li>
+<li>Combined with grouping
+<ul>
+<li>Grouping attribute placed to left of <span
+class="math inline">ℱ</span></li>
+<li>e.g. <span
+class="math inline"><sub><em>D</em><em>n</em><em>o</em></sub>ℱ<sub><em>C</em><em>O</em><em>U</em><em>N</em><em>T</em></sub> <sub><em>S</em><em>s</em><em>n</em>,</sub> <sub><em>A</em><em>V</em><em>E</em><em>R</em><em>A</em><em>G</em><em>E</em></sub> <sub><em>S</em><em>a</em><em>l</em><em>a</em><em>r</em><em>y</em></sub>(<em>E</em><em>M</em><em>P</em><em>L</em><em>O</em><em>Y</em><em>E</em><em>E</em>)</span>
+Above operation groups employees by Dno<br />
+<img src="aggregate_example.png" /></li>
+</ul></li>
 </ul>
 <h2 id="additional-relational-operations">Additional Relational
 Operations</h2>
-<p>OUTER JOINS, AGGREGATE FUNCTIONS<br />
-(these compute summary of information: e.g., SUM, COUNT, AVG, MIN,
-MAX)</p>
-<h1 id="examples-of-queries-in-relational-algebra">Examples of Queries
-in Relational Algebra</h1>
+<ul>
+<li>OUTER JOINS
+<ul>
+<li>LEFT OUTER JOIN
+<ul>
+<li>keeps every tuple in the left relation R in the result of <span
+class="math inline"><em>R</em> ⋈<sub><em>R</em></sub> <em>S</em></span>,
+if no matching tuple is found in S, then padding them with null values
+as needed</li>
+</ul></li>
+<li>RIGHT OUTER JOIN
+<ul>
+<li>keeps every tuple in the right relation S in the result of <span
+class="math inline"><em>R</em> ⋈<sub><em>L</em></sub> <em>S</em></span>,
+if no matching tuple is found in R, then padding them with null values
+as needed</li>
+</ul></li>
+<li>FULL OUTER JOIN
+<ul>
+<li>keeps every tuple in the both relation in the result of <span
+class="math inline"><em>R</em> ⋈<sub><em>F</em></sub> <em>S</em></span>,
+when no matching tuples are found, padding them with null values as
+needed</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="query-tree">Query Tree</h2>
+<p><img src="query_tree.png" /></p>
 
                 </div>
             </div>
@@ -372,7 +450,7 @@ in Relational Algebra</h1>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?59003210"></script>
+<script src="/blog/js/journal.js?18731934"></script>
 
 
 
