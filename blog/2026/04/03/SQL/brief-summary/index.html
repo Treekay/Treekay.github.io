@@ -9,8 +9,8 @@
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="">
 <meta name="description" content="Brief summary for SQL
-
-SQL overview: evolving standards (...">
+SQL overview
+evolving standards (SQ...">
 <meta name="keywords" content="">
 
     <meta charset="utf-8">
@@ -20,7 +20,7 @@ SQL overview: evolving standards (...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?41522570">
+<link rel="stylesheet" href="/blog/css/journal.css?27412207">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -183,42 +183,47 @@ SQL overview: evolving standards (...">
             <div class="post-body-wrapper">
                 <div class="post-body">
                     <h1 id="brief-summary-for-sql">Brief summary for SQL</h1>
-<ul>
-<li><p>SQL overview: evolving standards (SQL-86 to SQL:2003); key
-components include DDL, DML, Views, Transaction control, Authorization,
-Embedded/Dynamic SQL.</p></li>
-<li><p>Data Definition (DDL): CREATE TABLE with types (char, varchar,
-numeric(p,d)); integrity constraints (PRIMARY KEY, FOREIGN KEY, NOT
-NULL); composite keys and referential integrity.</p></li>
-<li><p>Basic queries: SELECT–FROM–WHERE; case-insensitive; duplicates
-allowed by default; use DISTINCT or ALL; SELECT *; expressions and
-column renaming with AS; joins via FROM + WHERE; self-joins with table
-aliases.</p></li>
-<li><p>Filtering: logical operators (AND/OR/NOT); comparisons (&lt;,
-&lt;=, &gt;, &gt;=, =, &lt;&gt;); BETWEEN; tuple comparisons.</p></li>
-<li><p>Strings: LIKE with % (substring) and _ (single char); ESCAPE for
-literals; functions such as concatenation (||), UPPER/LOWER, LENGTH,
-SUBSTRING.</p></li>
-<li><p>Ordering: ORDER BY with ASC/DESC; multiple sort keys
-supported.</p></li>
-<li><p>Set operations: UNION, INTERSECT, EXCEPT (and their ALL
-variants); default behavior removes duplicates unless ALL is
-used.</p></li>
-<li><p>Null semantics: NULL means unknown/absent; arithmetic/comparisons
-with NULL yield unknown; three-valued logic in WHERE; test with IS NULL
-/ IS NOT NULL.</p></li>
-<li><p>Aggregates: AVG, MIN, MAX, SUM, COUNT; GROUP BY forms groups;
-HAVING filters groups (vs WHERE filters rows); typical evaluation order:
-FROM → WHERE → GROUP BY → HAVING → SELECT.</p></li>
-<li><p>Subqueries:</p>
+<h2 id="sql-overview">SQL overview</h2>
+<p>evolving standards (SQL-86 to SQL:2003); key components include DDL,
+DML, Views, Transaction control, Authorization, Embedded/Dynamic
+SQL.</p>
+<h2 id="data-definition-ddl">Data Definition (DDL)</h2>
+<p>CREATE TABLE with types (char, varchar, numeric(p,d)); integrity
+constraints (PRIMARY KEY, FOREIGN KEY, NOT NULL); composite keys and
+referential integrity.</p>
+<h2 id="basic-queries">Basic queries</h2>
+<p>SELECT–FROM–WHERE; case-insensitive; duplicates allowed by default;
+use DISTINCT or ALL; SELECT *; expressions and column renaming with AS;
+joins via FROM + WHERE; self-joins with table aliases.</p>
+<h2 id="filtering">Filtering</h2>
+<p>logical operators (AND/OR/NOT); comparisons (&lt;, &lt;=, &gt;,
+&gt;=, =, &lt;&gt;); BETWEEN; tuple comparisons.</p>
+<h2 id="strings">Strings</h2>
+<p>LIKE with % (substring) and _ (single char); ESCAPE for literals;
+functions such as concatenation (||), UPPER/LOWER, LENGTH,
+SUBSTRING.</p>
+<h2 id="ordering">Ordering</h2>
+<p>ORDER BY with ASC/DESC; multiple sort keys supported.</p>
+<h2 id="set-operations">Set operations</h2>
+<p>UNION, INTERSECT, EXCEPT (and their ALL variants); default behavior
+removes duplicates unless ALL is used.</p>
+<h2 id="null-semantics">Null semantics</h2>
+<p>NULL means unknown/absent; arithmetic/comparisons with NULL yield
+unknown; three-valued logic in WHERE; test with IS NULL / IS NOT
+NULL.</p>
+<h2 id="aggregates">Aggregates</h2>
+<p>AVG, MIN, MAX, SUM, COUNT; GROUP BY forms groups; HAVING filters
+groups (vs WHERE filters rows); typical evaluation order: FROM → WHERE →
+GROUP BY → HAVING → SELECT.</p>
+<h2 id="subqueries">Subqueries:</h2>
 <ul>
 <li>In WHERE: IN/NOT IN, SOME/ALL, EXISTS/NOT EXISTS, UNIQUE; supports
 correlated subqueries.</li>
 <li>In FROM: derived tables; WITH (CTE) for temporary named
 subqueries.</li>
 <li>In SELECT: scalar subqueries (must return a single value).</li>
-</ul></li>
-<li><p>Data modification:</p>
+</ul>
+<h2 id="data-modification">Data modification:</h2>
 <ul>
 <li>INSERT with VALUES or INSERT…SELECT; NULLs can be inserted
 explicitly.</li>
@@ -226,12 +231,65 @@ explicitly.</li>
 deletion (use CTEs to stage results).</li>
 <li>UPDATE with SET and WHERE; use CASE for conditional updates; scalar
 subqueries can recompute derived columns.</li>
-</ul></li>
-<li><p>Schema changes: DROP TABLE; ALTER TABLE ADD COLUMN (existing rows
-get NULL) and (limited) DROP COLUMN support.</p></li>
-<li><p>Portability note: some/all set-comparison clauses may not be
-supported in all engines (e.g., SQLite).</p></li>
 </ul>
+<h2 id="schema-changes">Schema changes:</h2>
+<p>DROP TABLE; ALTER TABLE ADD COLUMN (existing rows get NULL) and
+(limited) DROP COLUMN support.</p>
+<h2 id="portability-note">Portability note:</h2>
+<p>some/all set-comparison clauses may not be supported in all engines
+(e.g., SQLite).</p>
+<h1 id="intermediate-sql-core-components">Intermediate SQL: Core
+Components</h1>
+<h2 id="join-expressions">Join Expressions</h2>
+<p>Natural join: matches rows on all common attribute names and keeps a
+single copy; risk of incorrect matches if unrelated columns share names.
+Inner join (join): use USING (col1, col2, …) to specify match columns,
+or ON predicate for general conditions; unlike natural join, it does not
+deduplicate same-named columns.<br />
+Outer joins: left/right/full preserve non-matching rows by padding
+NULLs; use ON or USING to define the join condition.<br />
+Key idea: join condition defines how rows match; join type defines how
+unmatched rows are handled.</p>
+<h2 id="views">Views</h2>
+<p>Virtual relations defined by create view v as <query>; used for
+abstraction and security.<br />
+Materialized views store results physically and require maintenance on
+updates.<br />
+Updates generally allowed only on simple views (single base table, no
+aggregates/distinct/group by); view dependencies expand to underlying
+queries.</p>
+<h2 id="transactions">Transactions</h2>
+<p>Atomic sequence of operations with isolation from concurrent
+work.<br />
+commit makes changes permanent; rollback undoes all changes in the
+transaction.</p>
+<h2 id="integrity-constraints">Integrity Constraints</h2>
+<p>Single-table: NOT NULL; PRIMARY KEY (implies NOT NULL); UNIQUE; CHECK
+(custom predicates, e.g., value in a set).<br />
+Multiple tables: FOREIGN KEY enforces referential integrity (typically
+referencing a primary key).<br />
+On update/delete actions: default reject, or CASCADE, SET NULL, SET
+DEFAULT to control propagation.</p>
+<h2 id="sql-data-types-and-schemas">SQL Data Types and Schemas</h2>
+<p>Date/Time types: date, time, timestamp, interval.<br />
+Large objects: BLOB (binary) and CLOB/TEXT (character); queries often
+return locators.<br />
+User-defined types/domains via create type and create domain (domains
+can include constraints).</p>
+<h2 id="index-definition">Index Definition</h2>
+Indexes speed equality and range searches without changing
+queries.<br />
+Create with create index <name> on
+<table>
+<p>(column_list); used automatically by the optimizer.</p>
+<h2 id="authorization">Authorization</h2>
+<p>Privileges for DML/DDL (select, insert, update, delete,
+create/alter/drop/index) managed via GRANT and REVOKE.<br />
+Grant option allows re-granting; revocation can cascade or
+restrict.<br />
+View privileges do not imply privileges on underlying tables.<br />
+Roles simplify management: assign privileges to roles, then grant roles
+to users; roles can chain.</p>
 
                 </div>
             </div>
@@ -276,7 +334,7 @@ supported in all engines (e.g., SQLite).</p></li>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?6368482"></script>
+<script src="/blog/js/journal.js?98394452"></script>
 
 
 
