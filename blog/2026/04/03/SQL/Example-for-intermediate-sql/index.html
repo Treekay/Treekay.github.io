@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Examples for intermediate SQL - Treek&#39;s Journal</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="">
+<meta name="description" content="Join Expressions
+Concepts
+Join operations combine tuples ...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?68805041">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Treek&#39;s Journal
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Treek&#39;s Journal</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Treek's<br>Journal
+        </div>
+        <div class="nav-subtitle">
+            
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://github.com/treekay">Treek&#39;s Journal</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Examples for intermediate SQL
+                    <div class="post-meta">
+                        <time datetime="2026-04-03T13:53:14.000Z" itemprop="datePublished">
+                            2026-04-03 13:53
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/SQL/'>SQL</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="join-expressions">Join Expressions</h1>
+<h2 id="concepts">Concepts</h2>
+<p>Join operations combine tuples from two or more relations to produce
+another relation. The core ideas are:</p>
+<ul>
+<li>Natural join: Equates all attributes with the same name across the
+two relations and returns one copy of each common attribute. Convenient,
+but risky when unrelated columns share the same name.</li>
+<li>Inner join (join): The default join that returns only matching
+tuples. You can specify:
+<ul>
+<li>join … using (A1, A2, …): Match on the listed attributes only (and
+deduplicate those columns in the result).</li>
+<li>join … on : Match on any Boolean condition (like a WHERE clause just
+for the join). Does not automatically deduplicate columns.</li>
+</ul></li>
+<li>Outer joins: Preserve unmatched tuples using nulls to fill missing
+columns:
+<ul>
+<li>left outer join: keep all rows from the left table</li>
+<li>right outer join: keep all rows from the right table</li>
+<li>full outer join: keep all rows from both tables</li>
+</ul></li>
+</ul>
+<p>Rule of thumb: Prefer explicit join … using or join … on when schemas
+share multiple identically named columns or risk accidental equivalence.
+Use outer joins to retain rows without matches.</p>
+<h2 id="example-1-natural-join-for-student-course-enrollments">Example
+1: Natural join for student-course enrollments</h2>
+<p>Goal: List each student’s name and the course_id values for the
+courses they have taken. Here, student and takes both have a column
+named ID used to match. <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name, t.course_id</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">natural</span> <span class="keyword">join</span> takes <span class="keyword">as</span> t;</span><br></pre></td></tr></table></figure> Explanation: natural join
+automatically matches on all identically named columns (here, ID). It
+returns only one copy of ID in the output, along with name and
+course_id.</p>
+<h2
+id="example-2-avoiding-the-natural-join-pitfall-with-join-on">Example 2:
+Avoiding the natural join pitfall with join … on</h2>
+<p>Goal: List each student’s name and the course title for the courses
+they have taken.</p>
+<p>Suppose student, takes, and course have multiple columns with the
+same names (e.g., dept_name) that are unrelated for matching. A chained
+natural join can accidentally equate unrelated attributes. Use join … on
+to be explicit. <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- Wrong (accidentally equates unrelated same-named columns):</span><br><span class="line">-- select s.name, c.title</span><br><span class="line">-- from student as s</span><br><span class="line">-- natural join takes as t</span><br><span class="line">-- natural join course as c;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Correct (explicit join condition):</span></span><br><span class="line"><span class="keyword">select</span> s.name, c.title</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">join</span> takes <span class="keyword">as</span> t <span class="keyword">on</span> s.ID <span class="operator">=</span> t.ID</span><br><span class="line"><span class="keyword">join</span> course <span class="keyword">as</span> c <span class="keyword">on</span> t.course_id <span class="operator">=</span> c.course_id;</span><br></pre></td></tr></table></figure>
+<p>Explanation: We join s to t using the student’s ID and then t to c
+using course_id, avoiding accidental equivalences on unrelated same-name
+columns.</p>
+<h2 id="example-3-inner-join-using-versus-natural-join">Example 3: Inner
+join using … versus natural join</h2>
+<p>Goal: List each student’s name and the course title for the courses
+they have taken.</p>
+<p>Both return matching rows, but natural join deduplicates all shared
+columns; inner join with on does not. using strikes a middle ground
+(deduplicates the listed attributes). <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Inner join using (deduplicates course_id in output)</span></span><br><span class="line"><span class="keyword">select</span> s.name, c.title</span><br><span class="line"><span class="keyword">from</span> (student <span class="keyword">as</span> s <span class="keyword">join</span> takes <span class="keyword">as</span> t <span class="keyword">using</span> (ID))</span><br><span class="line"><span class="keyword">join</span> course <span class="keyword">as</span> c <span class="keyword">using</span> (course_id);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Inner join on (retains both copies of join columns unless you project selectively)</span></span><br><span class="line"><span class="keyword">select</span> s.name, c.title</span><br><span class="line"><span class="keyword">from</span> (student <span class="keyword">as</span> s <span class="keyword">join</span> takes <span class="keyword">as</span> t <span class="keyword">on</span> s.ID <span class="operator">=</span> t.ID)</span><br><span class="line"><span class="keyword">join</span> course <span class="keyword">as</span> c <span class="keyword">on</span> t.course_id <span class="operator">=</span> c.course_id;</span><br></pre></td></tr></table></figure> Explanation: using
+is concise and prevents duplicated join columns from appearing multiple
+times, while on gives maximum flexibility at the cost of manual
+projection to avoid duplicate columns.</p>
+<h2 id="example-4-outer-joins-to-retain-non-matching-rows">Example 4:
+Outer joins to retain non-matching rows</h2>
+<p>Goal: List all students and any courses they have taken; for students
+with no enrollments, course fields appear as null. <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.ID, s.name, t.course_id, t.semester, t.year</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> takes <span class="keyword">as</span> t</span><br><span class="line">  <span class="keyword">on</span> s.ID <span class="operator">=</span> t.ID</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> s.ID;</span><br></pre></td></tr></table></figure>
+Explanation: left outer join preserves all students. If a student has no
+matching rows in takes, the course-related columns are null. Similarly,
+right outer join preserves the right table, and full outer join
+preserves both sides.</p>
+<h2 id="example-5-chaining-multiple-joins-safely">Example 5: Chaining
+multiple joins safely</h2>
+<p>Goal: Show student names and titles of all courses they have taken,
+including those who haven’t taken any course (title is null in that
+case). <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> s.name, c.title</span><br><span class="line"><span class="keyword">from</span> (student <span class="keyword">as</span> s</span><br><span class="line">      <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> takes <span class="keyword">as</span> t <span class="keyword">on</span> s.ID <span class="operator">=</span> t.ID)</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> course <span class="keyword">as</span> c <span class="keyword">on</span> t.course_id <span class="operator">=</span> c.course_id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> s.name;</span><br></pre></td></tr></table></figure> Explanation: The first left outer join preserves
+all students; the second left outer join brings in course titles where
+available. Unenrolled students appear with null titles.</p>
+<h1 id="views-virtual-relations">Views (Virtual Relations)</h1>
+<h2 id="concepts-1">Concepts</h2>
+<p>A view is a virtual relation defined by an SQL query. You create it
+with create view v as <query>. The database stores the definition, not
+the rows, and computes the result on demand. Views can depend on other
+views (view expansion resolves the dependencies). Some systems also
+support materialized views that persist the computed rows and need
+maintenance when base data changes.</p>
+<p>Updating through views is restricted: generally only simple views
+(derived from a single base table, no aggregates, no distinct, no
+expressions, and no grouping) are updatable. Complex views (joins,
+aggregates) are usually read-only unless special rules or triggers are
+provided.</p>
+<h2 id="example-1-hiding-sensitive-attributes">Example 1: Hiding
+sensitive attributes</h2>
+<p>Goal: Expose instructor identity and department to users who must not
+see salary. <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> faculty <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> ID, name, dept_name</span><br><span class="line">  <span class="keyword">from</span> instructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Use the view</span></span><br><span class="line"><span class="keyword">select</span> name</span><br><span class="line"><span class="keyword">from</span> faculty</span><br><span class="line"><span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Biology&#x27;</span>;</span><br></pre></td></tr></table></figure> Explanation: The view filters out salary,
+allowing consumers to query just the allowed columns.</p>
+<h2 id="example-2-aggregate-view-for-reporting">Example 2: Aggregate
+view for reporting</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> departments_total_salary (dept_name, total_salary) <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> dept_name, <span class="built_in">sum</span>(salary)</span><br><span class="line">  <span class="keyword">from</span> instructor</span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> dept_name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> departments_total_salary</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total_salary <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p>Explanation: The view provides a reusable summary. Since it uses an
+aggregate, it is read-only in most systems.</p>
+<h2 id="example-3-views-defined-using-other-views">Example 3: Views
+defined using other views</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> physics_fall_2017 <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> c.course_id, s.sec_id, s.building, s.room_number</span><br><span class="line">  <span class="keyword">from</span> course <span class="keyword">as</span> c</span><br><span class="line">  <span class="keyword">join</span> section <span class="keyword">as</span> s <span class="keyword">on</span> c.course_id <span class="operator">=</span> s.course_id</span><br><span class="line">  <span class="keyword">where</span> c.dept_name <span class="operator">=</span> <span class="string">&#x27;Physics&#x27;</span></span><br><span class="line">    <span class="keyword">and</span> s.semester <span class="operator">=</span> <span class="string">&#x27;Fall&#x27;</span></span><br><span class="line">    <span class="keyword">and</span> s.year <span class="operator">=</span> <span class="number">2017</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> physics_fall_2017_watson <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> course_id, room_number</span><br><span class="line">  <span class="keyword">from</span> physics_fall_2017</span><br><span class="line">  <span class="keyword">where</span> building <span class="operator">=</span> <span class="string">&#x27;Watson&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>Explanation: The second view depends on the first. When you query
+physics_fall_2017_watson, the database expands it into the underlying
+query chain.</p>
+<h2 id="example-4-why-some-views-are-not-updatable">Example 4: Why some
+views are not updatable</h2>
+<p>Joining tables in a view makes inserts ambiguous: which base table
+should receive new rows? <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> instructor_info <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> i.ID, i.name, d.building</span><br><span class="line">  <span class="keyword">from</span> instructor <span class="keyword">as</span> i</span><br><span class="line">  <span class="keyword">join</span> department <span class="keyword">as</span> d <span class="keyword">on</span> i.dept_name <span class="operator">=</span> d.dept_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- insert into instructor_info values (&#x27;69987&#x27;, &#x27;White&#x27;, &#x27;Taylor&#x27;); -- Typically fails</span></span><br></pre></td></tr></table></figure> Explanation: The database cannot
+infer which department (if multiple are in the same building) should be
+linked, nor how to populate required columns not present in the view.
+Hence, joined views are usually read-only.</p>
+<h1 id="transactions">Transactions</h1>
+<h2 id="concepts-2">Concepts</h2>
+<p>A transaction is a sequence of SQL statements that executes as a
+single atomic unit: either all its effects persist (commit) or none do
+(rollback). Transactions provide isolation from concurrent work and
+ensure the database is not left in a partial, inconsistent state.</p>
+<h2 id="example-1-transfer-with-commit">Example 1: Transfer with
+commit</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> TRANSACTION;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> Account</span><br><span class="line"><span class="keyword">set</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span></span><br><span class="line"><span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> Account</span><br><span class="line"><span class="keyword">set</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span></span><br><span class="line"><span class="keyword">where</span> id <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+<p>Explanation: Both updates either succeed together or, if one fails,
+can be rolled back together. COMMIT makes the changes durable.</p>
+<h2 id="example-2-error-handling-with-rollback">Example 2: Error
+handling with rollback</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> TRANSACTION;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> Account</span><br><span class="line"><span class="keyword">set</span> balance <span class="operator">=</span> balance <span class="operator">-</span> <span class="number">100</span></span><br><span class="line"><span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Suppose this fails (e.g., account doesn&#x27;t exist or violates a constraint):</span></span><br><span class="line"><span class="keyword">update</span> Account</span><br><span class="line"><span class="keyword">set</span> balance <span class="operator">=</span> balance <span class="operator">+</span> <span class="number">100</span></span><br><span class="line"><span class="keyword">where</span> id <span class="operator">=</span> <span class="number">9999</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br></pre></td></tr></table></figure>
+<p>Explanation: On failure, ROLLBACK undoes prior updates within the
+transaction, restoring the database to its prior consistent state.</p>
+<h2 id="example-3-isolation-intuition">Example 3: Isolation
+intuition</h2>
+<p>While one transaction transfers funds, another user querying balances
+should not see partial effects (e.g., the debit without the credit).
+Isolation levels govern the exact visibility rules, but the core idea is
+that a transaction’s intermediate state stays hidden until commit.</p>
+<h1 id="sql-data-types-and-schemas">SQL Data Types and Schemas</h1>
+<h2 id="concepts-3">Concepts</h2>
+<p>Date/time: date, time, timestamp, and interval (differences of
+date/time/timestamps). Large objects: blob (binary), clob/text
+(character). Queries typically return locators rather than loading the
+entire object.</p>
+<p>User-defined types/domains: create type and create domain restrict
+values and improve safety. Domains can carry constraints (e.g., NOT
+NULL, CHECK).</p>
+<h2 id="example-1-working-with-datetimetimestamp">Example 1: Working
+with date/time/timestamp</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> meeting (</span><br><span class="line">  id serial <span class="keyword">primary key</span>,</span><br><span class="line">  topic text <span class="keyword">not null</span>,</span><br><span class="line">  start_at <span class="type">timestamp</span> <span class="keyword">not null</span>,</span><br><span class="line">  duration <span class="type">interval</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert into</span> meeting (topic, start_at, duration)</span><br><span class="line"><span class="keyword">values</span> (<span class="string">&#x27;Design review&#x27;</span>, <span class="type">timestamp</span> <span class="string">&#x27;2026-05-17 09:00:00&#x27;</span>, <span class="type">interval</span> <span class="string">&#x27;90 minutes&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>Explanation: timestamp stores both date and time; interval captures a
+length of time (e.g., 90 minutes).</p>
+<h2 id="example-2-large-objects">Example 2: Large objects</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> asset (</span><br><span class="line">  id serial <span class="keyword">primary key</span>,</span><br><span class="line">  name text <span class="keyword">not null</span>,</span><br><span class="line">  photo <span class="type">blob</span>,       <span class="comment">-- or BYTEA in some DBMSs</span></span><br><span class="line">  document <span class="type">clob</span>     <span class="comment">-- or TEXT</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Explanation: blob is for binary data (images, video), clob/text for
+large character data (documents). Many systems stream/return locators to
+these values for efficiency.</p>
+<h2 id="example-3-custom-types-and-domains">Example 3: Custom types and
+domains</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- A type for currency values</span></span><br><span class="line"><span class="keyword">create</span> type Dollars <span class="keyword">as</span> <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>) <span class="keyword">final</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create table</span> department (</span><br><span class="line">  dept_name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line">  budget Dollars</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- A domain with constraints</span></span><br><span class="line"><span class="keyword">create</span> domain degree_level <span class="type">varchar</span>(<span class="number">10</span>)</span><br><span class="line">  <span class="keyword">constraint</span> degree_level_check</span><br><span class="line">  <span class="keyword">check</span> (<span class="keyword">value</span> <span class="keyword">in</span> (<span class="string">&#x27;Bachelors&#x27;</span>, <span class="string">&#x27;Masters&#x27;</span>, <span class="string">&#x27;Doctorate&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> domain person_name <span class="type">char</span>(<span class="number">20</span>) <span class="keyword">not null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create table</span> program (</span><br><span class="line">  id serial <span class="keyword">primary key</span>,</span><br><span class="line">  level degree_level,</span><br><span class="line">  director person_name</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="integrity-constraints">Integrity Constraints</h1>
+<h2 id="concepts-4">Concepts</h2>
+<p>Integrity constraints enforce business rules and protect against
+incorrect data:</p>
+<ul>
+<li>NOT NULL: Forbid missing values for listed columns.</li>
+<li>PRIMARY KEY: Unique identifier for rows; implies NOT NULL.</li>
+<li>UNIQUE: Ensures no duplicate values (or tuples of values) across
+rows; can include nulls (DBMS-dependent).</li>
+<li>CHECK (predicate): Row-level predicate that must be satisfied for
+every row (e.g., check (semester in
+(‘Fall’,‘Winter’,‘Spring’,‘Summer’))).</li>
+<li>FOREIGN KEY: Enforces referential integrity across tables by
+requiring referenced values to exist in the target table’s key. On
+updates/deletes, you can choose actions: RESTRICT/NO ACTION (reject),
+CASCADE (propagate), SET NULL, SET DEFAULT. ## Example 1: Basic
+constraints on a table <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> Employee (</span><br><span class="line">  emp_id <span class="type">integer</span> <span class="keyword">primary key</span>,</span><br><span class="line">  email text <span class="keyword">unique</span>,</span><br><span class="line">  name text <span class="keyword">not null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure> Explanation: emp_id uniquely
+identifies employees; email must be unique if present; name cannot be
+null.</li>
+</ul>
+<h2 id="example-2-check-constraints-semester-domain">Example 2: CHECK
+constraints (semester domain)</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> section (</span><br><span class="line">  course_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line">  sec_id <span class="type">varchar</span>(<span class="number">8</span>),</span><br><span class="line">  semester <span class="type">varchar</span>(<span class="number">6</span>),</span><br><span class="line">  <span class="keyword">year</span> <span class="type">numeric</span>(<span class="number">4</span>,<span class="number">0</span>),</span><br><span class="line">  building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line">  room_number <span class="type">varchar</span>(<span class="number">7</span>),</span><br><span class="line">  time_slot_id <span class="type">varchar</span>(<span class="number">4</span>),</span><br><span class="line">  <span class="keyword">primary key</span> (course_id, sec_id, semester, <span class="keyword">year</span>),</span><br><span class="line">  <span class="keyword">check</span> (semester <span class="keyword">in</span> (<span class="string">&#x27;Fall&#x27;</span>,<span class="string">&#x27;Winter&#x27;</span>,<span class="string">&#x27;Spring&#x27;</span>,<span class="string">&#x27;Summer&#x27;</span>))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Explanation: Only the listed semester values are allowed; attempts to
+insert ‘Autumn’ would fail.</p>
+<h2 id="example-3-foreign-keys-across-relations">Example 3: Foreign keys
+across relations</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> department (</span><br><span class="line">  dept_name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  building <span class="type">varchar</span>(<span class="number">15</span>),</span><br><span class="line">  budget <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create table</span> instructor (</span><br><span class="line">  ID <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  name <span class="type">varchar</span>(<span class="number">40</span>) <span class="keyword">not null</span>,</span><br><span class="line">  dept_name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span>,</span><br><span class="line">  salary <span class="type">numeric</span>(<span class="number">12</span>,<span class="number">2</span>),</span><br><span class="line">  <span class="keyword">foreign key</span> (dept_name) <span class="keyword">references</span> department(dept_name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create table</span> course (</span><br><span class="line">  course_id <span class="type">varchar</span>(<span class="number">8</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  title <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">not null</span>,</span><br><span class="line">  dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">  credits <span class="type">numeric</span>(<span class="number">2</span>,<span class="number">0</span>),</span><br><span class="line">  <span class="keyword">foreign key</span> (dept_name) <span class="keyword">references</span> department(dept_name)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> cascade</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">update</span> cascade</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Explanation: instructor.dept_name and course.dept_name must exist in
+department. Deleting or renaming a department cascades to related
+courses as specified.</p>
+<h2 id="example-4-self-referencing-foreign-keys">Example 4:
+Self-referencing foreign keys</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> person (</span><br><span class="line">  ID <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  name <span class="type">char</span>(<span class="number">40</span>),</span><br><span class="line">  mother <span class="type">char</span>(<span class="number">10</span>),</span><br><span class="line">  father <span class="type">char</span>(<span class="number">10</span>),</span><br><span class="line">  <span class="keyword">foreign key</span> (mother) <span class="keyword">references</span> person(ID),</span><br><span class="line">  <span class="keyword">foreign key</span> (father) <span class="keyword">references</span> person(ID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Explanation: parent links must reference an existing person row.
+Inserts may need careful ordering (or deferred constraints if
+supported).</p>
+<h2 id="example-5-handling-violations-set-nullset-default">Example 5:
+Handling violations (SET NULL/SET DEFAULT)</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> project (</span><br><span class="line">  project_id serial <span class="keyword">primary key</span>,</span><br><span class="line">  name text <span class="keyword">not null</span>,</span><br><span class="line">  lead_id <span class="type">integer</span>,</span><br><span class="line">  <span class="keyword">foreign key</span> (lead_id) <span class="keyword">references</span> Employee(emp_id)</span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">set</span> <span class="keyword">null</span></span><br><span class="line">    <span class="keyword">on</span> <span class="keyword">update</span> cascade</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Explanation: If a lead employee is deleted, lead_id becomes null; if
+the employee’s emp_id changes, it cascades to project.lead_id.</p>
+<h1 id="index-definition-in-sql">Index Definition in SQL</h1>
+<h2 id="concepts-5">Concepts</h2>
+An index is a physical data structure that accelerates lookups (equality
+and range searches). You create it with create index <name> on
+<table>
+<p>(column_list). The query optimizer uses indexes automatically where
+beneficial; you do not need to modify SELECT statements. Indexes speed
+reads but add overhead on writes (maintaining the index on
+insert/update/delete).</p>
+<h2 id="example-1-creating-an-index-for-primary-key-lookups">Example 1:
+Creating an index for primary-key lookups</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> student (</span><br><span class="line">  ID <span class="type">varchar</span>(<span class="number">5</span>) <span class="keyword">primary key</span>,</span><br><span class="line">  name <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span>,</span><br><span class="line">  dept_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">  tot_cred <span class="type">numeric</span>(<span class="number">3</span>,<span class="number">0</span>) <span class="keyword">default</span> <span class="number">0</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Many DBMSs automatically index PRIMARY KEY, but you can create explicit indexes, too:</span></span><br><span class="line"><span class="keyword">create</span> index student_id_idx <span class="keyword">on</span> student(ID);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Query (will typically use the index)</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">where</span> ID <span class="operator">=</span> <span class="string">&#x27;12345&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>Explanation: The index enables fast retrieval by ID. Most DBMSs
+auto-index primary keys, but explicit indexes are useful for non-key
+columns used in frequent filters or joins.</p>
+<h1 id="authorization">Authorization</h1>
+<h2 id="concepts-6">Concepts</h2>
+<p>Authorization governs who can see or modify which data. Privileges
+include DML (select, insert, update, delete) and DDL (index, create
+table, alter table, drop table). DBAs grant and revoke privileges for
+users or roles. You can grant with grant option to allow recipients to
+pass privileges onwards. Privileges on a view do not automatically imply
+privileges on the underlying base tables.</p>
+<h2 id="example-1-granting-and-revoking-privileges">Example 1: Granting
+and revoking privileges</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Grant read access on department to two users</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> department <span class="keyword">to</span> Amit, Satoshi;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Allow Amit to grant select further</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> department <span class="keyword">to</span> Amit <span class="keyword">with</span> <span class="keyword">grant</span> option;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Revoke (with policy control)</span></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">select</span> <span class="keyword">on</span> department <span class="keyword">from</span> Amit, Satoshi cascade;  <span class="comment">-- also revokes onward grants</span></span><br><span class="line"><span class="comment">-- or</span></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">select</span> <span class="keyword">on</span> department <span class="keyword">from</span> Amit, Satoshi restrict; <span class="comment">-- fails if dependent grants exist</span></span><br></pre></td></tr></table></figure>
+<p>Explanation: with grant option lets a grantee pass the privilege to
+others. REVOKE CASCADE removes dependent grants; REVOKE RESTRICT
+prevents revoke if dependencies exist.</p>
+<h2 id="example-2-authorization-on-views">Example 2: Authorization on
+views</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> geo_instructor <span class="keyword">as</span></span><br><span class="line">  <span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">from</span> instructor</span><br><span class="line">  <span class="keyword">where</span> dept_name <span class="operator">=</span> <span class="string">&#x27;Geology&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> geo_instructor <span class="keyword">to</span> geo_staff;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- A geo_staff member can:</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> geo_instructor;</span><br><span class="line">Explanation: Granting privileges <span class="keyword">on</span> a <span class="keyword">view</span> does <span class="keyword">not</span> automatically <span class="keyword">grant</span> privileges <span class="keyword">on</span> the base tables; the DBMS enforces <span class="keyword">view</span><span class="operator">-</span>level access.</span><br></pre></td></tr></table></figure>
+<h2 id="example-3-roles-to-simplify-management">Example 3: Roles to
+simplify management</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> role instructor;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> takes <span class="keyword">to</span> instructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Assign the role to a user</span></span><br><span class="line"><span class="keyword">grant</span> instructor <span class="keyword">to</span> Amit;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Role chaining</span></span><br><span class="line"><span class="keyword">create</span> role dean;</span><br><span class="line"><span class="keyword">grant</span> instructor <span class="keyword">to</span> dean;</span><br><span class="line"><span class="keyword">grant</span> dean <span class="keyword">to</span> Satoshi;</span><br></pre></td></tr></table></figure>
+<p>Explanation: Roles bundle privileges. You can grant roles to users
+and even grant roles to other roles to build hierarchies.</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/blog/2026/04/07/react/react-basic/">
+        Previous post<br>React Basic
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2026/04/03/SQL/brief-summary/">
+        Next post<br>Brief summary for SQL
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://github.com/treekay">Treek&#39;s Journal</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?19631540"></script>
+
+
+
+</body>
+</html>
