@@ -21,7 +21,7 @@ DDL (Data Definitio...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?20690289">
+<link rel="stylesheet" href="/blog/css/journal.css?44077429">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -333,6 +333,90 @@ DROP column (DB-dependent)<br />
 Examples:</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert into</span> instructor <span class="keyword">select</span> ID, name, dept_name, <span class="number">18000</span> <span class="keyword">from</span> student <span class="keyword">where</span> dept_name<span class="operator">=</span><span class="string">&#x27;Music&#x27;</span> <span class="keyword">and</span> total_cred<span class="operator">&gt;</span><span class="number">144</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> instructor <span class="keyword">where</span> dept_name <span class="keyword">in</span> (<span class="keyword">select</span> dept_name <span class="keyword">from</span> department <span class="keyword">where</span> building<span class="operator">=</span><span class="string">&#x27;Watson&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> instructor <span class="keyword">set</span> salary <span class="operator">=</span> <span class="keyword">case</span> <span class="keyword">when</span> salary <span class="operator">&lt;=</span> <span class="number">100000</span> <span class="keyword">then</span> salary<span class="operator">*</span><span class="number">1.05</span> <span class="keyword">else</span> salary<span class="operator">*</span><span class="number">1.03</span> <span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">as</span> S <span class="keyword">set</span> tot_cred <span class="operator">=</span> (<span class="keyword">select</span> <span class="built_in">sum</span>(credits) <span class="keyword">from</span> takes <span class="keyword">join</span> course <span class="keyword">using</span>(course_id) <span class="keyword">where</span> S.ID<span class="operator">=</span>takes.ID <span class="keyword">and</span> takes.grade <span class="operator">&lt;&gt;</span> <span class="string">&#x27;F&#x27;</span> <span class="keyword">and</span> takes.grade <span class="keyword">is</span> <span class="keyword">not null</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="what-does-a-natural-join-do-in-sql">What does a NATURAL JOIN do
+in SQL?</h1>
+<p>It matches rows that agree on all common attribute names between two
+tables and returns only one copy of each common attribute (deduplicates
+shared columns).</p>
+<h1
+id="why-can-natural-join-be-dangerous-and-how-do-you-avoid-issues">Why
+can NATURAL JOIN be dangerous, and how do you avoid issues?</h1>
+<p>If unrelated columns share the same name, NATURAL JOIN will equate
+them incorrectly. Avoid this by specifying the match explicitly with
+JOIN … USING (col_list) or JOIN … ON condition.</p>
+<h1 id="when-should-you-use-join-using-vs-join-on">When should you use
+JOIN … USING vs JOIN … ON?</h1>
+<p>Use USING when matching on identically named columns (e.g., USING
+(course_id)). Use ON for general predicates or when column names differ
+(e.g., ON a.id = b.student_id and a.year &gt;= b.year).</p>
+<h1 id="whats-the-difference-between-inner-join-and-outer-join">What’s
+the difference between INNER JOIN and OUTER JOIN?</h1>
+<p>INNER JOIN returns only matching rows. OUTER JOIN returns matching
+rows plus non-matching rows from one or both sides, padding missing
+columns with NULLs.</p>
+<h1 id="how-do-left-right-and-full-outer-join-differ">How do LEFT,
+RIGHT, and FULL OUTER JOIN differ?</h1>
+<p>LEFT OUTER JOIN keeps all left-table rows; RIGHT OUTER JOIN keeps all
+right-table rows; FULL OUTER JOIN keeps all rows from both tables,
+filling unmatched sides with NULLs.</p>
+<h1
+id="what-is-the-difference-between-a-join-condition-and-a-join-type">What
+is the difference between a join condition and a join type?</h1>
+<p>The join condition specifies how rows match (e.g., ON a.id = b.id).
+The join type (inner/left/right/full) specifies how to treat
+non-matching rows.</p>
+<h1 id="what-is-a-view-and-why-use-it">What is a View and why use
+it?</h1>
+<p>A view is a virtual relation defined by a query (CREATE VIEW v AS
+<query>). It provides abstraction/security by exposing only needed
+columns/rows; the data is generated on demand from base tables.</p>
+<h1 id="how-do-materialized-views-differ-from-regular-views">How do
+materialized views differ from regular views?</h1>
+<p>Materialized views store the query result physically for speed but
+require maintenance on base-table changes. Regular views store only the
+definition and compute results at query time.</p>
+<h1 id="when-are-view-updates-generally-allowed">When are view updates
+generally allowed?</h1>
+<p>Typically only on simple views over a single base table without
+aggregates, DISTINCT, GROUP BY/HAVING, or expressions; the SELECT list
+contains only base columns; omitted base columns must allow
+NULL/defaults.</p>
+<h1 id="what-is-a-transaction-and-how-does-it-end">What is a transaction
+and how does it end?</h1>
+<p>A transaction is an atomic sequence of operations (the “magic
+bubble”) isolated from others. It ends with COMMIT (make changes
+permanent) or ROLLBACK (undo all changes in the transaction).</p>
+<h1
+id="which-single-table-integrity-constraints-are-common-and-what-do-they-enforce">Which
+single-table integrity constraints are common and what do they
+enforce?</h1>
+<p>NOT NULL (no missing values), UNIQUE (no duplicates), PRIMARY KEY
+(UNIQUE + NOT NULL), and CHECK (custom predicate per row, e.g., CHECK
+(semester IN (‘Fall’,‘Winter’,‘Spring’,‘Summer’))).</p>
+<h1
+id="what-is-referential-integrity-and-how-can-violations-be-handled">What
+is referential integrity and how can violations be handled?</h1>
+<p>A foreign key requires referenced values to exist in another table
+(usually that table’s primary key). On delete/update, you can
+RESTRICT/REJECT (default), CASCADE, SET NULL, or SET DEFAULT.</p>
+<h1
+id="what-advanced-sql-data-types-are-useful-beyond-basic-stringsnumbers">What
+advanced SQL data types are useful beyond basic strings/numbers?</h1>
+<p>Date/time types: DATE, TIME, TIMESTAMP, INTERVAL. Large objects: BLOB
+(binary), CLOB/TEXT (character), typically returned via
+locators/pointers. User-defined types/domains: CREATE TYPE/DOMAIN, often
+with constraints (e.g., NOT NULL, CHECK).</p>
+<h1 id="what-is-an-index-and-how-do-you-create-one">What is an index and
+how do you create one?</h1>
+<p>An index is a data structure that speeds equality and range searches.
+Create with: CREATE INDEX idx_name ON table_name (col_list); the
+optimizer uses it automatically when beneficial.</p>
+<h1 id="how-is-authorization-managed-in-sql-users-privileges-roles">How
+is authorization managed in SQL (users, privileges, roles)?</h1>
+<p>GRANT/REVOKE manage privileges (SELECT, INSERT, UPDATE, DELETE; plus
+DDL like CREATE, DROP). WITH GRANT OPTION lets a user pass privileges
+on. Privileges on a view don’t imply privileges on base tables. Roles
+group privileges and can be granted to users and other roles.</p>
 
                 </div>
             </div>
@@ -377,7 +461,7 @@ Examples:</li>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?30275719"></script>
+<script src="/blog/js/journal.js?70493988"></script>
 
 
 
