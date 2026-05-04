@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Example for Storage in Database - Treek&#39;s Notes</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="">
+<meta name="description" content="1)
+Introduction to the Physical World and the Storage Hie...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?85768060">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://github.com/treekay">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Treek&#39;s Notes
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Treek&#39;s Notes</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Treek's<br>Notes
+        </div>
+        <div class="nav-subtitle">
+            
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://github.com/treekay">Treek&#39;s Notes</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Example for Storage in Database
+                    <div class="post-meta">
+                        <time datetime="2026-05-04T15:17:21.000Z" itemprop="datePublished">
+                            2026-05-04 15:17
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/SQL/'>SQL</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="introduction-to-the-physical-world-and-the-storage-hierarchy">1)
+Introduction to the Physical World and the Storage Hierarchy</h1>
+<h2 id="why-physical-storage-matters">Why physical storage matters</h2>
+<p>Databases ultimately live as bits on physical devices. CPU operations
+are extremely fast compared to I/O; fetching data from storage is
+commonly the bottleneck. A well-designed system minimizes slow I/O by
+organizing data intelligently across a hierarchy of storage devices that
+trade off speed, capacity, and cost.</p>
+<h2 id="the-storage-hierarchy">The storage hierarchy</h2>
+<ul>
+<li>Volatile storage (loses contents on power loss):
+<ul>
+<li>CPU caches: fastest, smallest, byte-addressable.</li>
+<li>Main memory (RAM): fast, byte-addressable random access, but
+expensive per GB and limited in size for very large datasets.</li>
+</ul></li>
+<li>Non-volatile storage (persists without power):
+<ul>
+<li>Flash memory (SSDs): block-addressable, no moving parts, high random
+IOPS.</li>
+<li>Magnetic disks (HDDs): block-addressable, mechanical parts, great
+for sequential access; lower random IOPS.</li>
+<li>Magnetic tapes: sequential access, very low cost per TB; used for
+backups/archival.</li>
+</ul></li>
+</ul>
+<h2 id="sequential-vs-random-volatile-vs-non-volatile">Sequential vs
+random, volatile vs non-volatile</h2>
+<ul>
+<li><p>Volatile devices are byte-addressable and optimized for random
+access.</p></li>
+<li><p>Non-volatile devices read/write whole blocks (a.k.a. pages),
+typically 4–8 KB or larger.</p></li>
+<li><p>Sequential access patterns on disks are much faster than random
+ones due to reduced seek/rotation overhead. ## Illustrative
+examples</p></li>
+<li><p>Example: RAM vs SSD vs HDD for a key-value lookup</p>
+<ul>
+<li>RAM: O(100 ns) access, effectively instant for a single lookup.</li>
+<li>SSD: tens of microseconds to a fraction of a millisecond per random
+4 KB read; tens to hundreds of thousands of IOPS.</li>
+<li>HDD: 5–10 ms typical random access latency; 50–200 IOPS for 4 KB
+random reads.</li>
+<li>Conclusion: indexing and caching matter; pushing frequent lookups to
+RAM avoids slow I/O.</li>
+</ul></li>
+<li><p>Example: Choosing a device for analytics scans</p>
+<ul>
+<li>HDD sequential throughput: 25–200 MB/s. SSD sequential: 400 MB/s
+(SATA3) to multiple GB/s (NVMe PCIe).</li>
+<li>Large sequential scans (e.g., fact table scans) can be reasonable
+even on HDDs</li>
+<li>Random point probes in large tables favor SSDs or memory-resident
+caches.</li>
+</ul></li>
+</ul>
+<h1 id="performance-measures-and-device-behavior">2) Performance
+Measures and Device Behavior</h1>
+<h2 id="key-metrics">Key metrics</h2>
+<ul>
+<li>Block I/O: Databases transfer data between memory and storage in
+fixed-size blocks (pages).</li>
+<li>IOPS (I/O operations per second): capacity for random block
+operations.</li>
+<li>Throughput: MB/s, most relevant for sequential scans/transfers.</li>
+<li>Latency: time per operation; includes HDD seek + rotational
+latency.</li>
+<li>MTTF (Mean Time To Failure): expected time until a device fails
+(e.g., 3–5 years on average for disks).</li>
+</ul>
+<h2 id="representative-figures">Representative figures</h2>
+<ul>
+<li>HDD sequential throughput: roughly 25–200 MB/s.</li>
+<li>SSD sequential throughput: ~400 MB/s (SATA3), 2–3+ GB/s (NVMe
+PCIe).</li>
+<li>Random IOPS at 4 KB:
+<ul>
+<li>HDD: ~50–200.</li>
+<li>SSD: ~10,000 reads/sec; ~40,000 writes/sec (typical consumer figures
+vary widely).</li>
+</ul></li>
+</ul>
+<h2 id="failure-scaling">Failure scaling</h2>
+<p>In arrays of many disks, the probability that any disk fails is much
+higher than the probability that one particular disk fails. For N
+independent disks, expected time to some disk failing shrinks roughly by
+a factor of N, making redundancy essential.</p>
+<h2 id="illustrative-examples">Illustrative examples</h2>
+<ul>
+<li>Example: Time to first failure in a 100-disk system
+<ul>
+<li>Each disk MTTF = 100,000 hours. Expected time to any failure ≈
+100,000 / 100 = 1,000 hours (~41 days).</li>
+<li>Implication: plan for redundancy and repair workflows.</li>
+</ul></li>
+<li>Example: Estimating random I/O latency
+<ul>
+<li>HDD: 100 IOPS → 10 ms/op on average. Reading 10,000 random blocks ≈
+100 s just in I/O time.</li>
+<li>SSD: 10,000 IOPS → 0.1 ms/op. Same 10,000 random blocks ≈ 1 s.</li>
+</ul></li>
+<li>Example: Sequential scan time
+<ul>
+<li>Scan 100 GB on HDD at 150 MB/s: ~667 s (~11 min).</li>
+<li>Scan 100 GB on NVMe SSD at 2 GB/s: ~50 s.</li>
+</ul></li>
+</ul>
+<h1 id="raid-redundant-arrays-of-independent-disks">3) RAID: Redundant
+Arrays of Independent Disks</h1>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Capacity: aggregate many disks into one logical volume.</li>
+<li>Performance: parallelize reads/writes across disks (striping).</li>
+<li>Reliability: mask disk failures with redundancy
+(mirrors/parity).</li>
+</ul>
+<h2 id="common-raid-levels">Common RAID levels</h2>
+<ul>
+<li>RAID 0 (Striping): data striped across disks; high performance; no
+redundancy—any disk failure loses the array.</li>
+<li>RAID 1 (Mirroring): duplicate each block on two disks; excellent
+reliability and fast reads; 2× capacity cost.</li>
+<li>RAID 5 (Distributed parity): stripe data and store parity blocks
+rotated across disks; tolerates one disk failure; write penalty for
+small random writes (read-old-data + read-old-parity + compute +
+write-data + write-parity).</li>
+</ul>
+<h2 id="design-considerations">Design considerations</h2>
+<ul>
+<li>Monetary cost: usable capacity vs raw capacity.</li>
+<li>Performance: read/write bandwidth, random IOPS, small-write
+behavior.</li>
+<li>During failure: degraded mode performance can drop (e.g., parity
+reconstruction on reads).</li>
+<li>Rebuild time: long rebuilds increase risk of another failure (RAID
+5).</li>
+</ul>
+<h2 id="illustrative-examples-1">Illustrative examples</h2>
+<ul>
+<li>Example: Usable capacity
+<ul>
+<li>4 disks × 2 TB each:</li>
+<li>RAID 0: 8 TB usable; zero redundancy.</li>
+<li>RAID 1 (two mirrors): 4 TB usable; can survive one disk failure per
+mirror set.</li>
+<li>RAID 5: 6 TB usable (N−1 disks); tolerates one disk failure.</li>
+</ul></li>
+<li>Example: Small random write in RAID 5
+<ul>
+<li>To update one 4 KB block: read old 4 KB data + read old parity
+block; compute new - parity; write 4 KB data + write parity. That’s four
+I/Os (read-modify-write penalty).</li>
+</ul></li>
+<li>Example: When RAID 0 is acceptable
+<ul>
+<li>Temporary scratch space for recomputable data (e.g., ephemeral
+staging). High throughput with no safety. Not acceptable for primary
+data.</li>
+</ul></li>
+</ul>
+<h1 id="file-organization-and-record-representation">4) File
+Organization and Record Representation</h1>
+<h2 id="files-records-and-blocks">Files, records, and blocks</h2>
+<ul>
+<li>Database data is stored in files; each file is a sequence of
+fixed-size blocks (pages).</li>
+<li>Each block holds one or more records; records consist of fields
+(attributes).</li>
+</ul>
+<h2 id="fixed-length-records">Fixed-length records</h2>
+<ul>
+<li>All records have the same size; packing into blocks is
+straightforward.</li>
+<li>Deletion management:
+<ul>
+<li>Move-last-into-hole: copy the last record into the deleted
+slot.</li>
+<li>Free list: maintain a linked list of free slots; new insertions
+reuse them, avoiding intra-block reshuffling.</li>
+</ul></li>
+</ul>
+<h2 id="variable-length-records-and-slotted-pages">Variable-length
+records and slotted pages</h2>
+<ul>
+<li>Variable-length fields (e.g., varchar) lead to records with
+different sizes.</li>
+<li>Slotted page structure:
+<ul>
+<li>Block header stores a directory: for each slot, the record’s offset
+and length (or an indicator if free).</li>
+<li>Records are packed from the end of the page upward; free space
+accumulates in the middle.</li>
+<li>External references should point to the slot entry (not the physical
+byte offset) so the DB can move records within the block to defragment
+space without breaking pointers.</li>
+</ul></li>
+</ul>
+<h2 id="illustrative-examples-2">Illustrative examples</h2>
+<ul>
+<li>Example: Fixed-length free list
+<ul>
+<li>Deleting record at slot 17: mark slot 17 as free and link it to the
+head of the free list stored in the block header. Next insertion reuses
+slot 17 immediately.</li>
+</ul></li>
+<li>Example: Slotted page compaction
+<ul>
+<li>Two variable-length records shrink/grow; the system moves them to
+keep free space contiguous. Because external pointers reference slot
+directory entries, no external references break.</li>
+</ul></li>
+<li>Example: External pointer target
+<ul>
+<li>Target the directory slot (logical handle), not the in-page byte
+offset (physical). This indirection enables safe in-page record
+movement.</li>
+</ul></li>
+</ul>
+<h1 id="organization-of-records-in-files-heap-sequential-tree-hash">5)
+Organization of Records in Files (Heap, Sequential, Tree, Hash)</h1>
+<h2 id="organization-options">Organization options</h2>
+<ul>
+<li>Heap file: place new records wherever space is available (fast
+inserts).</li>
+<li>Sequential file: maintain records sorted on a search key (fast
+ordered scans, slower inserts/deletes due to reorganization).</li>
+<li>B+-tree file organization: maintain records in key order with
+balanced tree structure to support efficient point/range queries and
+graceful inserts/deletes (covered deeply in indexing).</li>
+<li>Hashing: apply a hash function on a search key to choose a
+block/bucket; excellent for equality lookups; not ideal for range
+queries (covered in indexing).</li>
+</ul>
+<h2 id="trade-offs">Trade-offs</h2>
+<ul>
+<li>Heap: best for write-heavy, no-order-needed workloads; scanning may
+be slower; needs indexes for efficient queries.</li>
+<li>Sequential: great for range scans and order-by without extra sort;
+expensive maintenance on updates.</li>
+<li>B+-tree: balanced performance for inserts/lookups/range queries;
+extra space and maintenance overhead.</li>
+<li>Hash: O(1) expected equality lookup; range queries poor; sensitive
+to hash distribution and load factor.</li>
+</ul>
+<h2 id="illustrative-examples-3">Illustrative examples</h2>
+<ul>
+<li>Example: Log ingestion table
+<ul>
+<li>High insert rate; queries often filter by timestamp ranges. A heap
+file plus a B+-tree index on time balances fast inserts with efficient
+range reads.</li>
+</ul></li>
+<li>Example: Reference table with equality lookups
+<ul>
+<li>Lookups by ID only; range scans rare. Hash organization or a hash
+index provides fast equality access.</li>
+</ul></li>
+<li>Example: Pre-sorted data consumption
+<ul>
+<li>Frequent order-by on a key: a sequential file or clustered B+-tree
+on that key can remove the need to sort at query time.</li>
+</ul></li>
+</ul>
+<h1 id="buffer-management">6) Buffer Management</h1>
+<h2 id="buffer-pool-and-manager">Buffer pool and manager</h2>
+<ul>
+<li>Buffer pool: region of RAM to cache disk pages and reduce I/O.</li>
+<li>Buffer manager: serves page requests, loads pages on misses, and
+decides which page to evict when space is needed.</li>
+</ul>
+<h2 id="operations">Operations</h2>
+<ul>
+<li>Pin/unpin: a pinned page cannot be evicted; clients must unpin after
+use.</li>
+<li>Dirty pages: pages modified in memory; must be written back before
+eviction.</li>
+<li>Write-back: either overwrite the original block or write to a new
+location and mark the original invalid (common with SSD log-structured
+designs).</li>
+</ul>
+<h2 id="replacement-policies">Replacement policies</h2>
+<ul>
+<li>LRU (Least Recently Used): evict the page not used for the longest
+time (good default heuristic).</li>
+<li>Clock: approximate LRU with lower overhead.</li>
+<li>Workload-aware choices:
+<ul>
+<li>Toss-immediate: pages known to be read once (e.g., sequential scan)
+can be evicted right after use.</li>
+<li>MRU (Most Recently Used): can perform better than LRU for certain
+nested-loop patterns where older pages are more likely to be reused
+soon.</li>
+</ul></li>
+</ul>
+<h2 id="illustrative-examples-4">Illustrative examples</h2>
+<ul>
+<li>Example: Sequential scan of a large table
+<ul>
+<li>Each page is read once. Toss-immediate prevents the scan from
+evicting useful pages for concurrent OLTP queries.</li>
+</ul></li>
+<li>Example: Nested loop join
+<ul>
+<li>Inner table pages are repeatedly probed; MRU can outperform LRU if
+the “most recently used” page has the lowest reuse probability in the
+immediate future (depending on join access pattern).</li>
+</ul></li>
+<li>Example: Dirty page eviction
+<ul>
+<li>A modified page selected for eviction must be flushed to disk first;
+group commits and background flushers reduce stalls.</li>
+</ul></li>
+</ul>
+<h1 id="magnetic-disks-and-flash-memory-ssds">7) Magnetic Disks and
+Flash Memory (SSDs)</h1>
+<h2 id="magnetic-disks-hdds">Magnetic disks (HDDs)</h2>
+<ul>
+<li>Rotating platters and mechanical arms with read/write heads.</li>
+<li>Two dominant costs for random access:
+<ul>
+<li>Seek time: moving the head to the correct track.</li>
+<li>Rotational latency: waiting for the sector to rotate under the
+head.</li>
+</ul></li>
+<li>Excellent sequential throughput; low random IOPS.</li>
+</ul>
+<h2 id="ssds-flash-memory">SSDs (flash memory)</h2>
+<ul>
+<li>No moving parts; very low random access latency; high IOPS.</li>
+<li>Writes require erasing larger “erase blocks”; pages cannot be
+overwritten in place.</li>
+<li>Wear leveling distributes erases across physical blocks to prolong
+device life.</li>
+</ul>
+<h2 id="illustrative-examples-5">Illustrative examples</h2>
+<ul>
+<li>Example: Random read workload
+<ul>
+<li>HDD at 100 IOPS vs SSD at 50,000 IOPS: SSD completes 10,000 random
+reads in ~0.2 s vs ~100 s on HDD.</li>
+</ul></li>
+<li>Example: Log-structured writes on SSDs
+<ul>
+<li>DBMS issues append-only writes to avoid in-place overwrites,
+aligning with erase-block constraints and improving
+endurance/performance.</li>
+</ul></li>
+<li>Example: Mixed workload placement
+<ul>
+<li>Place random-read-heavy indexes on SSD; bulk data scans can remain
+on HDD to save cost.</li>
+</ul></li>
+</ul>
+<h1 id="external-sort-merge-algorithm">8) External Sort-Merge
+Algorithm</h1>
+<h2 id="when-and-why-we-need-external-sorting">When and why we need
+external sorting</h2>
+<ul>
+<li>Relations often exceed main memory capacity. External sort-merge
+sorts data using limited memory by organizing I/O into large sequential
+transfers.</li>
+<li>Sorted data enables efficient algorithms like merge join and
+supports ORDER BY/GROUP BY without large in-memory states.</li>
+</ul>
+<h2 id="two-phases">Two phases</h2>
+<ul>
+<li>Phase 1: Run generation
+<ul>
+<li>Read M blocks into memory, sort, write out a sorted run. Repeat
+until the entire relation is processed (producing approximately ceil(br
+/ M) runs for br data blocks and M buffer blocks).</li>
+</ul></li>
+<li>Phase 2: Multi-way merge
+<ul>
+<li>If number of runs N &lt; M: single N-way merge using N input buffers
++ 1 output buffer.</li>
+<li>If N ≥ M: multiple passes; each pass merges groups of up to M−1 runs
+into longer runs; repeat until one final run remains.</li>
+</ul></li>
+</ul>
+<h2 id="cost-analysis">Cost analysis</h2>
+<ul>
+<li>Total merge passes: ceil(log_{M−1}(br / M)).</li>
+<li>Each pass (including run generation) reads and writes all br blocks;
+conventionally, we count the final read but omit the final write.</li>
+<li>Total I/O cost: br × (2 × ceil(log_{M−1}(br / M)) + 1).</li>
+</ul>
+<h2 id="illustrative-examples-6">Illustrative examples</h2>
+<ul>
+<li>Example: 3-way merge with M=4 buffers
+<ul>
+<li>Use 3 input buffers + 1 output buffer; at each step, pick the
+smallest front element and append to output; refill buffers when
+empty.</li>
+</ul></li>
+<li>Example: Given br = 13 blocks, M = 4
+<ul>
+<li>Run generation: ceil(13/4) = 4 runs.</li>
+<li>Pass 1: 3-way merge of first three runs → one longer run; the 4th
+run remains.</li>
+<li>Pass 2: merge the two remaining runs → final sorted run.</li>
+<li>Passes = ceil(log_{3}(13/4)) = ceil(log3(3.25)) = 2. Total cost = 13
+× (2×2 + 1) = 13 × 5 = 65 I/Os.</li>
+</ul></li>
+<li>Example: Buffer allocation
+<ul>
+<li>With M buffers and N runs where N ≥ M, each pass merges up to M−1
+runs. Choose M to maximize merge degree and minimize number of
+passes.</li>
+</ul></li>
+</ul>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2026/05/04/SQL/storage_in_database_system/">
+        Next post<br>Storage in Database System
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://github.com/treekay">Treek&#39;s Notes</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?48352012"></script>
+
+
+
+</body>
+</html>
