@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Indexing - Treek&#39;s Notes</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="">
+<meta name="description" content="Brief Summary:
+Database Indexing and B+-Trees
+1) Basic Co...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?40366379">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://treekay.github.io/blog">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Treek&#39;s Notes
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Treek&#39;s Notes</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Treek's<br>Notes
+        </div>
+        <div class="nav-subtitle">
+            
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://treekay.github.io/blog">Treek&#39;s Notes</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Indexing
+                    <div class="post-meta">
+                        <time datetime="2026-05-13T16:45:21.000Z" itemprop="datePublished">
+                            2026-05-13 16:45
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/SQL/'>SQL</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="brief-summary-database-indexing-and-b-trees">Brief Summary:
+Database Indexing and B+-Trees</h1>
+<h2 id="basic-concepts">1) Basic Concepts</h2>
+<ul>
+<li>Purpose of Indexing: Speed up data access by minimizing disk I/O
+versus full scans.</li>
+<li>Search Key: Attribute(s) used to locate records; supports equality
+and range queries.</li>
+<li>Evaluation Metrics: Access time, insertion time, deletion time, and
+space overhead.</li>
+</ul>
+<h2 id="ordered-indices">2) Ordered Indices</h2>
+<ul>
+<li>Clustering (Primary) Index: Physical file order matches the index’s
+search key.</li>
+<li>Secondary (Non-clustering) Index: Logical order differs from
+physical file order.</li>
+<li>Dense vs. Sparse: Dense has an entry per search-key value; sparse
+has entries for some values and requires the data file to be ordered on
+the key.</li>
+<li>Multilevel Indices: Add outer levels when an index is too large for
+memory to reduce I/O.</li>
+</ul>
+<h2 id="b-tree-indexes">3) B+-Tree Indexes</h2>
+<ul>
+<li>Characteristics: Self-balancing, all leaves at the same depth, high
+fanout m; non-root nodes are at least half-full.</li>
+<li>Node Types: Inner nodes guide search (keys + child pointers); leaf
+nodes hold key–value pairs and are linked for fast range scans.</li>
+<li>Leaf Values: Either record IDs (most common) or tuple data
+(index-organized storage); secondary indexes often store primary keys as
+values.</li>
+<li>B-Tree vs. B+-Tree: B-Tree stores values in all nodes; B+-Tree
+stores values only in leaves.</li>
+<li>Operations: Lookups are O(log_m n) I/Os; inserts split nodes and
+copy/push up middle keys; deletes borrow from siblings or merge and pull
+keys down.</li>
+<li>Practical Notes: With fanout ≈ 100 and 10^6 keys, depth ≈ 3–4; inner
+nodes often stay in buffer; average occupancy ~2/3 (random
+inserts).</li>
+</ul>
+<h2
+id="topic-1.-organization-of-records-and-basic-indexing-concepts">Topic
+1. Organization of Records and Basic Indexing Concepts</h2>
+<h3 id="why-we-use-indexes">Why we use indexes</h3>
+<p>Indexes are auxiliary data structures that allow the database to find
+the data you want quickly (minimizing disk I/O). Instead of scanning an
+entire file to find a record (e.g., “student with ID = 22201”), an index
+maps a search key (one or more attributes) to a pointer that leads
+directly to the data block containing the target record.</p>
+<h3 id="record-organization-in-files">Record organization in files</h3>
+<ul>
+<li>Heap file: Records are placed anywhere; no particular order. Fast
+for inserts; slow for searches without an index.</li>
+<li>Sequential file: Records are stored in sorted order on a chosen
+search key. Efficient for range scans; expensive to maintain under
+frequent updates.</li>
+<li>B+-tree file organization: Maintains records in an order that
+supports inserts and deletes efficiently while staying balanced.</li>
+<li>Hashing: A hash function maps a search key to a bucket. Very fast
+for equality search; does not support range queries well.</li>
+</ul>
+<h3 id="search-keys-and-access-types">Search keys and access types</h3>
+<ul>
+<li>Search key: An attribute (or set of attributes) used to look up
+records.</li>
+<li>Access types:
+<ul>
+<li>Equality search: Find records where key = value.</li>
+<li>Range search: Find records where key is within [low, high] (or &lt;,
+&gt;, ≤, ≥).</li>
+</ul></li>
+</ul>
+<h3 id="index-types-and-key-ideas">Index types and key ideas</h3>
+<ul>
+<li>Ordered indices: Keys are stored in sorted order (enable equality
+and range queries).</li>
+<li>Hash indices: Keys are distributed across buckets by a hash function
+(excellent for equality, not for ranges).</li>
+</ul>
+<h3 id="how-we-evaluate-an-index">How we evaluate an index</h3>
+<ul>
+<li>Access time: I/Os to answer a query.</li>
+<li>Insertion time: I/Os to add a record and update the index.</li>
+<li>Deletion time: I/Os to remove a record and update the index.</li>
+<li>Space overhead: Bytes/pages needed in addition to the data
+itself.</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<ul>
+<li>Example 1 (Equality search): A Students(ID, Name, Major, Year) table
+has 1M rows stored as a heap. Without an index, finding ID=22201
+requires scanning many pages. With a B+-tree on ID (fanout around 100),
+only a few page reads (often 3–4) are needed to reach the target leaf
+and then the record.</li>
+<li>Example 2 (Range search): A Salaries(EmployeeID, Amount) table with
+an ordered index on Amount can answer queries like 60,000 ≤ Amount ≤
+80,000 by seeking to the first qualifying key in the leaves and then
+following leaf links to read subsequent qualifying entries
+efficiently.</li>
+<li>Example 3 (Choosing search keys): If the most common query is “find
+by email,” make Email the search key for the index. For frequent range
+queries on timestamps, index on Timestamp with an ordered structure like
+a B+-tree.</li>
+</ul>
+<h1
+id="topic-2.-ordered-indices-primaryclustering-secondary-dense-sparse-and-multilevel">Topic
+2. Ordered Indices: Primary/Clustering, Secondary, Dense, Sparse, and
+Multilevel</h1>
+<h2 id="primary-clustering-vs.-secondary-non-clustering-indices">Primary
+(Clustering) vs. Secondary (Non-clustering) indices</h2>
+<ul>
+<li>Clustering (Primary) index: The physical order of the data file
+matches the index’s search key order. Great for range scans; updates can
+be costlier if they disturb order.</li>
+<li>Secondary (Non-clustering) index: The search key order differs from
+the physical order of the data file. Flexible, supports many lookup
+patterns; range scans are less sequential on disk unless combined with
+other techniques.</li>
+</ul>
+<h2 id="dense-vs.-sparse-indices">Dense vs. Sparse indices</h2>
+<ul>
+<li>Dense index: Has an index entry for every search-key value. Fast
+lookups; higher space overhead.</li>
+<li>Sparse index: Has entries for only some search-key values (typically
+one per data block or group). Less space; requires scanning forward in
+the data from the located block. Requires that the data file be
+physically sorted on the search key (i.e., clustering).</li>
+</ul>
+<h2 id="multilevel-indices">Multilevel indices</h2>
+<p>When an index becomes too large for memory and on-disk binary search
+would require too many I/Os, we can build a small, higher-level index on
+top of the larger (lower-level) index—recursively, forming a tree of
+indices. This is the idea that leads to B+-trees.</p>
+<h2 id="examples-1">Examples</h2>
+<ul>
+<li>Example 1 (Clustering index on StudentID): If Students are
+physically stored sorted by StudentID, then an index on StudentID is
+clustering. Range queries on ID (e.g., 10000–19999) are efficient
+because the data blocks are adjacent on disk.</li>
+<li>Example 2 (Secondary index on Department): If Students are stored by
+StudentID, an index on Department is secondary. A query Department=‘CS’
+uses the secondary index to find matching pointers but resulting records
+are scattered in the heap.</li>
+<li>Example 3 (Dense vs. Sparse): For an Instructor(ID, Name, Salary)
+clustering index on ID, a sparse index may store one entry per data page
+keyed by the first ID in that page. To find ID=22201, locate the largest
+index key ≤ 22201, jump to that page, then scan forward within the
+page(s). A dense index on ID has a one-to-one mapping from every ID to
+its exact location.</li>
+<li>Example 4 (Multilevel): Suppose a dense index over 1M keys occupies
+thousands of pages. A higher-level sparse index over the lower index’s
+first keys might fit in a handful of pages, offering a quick two- or
+three-level search without scanning the entire index.</li>
+</ul>
+<h1 id="topic-3.-b-tree-fundamentals">Topic 3. B+-Tree Fundamentals</h1>
+<h2 id="definitions-and-properties">Definitions and properties</h2>
+<ul>
+<li>B+-tree: A self-balancing, ordered m-way tree optimized for disk
+I/O.</li>
+<li>Perfectly balanced: All leaves are at the same depth.</li>
+<li>Occupancy: Every non-root node is at least half-full. If a node can
+have up to m pointers, it will have between ⌈m/2⌉ and m pointers (and
+thus between ⌈m/2⌉−1 and m−1 keys). The root is a special case and may
+be less occupied.</li>
+<li>Performance: Lookup, insertion, and deletion each cost O(log_m n)
+I/Os, where m is fanout and n is keys.</li>
+</ul>
+<h2 id="node-types-and-layouts">Node types and layouts</h2>
+<ul>
+<li>Inner (non-leaf) nodes: Sorted array of keys that guide navigation,
+interleaved with child pointers. They contain keys only.</li>
+<li>Leaf nodes: Sorted key/value pairs and sibling pointers linking
+leaves for fast ordered scans. “Values” are either:
+<ul>
+<li>Record IDs (RIDs) pointing to the heap tuple location (common). This
+is typical for secondary indexes.</li>
+<li>Tuple data itself (index-organized storage). This is typical for a
+primary index that stores the actual row in leaves.</li>
+</ul></li>
+<li>Null handling: If present, null keys are gathered in a designated
+first/last leaf to maintain ordering semantics.</li>
+</ul>
+<h2 id="b-tree-vs.-b-tree">B-tree vs. B+-tree</h2>
+<ul>
+<li>B-tree (original): Stores keys and values in both inner and leaf
+nodes (each key appears once); more space-efficient for keys.</li>
+<li>B+-tree (common in DBMSs): Stores values only in leaves; inner nodes
+hold keys to guide search. This design simplifies range scans and bulk
+I/O on leaves.</li>
+</ul>
+<h2 id="why-b-trees-excel-on-disk">Why B+-trees excel on disk</h2>
+<ul>
+<li>High fanout (often ~100) keeps tree height small (e.g., ≈ 3–4 levels
+for millions of keys).</li>
+<li>Inner nodes are frequently cached in memory; most operations hit
+only one leaf I/O.</li>
+<li>Sequential access across leaves is efficient for range queries due
+to sibling pointers.</li>
+</ul>
+<h2 id="examples-2">Examples</h2>
+<ul>
+<li>Example 1 (Lookup): To find key 31, start at the root, choose the
+appropriate child by comparing 31 against node keys, repeat at each
+level until reaching the leaf that contains 31 (or where it would be).
+If found, follow the leaf’s value (RID or tuple) pointer.</li>
+<li>Example 2 (Range scan 10–44): Navigate to key ≥ 10 in the first
+leaf. Then follow the leaf sibling pointers, emitting all keys up to 44.
+Only the first seek traverses the inner nodes; subsequent pages read
+sequentially from leaves.</li>
+<li>Example 3 (Primary vs. secondary leaves): In a primary B+-tree over
+the table’s primary key, a leaf may store the full tuple
+(index-organized). In a secondary B+-tree on a non-key attribute, a leaf
+stores the (key, primary-key) pair or (key, RID), requiring one extra
+hop to fetch the full tuple from the heap.</li>
+</ul>
+<h1 id="pseudocode-lookup-find">Pseudocode: lookup (find)</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function find(tree, v):</span><br><span class="line">  c = tree.root</span><br><span class="line">  while c is an inner node:</span><br><span class="line">    // c.keys is sorted; c.ptrs has one more pointer than keys</span><br><span class="line">    pick i such that c.keys[i-1] &lt;= v &lt; c.keys[i], then c = c.ptrs[i]</span><br><span class="line">    // if v &gt;= largest key, descend to the rightmost child</span><br><span class="line">  // c is a leaf</span><br><span class="line">  if v is present in c.keys:</span><br><span class="line">    return the associated value (RID or tuple)</span><br><span class="line">  else:</span><br><span class="line">    return null</span><br></pre></td></tr></table></figure>
+<h1
+id="topic-4.-b-tree-operations-insertion-deletion-and-complexity">Topic
+4. B+-Tree Operations: Insertion, Deletion, and Complexity</h1>
+<h2 id="insertion">Insertion</h2>
+<ul>
+<li>Find the correct leaf L and insert the new (key, value) in sorted
+order.</li>
+<li>If L overflows (exceeds capacity), split it into L and L2 and
+redistribute keys evenly.</li>
+<li>Copy up the split key into the parent (for a leaf split); insert a
+new pointer to L2 in the parent.</li>
+<li>If the parent overflows, split it too, and push up the middle key to
+its parent; repeat up to the root. If the root splits, the tree grows in
+height by one.</li>
+</ul>
+<h2 id="deletion">Deletion</h2>
+<ul>
+<li>Find the target leaf and remove the (key, value).</li>
+<li>If the leaf falls below minimum occupancy (less than half-full),
+first try to borrow an entry from a sibling (with the same parent).</li>
+<li>If borrowing is not possible, merge the leaf with a sibling
+(coalesce) and remove the separating key from the parent. If the parent
+underflows, apply the same borrow-or-merge logic upwards. If the root
+ends up with a single child, the tree shrinks in height.</li>
+</ul>
+<h2 id="complexity-and-occupancy-facts">Complexity and occupancy
+facts</h2>
+<ul>
+<li>Worst-case I/Os for lookup/insert/delete: O(log_m n).</li>
+<li>In practice, inner nodes are often cached; most operations pay for
+one leaf I/O.</li>
+<li>Average node occupancy: roughly 2/3 with random insertions; can be
+~1/2 if keys are inserted in sorted order (which triggers more splits at
+half-full states).</li>
+</ul>
+<h2 id="examples-3">Examples</h2>
+<ul>
+<li>Example 1 (Leaf split): Insert key 6 into a leaf already full with
+[5,9,10]. After insertion and split, redistribute, keep leaf nodes
+balanced (e.g., [5,6] and [9,10]), then copy the split key (e.g., 9) up
+to the parent to point to the new right leaf.</li>
+<li>Example 2 (Root split): Repeated inserts can fill the root. When it
+splits, a new root is created with two child pointers, increasing the
+height by one.</li>
+<li>Example 3 (Borrow): Deleting a key makes a leaf underfull. If a
+sibling has extra entries, borrow one and update the separator key in
+the parent accordingly.</li>
+<li>Example 4 (Merge and shrink): If siblings are both near empty, merge
+them and pull down the separator key from the parent. This can cascade
+upward; if the root ends with one child, reduce the height.</li>
+<li>Example 5 (I/O estimate): For n=1,000,000 and fanout m≈100, the
+height is at most about log base ~50 of 1,000,000, so a lookup touches
+at most ~4 nodes. With inner nodes cached, often only the leaf I/O is
+needed.</li>
+</ul>
+<h2 id="pseudocode-insert-and-delete-high-level">Pseudocode: insert and
+delete (high level)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function insert(tree, (k, v)):</span><br><span class="line">  path = descend to leaf L for k (record parents)</span><br><span class="line">  insert (k, v) into L</span><br><span class="line">  while node overflows:</span><br><span class="line">    (left, splitKey, right) = split(node)</span><br><span class="line">    if node was root:</span><br><span class="line">      create new root with [splitKey] and pointers to (left, right)</span><br><span class="line">      return</span><br><span class="line">    else:</span><br><span class="line">      parent = pop from path</span><br><span class="line">      insert (splitKey, right) pointer into parent (left is already there)</span><br><span class="line">      node = parent</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function delete(tree, k):</span><br><span class="line">  path = descend to leaf L for k (record parents)</span><br><span class="line">  remove k from L</span><br><span class="line">  while node underflows and node != root:</span><br><span class="line">    sibling = choose left or right sibling with same parent</span><br><span class="line">    if sibling can lend an entry:</span><br><span class="line">      borrow from sibling and update parent separator</span><br><span class="line">      return</span><br><span class="line">    else:</span><br><span class="line">      merge node with sibling and pull down parent separator</span><br><span class="line">      node = parent</span><br><span class="line">  if root has only one child:</span><br><span class="line">    make that child the new root</span><br></pre></td></tr></table></figure>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2026/05/04/SQL/Example-for-storage-in-database/">
+        Next post<br>Example for Storage in Database
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://treekay.github.io/blog">Treek&#39;s Notes</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?26072888"></script>
+
+
+
+</body>
+</html>

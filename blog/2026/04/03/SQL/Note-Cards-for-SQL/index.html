@@ -21,7 +21,7 @@ DDL (Data Definitio...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?85945842">
+<link rel="stylesheet" href="/blog/css/journal.css?87229819">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -416,6 +416,86 @@ is authorization managed in SQL (users, privileges, roles)?</h1>
 DDL like CREATE, DROP). WITH GRANT OPTION lets a user pass privileges
 on. Privileges on a view don’t imply privileges on base tables. Roles
 group privileges and can be granted to users and other roles.</p>
+<h1 id="what-is-a-database-index-and-why-is-it-used">What is a database
+index and why is it used?</h1>
+<p>An index is a specialized data structure that maps search keys to
+pointers to data, enabling fast access and minimizing disk I/O compared
+to full table scans.</p>
+<h1
+id="what-is-a-search-key-and-which-access-types-do-indices-typically-support">What
+is a search key and which access types do indices typically
+support?</h1>
+<p>A search key is the attribute(s) used to look up records. Common
+access types are equality searches and range searches.</p>
+<h1 id="which-metrics-are-used-to-evaluate-index-structures">Which
+metrics are used to evaluate index structures?</h1>
+<p>Access time, insertion time, deletion time, and space overhead.</p>
+<h1
+id="clustering-primary-vs.-secondary-nonclustering-index-whats-the-difference">Clustering
+(primary) vs. secondary (nonclustering) index: what’s the
+difference?</h1>
+<p>A clustering index’s search key matches the physical order of the
+file. A secondary index’s order differs from the physical order; it is
+built on top of an unsorted (w.r.t. that key) file.</p>
+<h1
+id="dense-vs.-sparse-indices-how-do-they-differ-and-when-can-sparse-be-used">Dense
+vs. sparse indices: how do they differ and when can sparse be used?</h1>
+<p>Dense: one index entry per search-key value (fast lookups, more
+space). Sparse: entries for only some keys (less space); valid only when
+the data file is sorted on the search key (clustering index).</p>
+<h1 id="why-use-multilevel-indices">Why use multilevel indices?</h1>
+<p>When an index is too large for memory, a higher-level (outer) index
+over the lower-level (inner) index reduces disk I/Os needed for
+lookups.</p>
+<h1 id="what-is-a-b-tree-and-its-key-balancing-properties">What is a
+B+-tree and its key balancing properties?</h1>
+<p>A self-balancing, ordered m-way tree. All leaves are at the same
+depth; every non-root node is at least half-full; height is O(log_m
+n).</p>
+<h1
+id="what-do-inner-vs.-leaf-nodes-store-in-a-b-tree-and-why-are-leaf-siblings-linked">What
+do inner vs. leaf nodes store in a B+-tree, and why are leaf siblings
+linked?</h1>
+<p>Inner nodes store search keys and child pointers to guide searches.
+Leaf nodes store key–value pairs and sibling pointers for efficient
+sequential scans and range queries.</p>
+<h1 id="what-can-b-tree-leaf-node-values-point-to-or-contain">What can
+B+-tree leaf node values point to or contain?</h1>
+<p>Record IDs (most common) or the actual tuple data (index-organized
+storage). Secondary indexes typically store the primary key as the
+value.</p>
+<h1 id="how-efficient-are-b-tree-lookups-in-practice">How efficient are
+B+-tree lookups in practice?</h1>
+<p>They require O(log_m n) I/Os. With fanout m≈100 and n≈1,000,000,
+lookups typically traverse about 3–4 nodes.</p>
+<h1 id="how-does-b-tree-insertion-work-high-level">How does B+-tree
+insertion work (high level)?</h1>
+<p>Find the target leaf and insert in sorted order. If full, split the
+node, redistribute evenly, copy the middle key up to the parent. Inner
+node splits push the middle key up; a root split grows the tree
+height.</p>
+<h1 id="how-does-b-tree-deletion-work-high-level">How does B+-tree
+deletion work (high level)?</h1>
+<p>Delete from the leaf. If under half-full, try to borrow from a
+sibling; otherwise merge (coalesce) with a sibling and update the
+parent. The tree may shrink in height.</p>
+<h1 id="how-does-a-b-tree-differ-from-a-b-tree">How does a B+-tree
+differ from a B-tree?</h1>
+<p>B-tree stores keys and values in all nodes. B+-tree stores values
+only in leaves; inner nodes only direct the search.</p>
+<h1
+id="what-are-hash-indices-and-their-main-trade-offs-vs.-ordered-indices-like-b-trees">What
+are hash indices and their main trade-offs vs. ordered indices like
+B+-trees?</h1>
+<p>Hash indices use a hash function to map keys to buckets, offering
+excellent equality lookup performance but no support for range
+queries.</p>
+<h1
+id="how-are-hash-collisions-resolved-and-what-operational-factors-matter">How
+are hash collisions resolved and what operational factors matter?</h1>
+<p>Common methods: linear probing (open addressing) and chaining (linked
+lists per bucket). Maintain keys to know when to stop scanning; monitor
+load factor and resize/rehash when the table becomes too full.</p>
 
                 </div>
             </div>
@@ -460,7 +540,7 @@ group privileges and can be granted to users and other roles.</p>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?97498627"></script>
+<script src="/blog/js/journal.js?30283880"></script>
 
 
 
