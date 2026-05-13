@@ -20,7 +20,7 @@ Volatile (cache, RAM...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/blog/css/journal.css?53006543">
+<link rel="stylesheet" href="/blog/css/journal.css?49684163">
 
 <script src="/blog/js/loadCSS.js"></script>
 <script>
@@ -194,18 +194,21 @@ MB/s, NVMe ≈2–3+ GB/s; page-out-of-place writes, erase blocks, wear
 leveling.<br />
 Reliability: mean time to failure (MTTF) typically a few years; more
 disks raise failure probability; hybrids combine flash cache with
-HDD.<br />
-# 2) RAID: Reliability and Parallel Performance<br />
-Goals: higher capacity, bandwidth, and reliability via parallelism and
-redundancy. RAID 0: striping only (high speed, no safety). RAID 1:
+HDD.</p>
+<h1 id="raid-reliability-and-parallel-performance">2) RAID: Reliability
+and Parallel Performance</h1>
+<p>Goals: higher capacity, bandwidth, and reliability via parallelism
+and redundancy. RAID 0: striping only (high speed, no safety). RAID 1:
 mirroring (high reliability and reads, 50% capacity overhead). RAID 5:
 distributed parity (tolerates 1 disk failure; write penalty from
 read-old-data/parity, compute, write-new).<br />
 Choice factors: cost, IOPS/bandwidth, performance during
 failure/rebuild, rebuild time. Level 1 often better random-write
-performance than level 5.<br />
-# 3) File Organization and Record Representation<br />
-Database stored as files of records packed into blocks (I/O unit).<br />
+performance than level 5.</p>
+<h1 id="file-organization-and-record-representation">3) File
+Organization and Record Representation</h1>
+<p>Database stored as files of records packed into blocks (I/O
+unit).<br />
 Fixed-length records: simple packing; deletions reuse space via a free
 list.<br />
 Variable-length records: slotted page structure with a header directory
@@ -215,18 +218,19 @@ not the physical record, enabling in-page
 movement/defragmentation.<br />
 File organizations: heap (anywhere), sequential (ordered by key),
 B+-tree (ordered with efficient inserts/deletes), hashing (direct to
-bucket).<br />
-# 4) Buffer Management<br />
-Buffer pool caches disk blocks; buffer manager serves page requests,
+bucket).</p>
+<h1 id="buffer-management">4) Buffer Management</h1>
+<p>Buffer pool caches disk blocks; buffer manager serves page requests,
 minimizing I/O.<br />
 Pin/unpin: pinned pages can’t be evicted; dirty pages require write-back
 on eviction (overwrite or write-new-then-invalidate-old).<br />
 Replacement: LRU and Clock (approx. LRU). DB-aware policies (e.g.,
 Toss-immediate, MRU) can outperform OS LRU for known access
-patterns.<br />
-# 5) External Sort-Merge (for data larger than memory)<br />
-Phase 1 (Run generation): read M blocks, sort in memory, write as a run;
-repeat.<br />
+patterns.</p>
+<h1 id="external-sort-merge-for-data-larger-than-memory">5) External
+Sort-Merge (for data larger than memory)</h1>
+<p>Phase 1 (Run generation): read M blocks, sort in memory, write as a
+run; repeat.<br />
 Phase 2 (Merge): if runs N &lt; M, single N-way merge using N input
 buffers + 1 output; else do multiple passes merging up to (M−1) runs per
 pass.<br />
@@ -278,7 +282,7 @@ reduce seeks and boost throughput.</p>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/blog/js/journal.js?77068711"></script>
+<script src="/blog/js/journal.js?94465240"></script>
 
 
 
