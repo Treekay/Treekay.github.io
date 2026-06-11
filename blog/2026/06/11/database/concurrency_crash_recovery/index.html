@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Concurrency Control &amp; Crash Recovery - Treek&#39;s Notes</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="">
+<meta name="description" content="Concurrency Control &amp;amp;
+Crash Recovery
+Concurrency Cont...">
+<meta name="keywords" content="">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/blog/css/journal.css?87335523">
+
+<script src="/blog/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://treekay.github.io/blog">
+                Home
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/blog/archives">
+                Archive
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/blog/tags/index.html">
+                Tags
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/blog/">
+            Treek&#39;s Notes
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/blog/">
+        <div class="single-column-header-title">Treek&#39;s Notes</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/blog/">
+        <div class="nav-title">
+            Treek's<br>Notes
+        </div>
+        <div class="nav-subtitle">
+            
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/blog/archives">
+            Archive
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/blog/tags/index.html">
+            Tags
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2026 <a href="https://treekay.github.io/blog">Treek&#39;s Notes</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Concurrency Control &amp; Crash Recovery
+                    <div class="post-meta">
+                        <time datetime="2026-06-11T14:42:54.000Z" itemprop="datePublished">
+                            2026-06-11 14:42
+                        </time>&nbsp;
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/blog/tags/Database/'>Database</a>, 
+                        
+                        <a href='/blog/tags/UoA/'>UoA</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="concurrency-control-crash-recovery">Concurrency Control &amp;
+Crash Recovery</h1>
+<h2 id="concurrency-control">Concurrency Control</h2>
+<h3 id="timestamp-ordering-tso">Timestamp Ordering, TSO</h3>
+<p>Core idea:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Serial order = timestamp order</span><br></pre></td></tr></table></figure>
+<p>Each transaction gets:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TS(Ti)</span><br></pre></td></tr></table></figure>
+<p>Each data item <code>Q</code> stores:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">R-TS(Q): largest timestamp of transactions that read Q</span><br><span class="line">W-TS(Q): largest timestamp of transactions that wrote Q</span><br></pre></td></tr></table></figure>
+<p>Read rule:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read(Q): if TS(Ti) &lt; W-TS(Q), rollback Ti</span><br></pre></td></tr></table></figure>
+<p>Write rule:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">write(Q):</span><br><span class="line">if TS(Ti) &lt; R-TS(Q), rollback Ti</span><br><span class="line">if TS(Ti) &lt; W-TS(Q), rollback Ti</span><br><span class="line">otherwise write and set W-TS(Q)=TS(Ti)</span><br></pre></td></tr></table></figure>
+<p>Key points:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Guarantees serializability</span><br><span class="line">Deadlock-free because transactions do not wait</span><br><span class="line">May cause many rollbacks</span><br><span class="line">May not be recoverable/cascadeless</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="thomas-write-rule">Thomas’ Write Rule</h3>
+<p>Modified TSO rule:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if TS(Ti) &lt; W-TS(Q), ignore the obsolete write instead of rollback</span><br></pre></td></tr></table></figure>
+<p>Meaning:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Old write is no longer useful because a newer value already exists.</span><br></pre></td></tr></table></figure>
+<p>Key point:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Allows more concurrency</span><br><span class="line">Can allow view-serializable but not conflict-serializable schedules</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="validation-based-protocol-occ">Validation-Based Protocol /
+OCC</h3>
+<p>OCC = Optimistic Concurrency Control.</p>
+<p>Core idea:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Execute first, validate before commit.</span><br></pre></td></tr></table></figure>
+<p>Three phases:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. Read/execution phase: read DB, write local variables only</span><br><span class="line">2. Validation phase: check serializability</span><br><span class="line">3. Write phase: apply writes if validation succeeds</span><br></pre></td></tr></table></figure>
+<p>Good for:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Low-conflict workloads</span><br><span class="line">Mostly read-only transactions</span><br></pre></td></tr></table></figure>
+<p>Bad for:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">High-conflict workloads, because many transactions may abort late</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="snapshot-isolation-si">Snapshot Isolation, SI</h3>
+<p>Core idea:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Each transaction reads from a committed snapshot taken at its start.</span><br></pre></td></tr></table></figure>
+<p>Properties:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Reads do not block writes</span><br><span class="line">Writes do not block reads</span><br><span class="line">Transaction sees its own writes</span><br><span class="line">Concurrent transactions&#x27; writes are not visible</span><br></pre></td></tr></table></figure>
+<p>First-committer-wins:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">If two concurrent transactions write the same item,</span><br><span class="line">the first committer succeeds and the other aborts.</span><br></pre></td></tr></table></figure>
+<p>SI prevents:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dirty read</span><br><span class="line">Lost update</span><br><span class="line">Non-repeatable read</span><br></pre></td></tr></table></figure>
+<p>But:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SI is not always serializable</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="write-skew">Write Skew</h3>
+<p>Classic SI anomaly.</p>
+<p>Pattern:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T1 reads X,Y and writes X</span><br><span class="line">T2 reads X,Y and writes Y</span><br></pre></td></tr></table></figure>
+<p>Since they write different items:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">No write-write conflict</span><br><span class="line">Both may commit under SI</span><br></pre></td></tr></table></figure>
+<p>Problem:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Both transactions made decisions using old snapshots.</span><br><span class="line">Final state may violate constraints.</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="serializable-snapshot-isolation-ssi">Serializable Snapshot
+Isolation, SSI</h3>
+<p>Plain SI detects:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write-write conflicts</span><br></pre></td></tr></table></figure>
+<p>SSI also detects:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read-write dependencies</span><br></pre></td></tr></table></figure>
+<p>If dependencies form a cycle:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">abort one transaction</span><br></pre></td></tr></table></figure>
+<p>Key point:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SSI = SI + extra dependency tracking to guarantee serializability</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="crash-recovery">Crash Recovery</h2>
+<h3 id="main-goal">Main Goal</h3>
+<p>Crash recovery protects:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Atomicity: all or nothing</span><br><span class="line">Durability: committed changes survive crash</span><br></pre></td></tr></table></figure>
+<p>Main problem:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RAM is fast but volatile.</span><br><span class="line">Disk is stable but slow.</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="buffer-pool-vs-stable-storage">Buffer Pool vs Stable
+Storage</h3>
+<p>Buffer pool:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RAM</span><br><span class="line">fast</span><br><span class="line">lost after crash</span><br><span class="line">contains dirty pages</span><br></pre></td></tr></table></figure>
+<p>Stable storage:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Disk</span><br><span class="line">slow</span><br><span class="line">survives crash</span><br><span class="line">contains stable log and database pages</span><br></pre></td></tr></table></figure>
+<p>Dirty page:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A page modified in memory but not yet flushed to disk.</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="steal-no-steal">STEAL / NO-STEAL</h3>
+<p>STEAL:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncommitted dirty pages may be flushed to disk.</span><br></pre></td></tr></table></figure>
+<p>Consequence:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uncommitted data may appear on disk.</span><br><span class="line">Need UNDO.</span><br></pre></td></tr></table></figure>
+<p>NO-STEAL:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncommitted dirty pages cannot be flushed.</span><br></pre></td></tr></table></figure>
+<p>Consequence:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Simpler recovery but worse buffer usage.</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="force-no-force">FORCE / NO-FORCE</h3>
+<p>FORCE:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">At commit, all modified pages must be flushed to disk.</span><br></pre></td></tr></table></figure>
+<p>Consequence:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Simpler recovery but slow commit.</span><br></pre></td></tr></table></figure>
+<p>NO-FORCE:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">At commit, modified pages do not have to be flushed immediately.</span><br></pre></td></tr></table></figure>
+<p>Consequence:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Committed data may be missing from disk.</span><br><span class="line">Need REDO.</span><br></pre></td></tr></table></figure>
+<p>Modern DBMS usually uses:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STEAL / NO-FORCE</span><br></pre></td></tr></table></figure>
+<p>So it needs:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UNDO + REDO</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="log">Log</h3>
+<p>Log records changes sequentially.</p>
+<p>For each write:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">old value -&gt; used for UNDO</span><br><span class="line">new value -&gt; used for REDO</span><br></pre></td></tr></table></figure>
+<p>Why log is fast:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Log writes are sequential append-only I/O.</span><br><span class="line">Database page writes are random I/O.</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="write-ahead-logging-wal">Write-Ahead Logging, WAL</h3>
+<p>WAL means:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Write log before writing database page or reporting commit.</span><br></pre></td></tr></table></figure>
+<p>UNDO rule:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before an uncommitted dirty page is flushed,</span><br><span class="line">the log record with old value must be stable.</span><br></pre></td></tr></table></figure>
+<p>Protects against:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STEAL</span><br></pre></td></tr></table></figure>
+<p>REDO rule:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Before a transaction is reported committed,</span><br><span class="line">its update log records and commit record must be stable.</span><br></pre></td></tr></table></figure>
+<p>Protects against:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NO-FORCE</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="winner-and-loser-transactions">Winner and Loser
+Transactions</h3>
+<p>Winner:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Transaction has commit record in stable log.</span><br><span class="line">Action: REDO</span><br></pre></td></tr></table></figure>
+<p>Loser:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Transaction has writes but no commit record.</span><br><span class="line">Action: UNDO</span><br></pre></td></tr></table></figure>
+<p>Memory:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Has ci =&gt; winner</span><br><span class="line">No ci =&gt; loser</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="steal-data-vs-stale-data">Steal Data vs Stale Data</h3>
+<p>Steal data:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uncommitted transaction&#x27;s value is found on disk.</span><br><span class="line">Need UNDO.</span><br></pre></td></tr></table></figure>
+<p>Stale data:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Committed transaction&#x27;s value is missing from disk.</span><br><span class="line">Need REDO.</span><br></pre></td></tr></table></figure>
+<p>Memory:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uncommitted on disk =&gt; STEAL</span><br><span class="line">Committed missing from disk =&gt; STALE / NO-FORCE</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="aries-recovery">ARIES Recovery</h3>
+<p>Simplified idea:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Repeat history, then undo losers.</span><br></pre></td></tr></table></figure>
+<p>REDO phase:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scan log forward.</span><br><span class="line">Redo all logged writes, including winners and losers.</span><br></pre></td></tr></table></figure>
+<p>UNDO phase:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scan log backward.</span><br><span class="line">Undo only loser transactions using old values.</span><br></pre></td></tr></table></figure>
+<p>Final memory:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REDO all.</span><br><span class="line">UNDO losers.</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="ultra-short-exam-memory">Ultra Short Exam Memory</h2>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">TSO:</span><br><span class="line">serial order = timestamp order</span><br><span class="line">no wait =&gt; no deadlock</span><br><span class="line"></span><br><span class="line">Thomas:</span><br><span class="line">obsolete write =&gt; ignore</span><br><span class="line"></span><br><span class="line">OCC:</span><br><span class="line">execute first, validate at commit</span><br><span class="line"></span><br><span class="line">SI:</span><br><span class="line">read snapshot</span><br><span class="line">abort on write-write conflict</span><br><span class="line">not always serializable</span><br><span class="line"></span><br><span class="line">SSI:</span><br><span class="line">SI + read-write dependency tracking</span><br><span class="line"></span><br><span class="line">STEAL:</span><br><span class="line">uncommitted data on disk =&gt; UNDO</span><br><span class="line"></span><br><span class="line">NO-FORCE:</span><br><span class="line">committed data missing from disk =&gt; REDO</span><br><span class="line"></span><br><span class="line">WAL:</span><br><span class="line">log before page</span><br><span class="line">log before commit</span><br><span class="line"></span><br><span class="line">ARIES:</span><br><span class="line">REDO all, UNDO losers</span><br></pre></td></tr></table></figure>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/blog/2026/05/26/database/database_transaction/">
+        Next post<br>Database Transaction
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2026 <a href="https://treekay.github.io/blog">Treek&#39;s Notes</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/blog/js/journal.js?63819297"></script>
+
+
+
+</body>
+</html>
