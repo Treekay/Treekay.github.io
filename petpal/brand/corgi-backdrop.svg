@@ -1,0 +1,29 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="660" height="604" viewBox="0 0 660 604" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Corgi backdrop &#194;&#183; small yellow circle">
+<g id="Small sunny circle" filter="url(#filter0_d_0_5)">
+<circle cx="345" cy="265" r="195" fill="#FFD523" fill-opacity="0.96"/>
+</g>
+<ellipse id="Soft cream inner glow" cx="344.5" cy="259.5" rx="132.5" ry="117.5" fill="#FEF7EC" fill-opacity="0.26"/>
+<ellipse id="Warm floor shadow" cx="346" cy="530" rx="250" ry="52" fill="#2F6F5E" fill-opacity="0.13"/>
+<ellipse id="Dog contact shadow" cx="338" cy="531" rx="196" ry="29" fill="#2F6F5E" fill-opacity="0.15"/>
+<circle id="Small coral accent" cx="536" cy="168" r="22" fill="#F65846" fill-opacity="0.16"/>
+<circle id="Small cream highlight" cx="491" cy="137" r="37" fill="white" fill-opacity="0.36"/>
+<circle id="Tiny orange paw accent" cx="151.5" cy="315.5" r="3.5" fill="#E86F2E" fill-opacity="0.24"/>
+<circle id="Tiny orange paw accent_2" cx="164" cy="300" r="2" fill="#E86F2E" fill-opacity="0.26"/>
+<circle id="Tiny orange paw accent_3" cx="174" cy="314" r="2" fill="#E86F2E" fill-opacity="0.26"/>
+<circle id="Tiny orange paw accent_4" cx="506" cy="332" r="4" fill="#E86F2E" fill-opacity="0.2"/>
+<circle id="Tiny orange paw accent_5" cx="520.5" cy="316.5" r="2.5" fill="#E86F2E" fill-opacity="0.22"/>
+<circle id="Tiny orange paw accent_6" cx="530.5" cy="330.5" r="2.5" fill="#E86F2E" fill-opacity="0.22"/>
+</g>
+<defs>
+<filter id="filter0_d_0_5" x="124" y="58" width="442" height="442" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="14"/>
+<feGaussianBlur stdDeviation="13"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.36 0 0 0 0 0.05 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_5"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_5" result="shape"/>
+</filter>
+</defs>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "name": "PetPal Interactive Demo",
+  "short_name": "PetPal Demo",
+  "start_url": "/petpal/#/parent",
+  "scope": "/petpal/",
+  "display": "standalone",
+  "background_color": "#fff4eb",
+  "theme_color": "#fff4eb",
+  "icons": [
+    {
+      "src": "/petpal/brand/app-icons/parent/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
